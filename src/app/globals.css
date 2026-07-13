@@ -1,0 +1,149 @@
+@import url('https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@100..900&family=Inter:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+:root {
+  --background: #0a0a0f;
+  --foreground: #ededed;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: 'Google Sans Flex', 'Google Sans', sans-serif;
+  overflow-x: hidden;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, #ffffff 0%, #94a3b8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-glow {
+  background: radial-gradient(ellipse at center, rgba(59, 130, 246, 0.15) 0%, transparent 70%);
+}
+
+.card-gradient {
+  background: linear-gradient(180deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%);
+}
+
+.blue-glow {
+  box-shadow: 0 0 30px rgba(59, 130, 246, 0.3), 0 0 60px rgba(59, 130, 246, 0.1);
+}
+
+.line-animation {
+  background: linear-gradient(90deg, transparent, #3b82f6, transparent);
+  background-size: 200% 100%;
+  animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+.float-animation {
+  animation: float 3s ease-in-out infinite;
+}
+
+.float-animation-delayed {
+  animation: float 3s ease-in-out infinite 1.5s;
+}
+
+/* ─── Premium VisionOS-style Glass Badge ─── */
+
+.glass-badge {
+  position: relative;
+  isolation: isolate;
+
+  /* Glass body — dark tinted base */
+  background: linear-gradient(
+    121deg,
+    rgba(255, 255, 255, 0.06) 0%,
+    rgba(20, 20, 30, 0.35) 45%,
+    rgba(8, 8, 18, 0.50) 100%
+  );
+
+  /* Frost blur (Frost: 70.3 → ~20px blur) */
+  backdrop-filter: blur(20px) brightness(1.08) saturate(1.4);
+  -webkit-backdrop-filter: blur(20px) brightness(1.08) saturate(1.4);
+
+  /* Depth: 20 → outer drop shadow
+     + inset top highlight (light at 121°)
+     + inset bottom inner shadow
+     + inset left rim bright
+     + inset right rim dim */
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.45),
+    0 2px 8px rgba(0, 0, 0, 0.3),
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.28),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.35),
+    inset 1.5px 0 0 rgba(255, 255, 255, 0.22),
+    inset -1px 0 0 rgba(255, 255, 255, 0.06);
+}
+
+/* ── Masked gradient border rim (the "glass edge") ── */
+.glass-badge::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+
+  /* Light at 121° → bright top-left, dim bottom-right
+     Dispersion: 50 → subtle warm/cool tint split */
+  background: linear-gradient(
+    121deg,
+    rgba(255, 255, 255, 0.65) 0%,
+    rgba(200, 210, 255, 0.30) 20%,
+    rgba(255, 255, 255, 0.08) 50%,
+    rgba(255, 220, 200, 0.10) 75%,
+    rgba(255, 255, 255, 0.25) 100%
+  );
+
+  /* Mask trick — only the 1px border shows */
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ── Inner reflections: left/right curved highlights + top sheen + bottom shadow ── */
+.glass-badge::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 2;
+
+  background:
+    /* Bright left curved highlight (Refraction: 80 → strong left edge) */
+    radial-gradient(ellipse 18% 75% at 0% 50%,   rgba(255, 255, 255, 0.22) 0%, transparent 100%),
+    /* Bright right curved highlight (slightly dimmer — light from 121°) */
+    radial-gradient(ellipse 14% 65% at 100% 50%, rgba(255, 255, 255, 0.12) 0%, transparent 100%),
+    /* Subtle top reflection sheen */
+    radial-gradient(ellipse 70% 35% at 50% 0%,   rgba(255, 255, 255, 0.13) 0%, transparent 100%),
+    /* Soft bottom inner shadow */
+    radial-gradient(ellipse 80% 25% at 50% 100%, rgba(0,   0,   0,   0.20) 0%, transparent 100%);
+}
