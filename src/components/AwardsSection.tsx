@@ -103,13 +103,6 @@ export default function AwardsSection() {
           toggleActions: "play none none reverse",
         },
       });
-
-      // Testimonials marquee — cards drift left to right in an endless loop
-      gsap.fromTo(
-        ".testimonial-track",
-        { xPercent: -50 },
-        { xPercent: 0, ease: "none", duration: 40, repeat: -1 }
-      );
     }, sectionRef);
 
     return () => ctx.revert();

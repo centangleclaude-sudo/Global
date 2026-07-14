@@ -147,3 +147,16 @@ html {
     /* Soft bottom inner shadow */
     radial-gradient(ellipse 80% 25% at 50% 100%, rgba(0,   0,   0,   0.20) 0%, transparent 100%);
 }
+
+/* ── Testimonials marquee: cards drift left → right, endless loop ── */
+@keyframes testimonial-marquee {
+  from { transform: translateX(-50%); }
+  to   { transform: translateX(0); }
+}
+.testimonial-track {
+  animation: testimonial-marquee 40s linear infinite;
+  will-change: transform;
+}
+.testimonial-track:hover {
+  animation-play-state: paused;
+}
