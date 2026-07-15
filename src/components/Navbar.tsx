@@ -40,9 +40,9 @@ export default function Navbar() {
 
         {/* Nav links */}
         <div className="flex items-center gap-6 text-[13px] text-gray-300">
-          <a href="#" className="hover:text-white transition-colors whitespace-nowrap">Home</a>
+          <a href="/" className="hover:text-white transition-colors whitespace-nowrap">Home</a>
           <a href="#" className="hover:text-white transition-colors whitespace-nowrap">Services</a>
-          <a href="#" className="hover:text-white transition-colors whitespace-nowrap">Projects</a>
+          <a href="/projects" className="hover:text-white transition-colors whitespace-nowrap">Projects</a>
           <a href="#" className="hover:text-white transition-colors whitespace-nowrap">About us</a>
           <a href="#" className="hover:text-white transition-colors whitespace-nowrap">Contact us</a>
         </div>
