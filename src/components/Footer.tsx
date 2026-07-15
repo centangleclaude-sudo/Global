@@ -10,17 +10,15 @@ const columns = [
   },
   {
     heading: "Cases",
-    links: ["Dice", "Eztrak", "PMIC", "Worldbank", "Worldbank"],
+    links: ["EZTRAK", "RAMS", "DYH", "DICE", "Ignite"],
   },
   {
     heading: "Services",
     links: [
-      "Consulting & Digital Transformation Advisory",
-      "Enterprise Systems & Integration",
-      "Emerging Technology & Innovation",
-      "Technical Training & Capacity Building",
-      "UI/UX, Product Design & Digital Experience",
       "Custom Software Development",
+      "Staff Augmentation",
+      "AI Development",
+      "UI/UX Design",
     ],
   },
 ];
@@ -102,7 +100,7 @@ export default function Footer() {
   return (
     <footer ref={footerRef} style={{ background: "#050507" }}>
       <div className="footer-inner pt-20 pb-8 px-6 md:px-[79px]">
-        <div className="flex flex-col lg:flex-row gap-14 lg:gap-[157px]">
+        <div className="flex flex-col lg:flex-row gap-14 lg:gap-[250px]">
           {/* Left: email + socials */}
           <div>
             <a
@@ -128,7 +126,7 @@ export default function Footer() {
           </div>
 
           {/* Right: link columns */}
-          <div className="grid grid-cols-1 sm:grid-cols-[auto_auto_auto] gap-y-10 gap-x-[88px]">
+          <div className="grid grid-cols-1 sm:grid-cols-[auto_auto_auto] gap-y-10 gap-x-[90px]">
             {columns.map((col) => (
               <div key={col.heading}>
                 <div className="text-white text-[15px] font-medium mb-5">{col.heading}</div>
@@ -149,12 +147,18 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Bottom bar */}
-        <div className="flex flex-col md:flex-row justify-between items-center gap-4 border-t border-white/[0.08] mt-16 pt-7">
-          <span className="text-[#737373] text-[13px]">
-            © 2026 Centangle Interactive. All rights reserved.
-          </span>
-          <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
+        {/* Bottom bar — text left, legal links right & vertically centered against it */}
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 border-t border-white/[0.08] mt-16 pt-7">
+          <div className="flex flex-col items-start text-left gap-2.5">
+            <span className="text-[#737373] text-[13px]">
+              Centangle Global is US-registered, with delivery teams in Pakistan.
+            </span>
+            <span className="text-[#737373] text-[13px]">
+              © 2026 Centangle Interactive. All rights reserved.
+            </span>
+          </div>
+
+          <div className="flex flex-wrap items-center justify-start md:justify-end gap-x-2 gap-y-1">
             {legalLinks.map((link, i) => (
               <span key={link} className="flex items-center gap-2">
                 <a

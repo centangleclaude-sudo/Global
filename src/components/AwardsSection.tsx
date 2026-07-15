@@ -52,9 +52,7 @@ function AwardsHeading({ className = "" }: { className?: string }) {
         lineHeight: 1.15,
       }}
     >
-      Awards &amp; Excellence for
-      <br />
-      digital innovation
+      Recognition
     </h2>
   );
 }
@@ -112,7 +110,6 @@ export default function AwardsSection() {
     <section ref={sectionRef} className="pt-[200px] pb-28 px-6 md:px-12 max-w-6xl mx-auto">
       {/* First block: heading + award rows */}
       <div className="awards-heading">
-        <p className="text-center text-[#9a9aa0] text-sm mb-4">Recognition</p>
         <AwardsHeading />
       </div>
 
@@ -207,9 +204,7 @@ export default function AwardsSection() {
             lineHeight: 1.15,
           }}
         >
-          Trusted by Clients.
-          <br />
-          Recognized by Industry.
+          What clients say
         </h2>
       </div>
 

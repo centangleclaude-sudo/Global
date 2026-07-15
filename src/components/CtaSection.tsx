@@ -42,7 +42,14 @@ export default function CtaSection() {
     <section
       ref={sectionRef}
       className="flex flex-col items-center justify-center text-center px-6"
-      style={{ background: "#2F7CFF", padding: "120px 24px 130px" }}
+      style={{
+        backgroundColor: "#2F7CFF",
+        backgroundImage: "url('/Cta bg.png')",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        padding: "120px 24px 130px",
+      }}
     >
       <h2
         className="cta-heading text-white max-w-[1250px]"

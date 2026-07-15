@@ -35,16 +35,14 @@ export default function StagesSection() {
           lineHeight: "94.13%", // 70.6px at 75px
         }}
       >
-        Stages of startup
-        <br />
-        development
+        Work that&apos;s still running
       </h2>
       <p
         ref={subtitleRef}
         className="mt-5 text-gray-500 text-sm md:text-base max-w-md mx-auto leading-relaxed"
       >
-        Examples of our most common engagement models into early-stage
-        start-ups on different stages of the lifecycle.
+        Selected from a thirteen-year portfolio. Complex, operational, and
+        built to be extended.
       </p>
     </section>
   );

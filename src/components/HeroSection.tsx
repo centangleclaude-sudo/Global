@@ -54,7 +54,7 @@ export default function HeroSection() {
             zIndex: 3,
           }}
         >
-          Digital brand design agency
+          Custom Software Development and Staff Augmentation
         </span>
       </div>
 
@@ -73,7 +73,7 @@ export default function HeroSection() {
         <br />
         for businesses that
         <br />
-        build the future
+        build for the long run
       </h1>
 
       {/* Hero Image Area */}
@@ -129,7 +129,7 @@ export default function HeroSection() {
         {/* Project Delivery card - above orange circle */}
         <div
           className="absolute"
-          style={{ left: "-160px", top: "-250px", width: "266px" }}
+          style={{ left: "-190px", top: "-250px", width: "266px" }}
         >
           {/* Rocket icon - outside and above the card, centered */}
           <div style={{

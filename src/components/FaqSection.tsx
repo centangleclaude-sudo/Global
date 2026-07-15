@@ -5,26 +5,43 @@ import { gsap, ScrollTrigger } from "@/lib/gsap";
 
 const faqs = [
   {
-    question: "Do you build custom software?",
+    question: "What does Centangle Global do?",
     answer:
-      "Yes — we design and build custom software end to end, from discovery and UX through development, deployment, and ongoing support. Every solution is architected around your business, not adapted from a template.",
+      "Centangle Global is a US-registered software engineering company that builds custom web platforms, mobile applications, and AI-integrated systems for SMEs and startups in the US and Europe. We also provide staff augmentation, embedding dedicated engineers into existing product teams.",
   },
   {
-    question: "Do you build custom software?",
+    question: "What is the difference between staff augmentation and hiring in-house?",
     answer:
-      "Yes — we design and build custom software end to end, from discovery and UX through development, deployment, and ongoing support. Every solution is architected around your business, not adapted from a template.",
+      "Staff augmentation gives you dedicated engineers who work within your team, your processes, and your direction, without the overhead of recruiting, onboarding, and retaining full-time hires. You scale the team up or down as the work requires. The engineers are ours to manage administratively and yours to direct technically.",
   },
   {
-    question: "Do you build custom software?",
+    question: "How much does custom software development cost?",
     answer:
-      "Yes — we design and build custom software end to end, from discovery and UX through development, deployment, and ongoing support. Every solution is architected around your business, not adapted from a template.",
+      "It depends on scope clarity, domain complexity, whether the project is greenfield or inherits existing systems, and the seniority mix the work requires. We price at a significant advantage to comparable US and European agency rates, and every proposal is scoped through a real conversation rather than a rate sheet.",
   },
   {
-    question: "Do you build custom software?",
+    question: "Where is your team located?",
     answer:
-      "Yes — we design and build custom software end to end, from discovery and UX through development, deployment, and ongoing support. Every solution is architected around your business, not adapted from a template.",
+      "Centangle Global is US-registered. Our delivery team is based in Islamabad, Pakistan, and has been building software since 2013. EU working hours are covered comfortably; for US clients we sync meetings to your time zone, with fuller overlap arranged per engagement.",
+  },
+  {
+    question: "How do your engineers integrate with our existing team?",
+    answer:
+      "They join your standups, use your tools, and follow your processes. A senior lead anchors every engagement, and every project has a project manager with 12 or more years of experience. Engineers communicate with your team directly.",
+  },
+  {
+    question: "Do you build AI products?",
+    answer:
+      "We build applied AI inside production systems: computer vision for road asset detection, neural text-to-speech trained from scratch, and AI features in active client projects. We are not an AI research lab, and we do not claim capability ahead of delivery.",
+  },
+  {
+    question: "How do we start?",
+    answer:
+      "Describe the problem. What you are building, where you are stuck, or what engineering capacity you need. We will tell you honestly whether we are the right team for it, and scope from there.",
   },
 ];
+
+const INITIAL_COUNT = 4;
 
 function FaqItem({
   question,
@@ -92,6 +109,9 @@ function FaqItem({
 export default function FaqSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const [openIndex, setOpenIndex] = useState<number | null>(0);
+  const [showAll, setShowAll] = useState(false);
+
+  const visibleFaqs = showAll ? faqs : faqs.slice(0, INITIAL_COUNT);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -139,7 +159,7 @@ export default function FaqSection() {
       </h2>
 
       <div className="faq-list">
-        {faqs.map((faq, i) => (
+        {visibleFaqs.map((faq, i) => (
           <FaqItem
             key={i}
             question={faq.question}
@@ -149,6 +169,20 @@ export default function FaqSection() {
           />
         ))}
       </div>
+
+      {!showAll && faqs.length > INITIAL_COUNT && (
+        <div className="flex justify-center mt-10">
+          <button
+            onClick={() => setShowAll(true)}
+            className="inline-flex items-center gap-2 bg-white/[0.06] hover:bg-white/[0.12] border border-white/[0.12] text-white text-sm font-medium px-6 py-3 rounded-full transition-colors cursor-pointer"
+          >
+            Load more
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+              <path d="M6 9l6 6 6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </button>
+        </div>
+      )}
     </section>
   );
 }

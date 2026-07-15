@@ -160,3 +160,18 @@ html {
 .testimonial-track:hover {
   animation-play-state: paused;
 }
+
+/* ── Mission statement: force the 4 designed lines on tablet/desktop; wrap on mobile ── */
+.mission-line { display: block; }
+@media (min-width: 768px) {
+  .mission-line { white-space: nowrap; }
+}
+
+/* ── Case study images bleed to the right edge of the screen (desktop 2-col only) ──
+   Section is max-w-7xl (1280px) centered with lg:px-20 (80px), so the distance from
+   the grid's right edge to the viewport edge is (100vw - 1280px)/2 + 80px. */
+@media (min-width: 1024px) {
+  .case-image {
+    margin-right: min(-80px, calc(560px - 50vw));
+  }
+}

@@ -24,7 +24,7 @@ export default function Navbar() {
       <div
         style={{
           display: "inline-flex",
-          padding: "4px 6px 4px 10px",
+          padding: "4px 15px",
           alignItems: "center",
           gap: "14px",
           borderRadius: "59px",
@@ -40,18 +40,19 @@ export default function Navbar() {
 
         {/* Nav links */}
         <div className="flex items-center gap-6 text-[13px] text-gray-300">
-          <a href="#" className="hover:text-white transition-colors whitespace-nowrap">About Us</a>
-          <a href="#" className="hover:text-white transition-colors whitespace-nowrap">Solutions</a>
-          <a href="#" className="hover:text-white transition-colors whitespace-nowrap">Cases</a>
-          <a href="#" className="hover:text-white transition-colors whitespace-nowrap">Resources</a>
+          <a href="#" className="hover:text-white transition-colors whitespace-nowrap">Home</a>
+          <a href="#" className="hover:text-white transition-colors whitespace-nowrap">Services</a>
+          <a href="#" className="hover:text-white transition-colors whitespace-nowrap">Projects</a>
+          <a href="#" className="hover:text-white transition-colors whitespace-nowrap">About us</a>
+          <a href="#" className="hover:text-white transition-colors whitespace-nowrap">Contact us</a>
         </div>
 
-        {/* Contact button */}
+        {/* Book a Meeting button */}
         <a
           href="#"
           className="bg-blue-600 hover:bg-blue-700 text-white text-[13px] font-medium px-5 py-2.5 rounded-full flex items-center gap-1.5 transition-colors whitespace-nowrap flex-shrink-0"
         >
-          Contact
+          Book a Meeting
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
             <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
           </svg>

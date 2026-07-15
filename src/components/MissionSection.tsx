@@ -40,14 +40,20 @@ export default function MissionSection() {
     return () => ScrollTrigger.getAll().forEach((t) => t.kill());
   }, []);
 
-  const parts = [
-    { text: "We join forces with enterprise companies &", white: true },
-    { text: "visionary startups leveraging our full-cycle digital", white: true },
-    { text: "expertise to", white: true },
-    { text: "create brands, experiences, and", white: false },
-    { text: "products that drive growth and transformation", white: false },
-    { text: "impacting millions every day", white: false },
+  // Four forced lines; text turns #737373 starting at "understand"
+  const lines = [
+    "We embed into your problem the way a good hire",
+    "would. Ask the questions, understand the domain,",
+    "build the thing, and stay accountable for whether",
+    "it actually works.",
   ];
+  let grayStarted = false;
+  const linesWithColor = lines.map((line) =>
+    line.split(" ").map((word) => {
+      if (word.startsWith("understand")) grayStarted = true;
+      return { word, gray: grayStarted };
+    })
+  );
 
   return (
     <section
@@ -63,18 +69,19 @@ export default function MissionSection() {
           lineHeight: "160.45%", // 70.6px at 44px
         }}
       >
-        {parts.map((part, pi) =>
-          part.text.split(" ").map((word, wi) => (
-            <span
-              key={`${pi}-${wi}`}
-              className={`word inline-block mr-[0.3em] ${
-                part.white ? "text-white" : "text-gray-500"
-              }`}
-            >
-              {word}
-            </span>
-          ))
-        )}
+        {linesWithColor.map((line, li) => (
+          <span key={li} className="mission-line">
+            {line.map((item, wi) => (
+              <span
+                key={`${li}-${wi}`}
+                className="word inline-block mr-[0.3em]"
+                style={{ color: item.gray ? "#737373" : "#ffffff" }}
+              >
+                {item.word}
+              </span>
+            ))}
+          </span>
+        ))}
       </p>
 
       <a
@@ -82,7 +89,7 @@ export default function MissionSection() {
         href="#"
         className="mt-10 inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white text-sm px-6 py-3.5 rounded-full transition-colors font-medium"
       >
-        Share your idea
+        Book a Meeting
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
           <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
         </svg>

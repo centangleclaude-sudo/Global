@@ -72,16 +72,18 @@ export default function FeatureColumns() {
     return () => ctx.revert();
   }, []);
 
-  // "We prove, design," is #030305; the rest is #737373
+  // First three words #030305; the rest #737373
   const headingWords =
-    "We prove, design, implement, and market your idea with absolute transparency and efficiency in it".split(" ");
+    "Experienced engineers deliver transparent partnerships through clear communication, fair pricing, and lasting client trust always.".split(
+      " "
+    );
   const darkWordCount = 3;
 
   return (
     <section ref={sectionRef} className="pt-[200px] pb-0 px-6 md:px-12 max-w-7xl mx-auto">
       {/* Heading */}
       <h2
-        className="fc-heading text-center max-w-[760px] mx-auto mb-[130px]"
+        className="fc-heading text-center max-w-[1000px] mx-auto mb-[130px]"
         style={{
           fontFamily: "'Google Sans Flex', 'Google Sans', sans-serif",
           fontWeight: 600,
