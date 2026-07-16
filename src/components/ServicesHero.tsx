@@ -22,7 +22,7 @@ export default function ServicesHero() {
   return (
     <section
       ref={sectionRef}
-      className="relative flex flex-col items-center text-center px-6 pt-[170px] pb-[120px]"
+      className="relative flex flex-col items-center text-center px-6 pt-[170px] pb-0"
     >
       {/* Hero video + gradient scrim */}
       <div

@@ -1,7 +1,9 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { gsap } from "@/lib/gsap";
+
+const CONTACT_EMAIL = "contact@centangleglobal.com";
 
 const inputStyle: React.CSSProperties = {
   background: "#ECECEE",
@@ -17,6 +19,12 @@ const inputStyle: React.CSSProperties = {
 export default function ContactHero() {
   const sectionRef = useRef<HTMLDivElement>(null);
 
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [budget, setBudget] = useState("");
+  const [message, setMessage] = useState("");
+
   useEffect(() => {
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
@@ -27,6 +35,25 @@ export default function ContactHero() {
 
     return () => ctx.revert();
   }, []);
+
+  function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+
+    const subject = `New enquiry from ${name || "website visitor"}`;
+    const body = [
+      `Name: ${name}`,
+      `Email: ${email}`,
+      `Phone: ${phone}`,
+      `Budget: ${budget || "Not defined"}`,
+      "",
+      "Message:",
+      message,
+    ].join("\n");
+
+    window.location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(
+      subject
+    )}&body=${encodeURIComponent(body)}`;
+  }
 
   return (
     <section
@@ -51,27 +78,45 @@ export default function ContactHero() {
       </p>
 
       {/* Form */}
-      <form
-        className="contact-form w-full max-w-[880px] mt-14"
-        onSubmit={(e) => e.preventDefault()}
-      >
+      <form className="contact-form w-full max-w-[880px] mt-14" onSubmit={handleSubmit}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-          <input type="text" placeholder="Your Name" style={inputStyle} />
-          <input type="email" placeholder="Email" style={inputStyle} />
-          <input type="tel" placeholder="Phone" style={inputStyle} />
+          <input
+            type="text"
+            required
+            placeholder="Your Name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            style={inputStyle}
+          />
+          <input
+            type="email"
+            required
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            style={inputStyle}
+          />
+          <input
+            type="tel"
+            placeholder="Phone"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+            style={inputStyle}
+          />
           <div className="relative">
             <select
-              defaultValue=""
+              value={budget}
+              onChange={(e) => setBudget(e.target.value)}
               style={{ ...inputStyle, appearance: "none", color: "#030305", cursor: "pointer" }}
             >
               <option value="" disabled hidden>
                 Budget not defined
               </option>
-              <option value="undefined">Budget not defined</option>
-              <option value="5-10k">$5k – $10k</option>
-              <option value="10-25k">$10k – $25k</option>
-              <option value="25-50k">$25k – $50k</option>
-              <option value="50k+">$50k+</option>
+              <option value="Budget not defined">Budget not defined</option>
+              <option value="$5k – $10k">$5k – $10k</option>
+              <option value="$10k – $25k">$10k – $25k</option>
+              <option value="$25k – $50k">$25k – $50k</option>
+              <option value="$50k+">$50k+</option>
             </select>
             <svg
               width="14"
@@ -86,6 +131,9 @@ export default function ContactHero() {
           <textarea
             placeholder="Message"
             rows={5}
+            required
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
             className="md:col-span-2 resize-none"
             style={inputStyle}
           />

@@ -214,7 +214,7 @@ export default function ServiceCapabilities() {
   return (
     <section
       ref={sectionRef}
-      className="px-6 md:px-12 max-w-6xl mx-auto flex flex-col gap-[180px] pb-[180px]"
+      className="px-6 md:px-12 max-w-6xl mx-auto flex flex-col gap-[180px] pt-[200px] pb-[180px]"
     >
       {capabilities.map((cap) => (
         <CapabilityBlock key={cap.heading} cap={cap} />
