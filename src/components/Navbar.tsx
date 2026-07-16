@@ -60,7 +60,7 @@ export default function Navbar({ variant = "dark" }: { variant?: "dark" | "light
           }`}
         >
           <a href="/" className={linkClass}>Home</a>
-          <a href="#" className={linkClass}>Services</a>
+          <a href="/services" className={linkClass}>Services</a>
           <a href="/projects" className={linkClass}>Projects</a>
           <a href="#" className={linkClass}>About us</a>
           <a href="/contact" className={linkClass}>Contact us</a>
