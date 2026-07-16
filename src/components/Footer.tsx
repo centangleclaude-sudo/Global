@@ -104,7 +104,7 @@ export default function Footer() {
           {/* Left: email + socials */}
           <div>
             <a
-              href="mailto:hello@centangle.com"
+              href="mailto:contact@centangleglobal.com"
               className="text-white"
               style={{
                 display: "block",
@@ -114,7 +114,7 @@ export default function Footer() {
                 fontSize: "clamp(24px, 2.4vw, 34px)",
               }}
             >
-              hello@centangle.com
+              contact@centangleglobal.com
             </a>
             <div className="flex gap-4" style={{ marginTop: "34px" }}>
               <SocialIcon type="facebook" />

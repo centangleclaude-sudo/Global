@@ -62,13 +62,16 @@ export default function Navbar({ variant = "dark" }: { variant?: "dark" | "light
           <a href="/" className={linkClass}>Home</a>
           <a href="/services" className={linkClass}>Services</a>
           <a href="/projects" className={linkClass}>Projects</a>
-          <a href="#" className={linkClass}>About us</a>
+          {/* <a href="#" className={linkClass}>About us</a> */}
+          <a href="/coming-soon" className={linkClass}>
+            About us
+          </a>
           <a href="/contact" className={linkClass}>Contact us</a>
         </div>
 
         {/* Book a Meeting button */}
         <a
-          href="#"
+          href="/contact"
           className="bg-blue-600 hover:bg-blue-700 text-white text-[13px] font-medium px-5 py-2.5 rounded-full flex items-center gap-1.5 transition-colors whitespace-nowrap flex-shrink-0"
         >
           Book a Meeting

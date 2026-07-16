@@ -90,17 +90,15 @@ export default function ContactInfo() {
             </h2>
 
             <p className="text-[#737373] text-[16px] leading-[1.6] mb-10">
-              3rd Floor, CIS Technology Park,
+              30 N GOULD ST STE R, 
               <br />
-              Shahra-e-Jamhuriat, G-5/2,
-              <br />
-              Islamabad, Pakistan
+              SHERIDAN, WY 82801
             </p>
 
             <div className="flex flex-col gap-6">
-              <InfoRow icon="phone">+92-51-2825565</InfoRow>
-              <InfoRow icon="mail">hello@centangle.com</InfoRow>
-              <InfoRow icon="clock">Mon – Fri (10 am – 6 pm PKT)</InfoRow>
+              <InfoRow icon="phone">+1 (307) 269-6427</InfoRow>
+              <InfoRow icon="mail">contact@centangleglobal.com</InfoRow>
+              {/* <InfoRow icon="clock">Mon – Fri (10 am – 6 pm PKT)</InfoRow> */}
             </div>
           </div>
 
@@ -110,13 +108,13 @@ export default function ContactInfo() {
               className="w-full rounded-3xl overflow-hidden"
               style={{ aspectRatio: "590 / 775", maxHeight: "620px" }}
             >
-              <Image
+              {/* <Image
                 src="/Cis.png"
                 alt="CIS Technology Park"
                 width={1180}
                 height={1550}
                 className="w-full h-full object-cover"
-              />
+              /> */}
             </div>
           </div>
         </div>

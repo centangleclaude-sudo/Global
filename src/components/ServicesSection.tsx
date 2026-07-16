@@ -134,13 +134,13 @@ const pills: Pill[] = [
   { label: "Intelligent", left: "1%", top: "28%", rotate: -19.69, bg: "#141216", color: "#fff" },
   { label: "Structured", left: "70%", top: "20%", rotate: 20.82, bg: "#141216", color: "#fff" },
   { label: "Precision", left: "32%", top: "36%", rotate: 23.68, bg: "#141216", color: "#fff" },
-  { label: "Clarity", left: "56%", top: "44%", rotate: -27.33, bg: "linear-gradient(90deg, #7A5CFF 0%, #5C7CFF 100%)", color: "#fff" },
-  { label: "Efficiency", left: "79%", top: "56%", rotate: -23.14, bg: "#2F6BFF", color: "#fff" },
+  { label: "Clear", left: "56%", top: "44%", rotate: -27.33, bg: "linear-gradient(90deg, #7A5CFF 0%, #5C7CFF 100%)", color: "#fff" },
+  { label: "Efficient", left: "79%", top: "56%", rotate: -23.14, bg: "#2F6BFF", color: "#fff" },
   { label: "Control", left: "4%", top: "56%", rotate: 17.93, bg: "#EDEDEF", color: "#111", border: "1px solid #111" },
   { label: "Professional", left: "22%", top: "66%", rotate: -16.15, bg: "#F04E23", color: "#fff" },
   { label: "Direct", left: "51%", top: "70%", rotate: 34.95, bg: "#fff", color: "#111", border: "1px solid #111" },
-  { label: "Clarity", left: "70%", top: "86%", rotate: 6.12, bg: "#141216", color: "#fff" },
-  { label: "Reliability", left: "3%", top: "88%", rotate: 0, bg: "linear-gradient(90deg, #6EA8FF 0%, #2F6BFF 100%)", color: "#fff" },
+  // { label: "Clarity", left: "70%", top: "86%", rotate: 6.12, bg: "#141216", color: "#fff" },
+  { label: "Reliabile", left: "3%", top: "88%", rotate: 0, bg: "linear-gradient(90deg, #6EA8FF 0%, #2F6BFF 100%)", color: "#fff" },
 ];
 
 export default function ServicesSection() {

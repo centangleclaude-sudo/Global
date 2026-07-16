@@ -12,32 +12,32 @@ const awards = [
 
 const testimonials = [
   {
-    name: "Christopher",
-    role: "CEO",
+    name: "Zain Rahman",
+    role: "Project Manager SEED Adam Smith International Pakistan",
     rating: "5.0",
     avatar: "/darkp.png",
-    text: "An incredible team that goes above and beyond. They listened carefully to our goals and delivered a solution…",
+    text: "While working with Centangle Interactive, we found them technically sound, easy to reach, and client-focused…",
   },
   {
-    name: "Christopher",
-    role: "CEO",
+    name: "Talha Chishti",
+    role: "Head of Society · British High Commission",
     rating: "5.0",
     avatar: "/darkp.png",
-    text: "An incredible team that goes above and beyond. They listened carefully to our goals and delivered a solution…",
+    text: "I am delighted to share my experience with Centangle Interactive Pvt. Ltd. The team'sI am delighted to share my experience with Centangle Interactive Pvt. Ltd. The team's professionalism and unwavering dedication…",
   },
   {
-    name: "Christopher",
-    role: "CEO",
+    name: "Sajid Maqsood",
+    role: "IT Officer · The World Bank",
     rating: "5.0",
     avatar: "/darkp.png",
-    text: "An incredible team that goes above and beyond. They listened carefully to our goals and delivered a solution…",
+    text: "Centangle has been exceptional! Their responsive and professional approach exceeded our expectations…",
   },
   {
-    name: "Christopher",
-    role: "CEO",
+    name: "Fayyaz Khan",
+    role: "Program Officer Administration SGAFP",
     rating: "5.0",
     avatar: "/darkp.png",
-    text: "An incredible team that goes above and beyond. They listened carefully to our goals and delivered a solution…",
+    text: "SGAFP found Centangle Interactive to be thoroughly professional, customer-oriented…",
   },
 ];
 

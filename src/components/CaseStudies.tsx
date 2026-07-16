@@ -142,7 +142,7 @@ function CaseCard({ study, index }: { study: CaseStudy; index: number }) {
             {renderText(study.extraParagraph, study.boldPhrases)}
           </p>
         )}
-        <a
+        {/* <a
           href="#"
           className="inline-flex items-center gap-2 text-white text-sm font-medium mt-5 hover:text-blue-400 transition-colors group"
         >
@@ -168,7 +168,7 @@ function CaseCard({ study, index }: { study: CaseStudy; index: number }) {
               <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </span>
-        </a>
+        </a> */}
       </div>
 
       {/* Image */}

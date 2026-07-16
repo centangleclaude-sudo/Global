@@ -37,15 +37,19 @@ export default function ComingSoon() {
         Coming Soon!
       </h1>
 
-      <p
+      <p className="text-gray-400 text-lg mt-4">
+        We&apos;re working hard behind the scenes to bring this to life. Check back soon!
+      </p>
+
+      {/* <p
         className="cs-sub mt-6 text-[#d4d4d6] max-w-[680px]"
         style={{ fontSize: "clamp(15px, 1.3vw, 22px)", lineHeight: 1.75 }}
       >
         Subscribe to be the first to know about all the events and get a
         discount on your first order!
-      </p>
+      </p> 
 
-      <form
+       <form
         className="cs-form mt-14 flex flex-col sm:flex-row items-center gap-4 w-full max-w-[820px]"
         onSubmit={(e) => e.preventDefault()}
       >
@@ -77,7 +81,7 @@ export default function ComingSoon() {
         >
           Subscribe
         </button>
-      </form>
+      </form> */}
     </section>
   );
 }

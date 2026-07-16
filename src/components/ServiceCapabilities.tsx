@@ -157,7 +157,7 @@ function CapabilityBlock({ cap }: { cap: Capability }) {
             </ul>
           </div>
 
-          <a
+          {/* <a
             href="/contact"
             className="inline-flex items-center gap-2.5 mt-10 text-white text-[13px] font-medium rounded-full px-6 py-3 transition-colors hover:bg-blue-600"
             style={{
@@ -169,7 +169,7 @@ function CapabilityBlock({ cap }: { cap: Capability }) {
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
               <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
-          </a>
+          </a> */}
         </div>
       </div>
     </div>
