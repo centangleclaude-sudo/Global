@@ -49,7 +49,7 @@ export default function ServiceHighlights() {
   return (
     <section
       ref={sectionRef}
-      className="px-6 md:px-12 max-w-6xl mx-auto flex flex-col gap-[30px] pb-[100px] md:pb-[180px]"
+        className="px-6 md:px-12 max-w-6xl mx-auto flex flex-col gap-[30px] pb-[60px] md:pb-[88px]"
     >
       {highlights.map((h) => (
         <div
