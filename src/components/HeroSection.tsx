@@ -12,14 +12,14 @@ export default function HeroSection() {
   const floatingRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
-    const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+    const tl = gsap.timeline();
 
-    tl.from(badgeRef.current, { y: 30, opacity: 0, duration: 0.8 })
-      .from(headingRef.current, { y: 60, opacity: 0, duration: 1 }, "-=0.4")
-      .from(imageRef.current, { y: 80, opacity: 0, scale: 0.95, duration: 1.2 }, "-=0.6")
+    tl.from(badgeRef.current, { y: 32, opacity: 0 })
+      .from(headingRef.current, { y: 32, opacity: 0 }, "-=0.4")
+      .from(imageRef.current, { y: 32, opacity: 0, scale: 0.97 }, "-=0.6")
       .from(
         floatingRefs.current.filter(Boolean),
-        { scale: 0, opacity: 0, duration: 0.6, stagger: 0.15 },
+        { scale: 0, opacity: 0, stagger: 0.08 },
         "-=0.8"
       );
   }, []);
@@ -27,7 +27,7 @@ export default function HeroSection() {
   return (
     <section
       ref={sectionRef}
-      className="relative min-h-screen flex flex-col items-center pt-[136px] pb-0 px-4 overflow-hidden"
+      className="relative min-h-screen flex flex-col items-center pt-[120px] md:pt-[136px] pb-0 px-4 overflow-hidden"
     >
       {/* Background glow */}
       <div className="absolute inset-0 pointer-events-none">
@@ -37,7 +37,7 @@ export default function HeroSection() {
       {/* Badge */}
       <div
         ref={badgeRef}
-        className="glass-badge mb-5"
+        className="glass-badge mb-5 max-w-full"
         style={{
           display: "flex",
           padding: "8px 14px",
@@ -48,7 +48,7 @@ export default function HeroSection() {
         }}
       >
         <span
-          className="relative whitespace-nowrap text-sm tracking-wide"
+          className="relative text-center text-[12px] sm:text-sm tracking-wide sm:whitespace-nowrap"
           style={{
             color: "rgba(255,255,255,0.82)",
             zIndex: 3,
@@ -61,11 +61,11 @@ export default function HeroSection() {
       {/* Heading */}
       <h1
         ref={headingRef}
-        className="text-center max-w-[880px] mb-14"
+        className="text-center max-w-[880px] mb-10 md:mb-14"
         style={{
           fontFamily: "'Google Sans Flex', 'Google Sans', sans-serif",
           fontWeight: 500,
-          fontSize: "clamp(40px, 5.3vw, 75px)",
+          fontSize: "clamp(32px, 5.3vw, 75px)",
           lineHeight: "112.8%",
         }}
       >
@@ -99,8 +99,10 @@ export default function HeroSection() {
           />
         </div>
 
-        {/* Floating elements */}
-
+        {/* Floating elements — the leftmost card sits at -190px against a 900px
+            image, so the viewport needs (900 + 2*190) = 1280px before they fit
+            without being cropped. Hence xl, not lg. */}
+        <div className="hidden xl:block" aria-hidden="true">
 
         {/* Result +72% - top right, overlapping the 98% card */}
         <div
@@ -343,11 +345,12 @@ export default function HeroSection() {
             <span className="text-white text-sm font-medium whitespace-nowrap">Engineering systems</span>
           </div>
         </div>
+        </div>
       </div>
 
 
       {/* Decorative dots - left side */}
-      <div className="absolute left-6 md:left-10 top-[45%] flex gap-1.5">
+      <div className="hidden xl:flex absolute left-6 md:left-10 top-[45%] gap-1.5">
         {[...Array(6)].map((_, i) => (
           <div
             key={i}

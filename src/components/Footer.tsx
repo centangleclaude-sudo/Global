@@ -1,41 +1,63 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { gsap, ScrollTrigger } from "@/lib/gsap";
+import { gsap } from "@/lib/gsap";
 
 const columns = [
   {
     heading: "About",
-    links: ["Who We Are", "Careers", "Our Leadership", "FAQs"],
+    links: [
+      // TODO: no pages exist for these three yet.
+      { label: "Who We Are", href: "/coming-soon" },
+      { label: "Careers", href: "/coming-soon" },
+      { label: "Our Leadership", href: "/coming-soon" },
+      { label: "FAQs", href: "/#faq" },
+    ],
   },
   {
     heading: "Cases",
-    links: ["EZTRAK", "RAMS", "DYH", "DICE", "Ignite"],
+    links: [
+      { label: "EZTRAK", href: "/coming-soon" },
+      { label: "RAMS", href: "/coming-soon" },
+      { label: "DYH", href: "/coming-soon" },
+      { label: "DICE", href: "/coming-soon" },
+      { label: "Ignite", href: "/coming-soon" },
+    ],
   },
   {
     heading: "Services",
     links: [
-      "Custom Software Development",
-      "Staff Augmentation",
-      "AI Development",
-      "UI/UX Design",
+      { label: "Custom Software Development", href: "/services" },
+      { label: "Staff Augmentation", href: "/services" },
+      { label: "AI Development", href: "/services" },
+      { label: "UI/UX Design", href: "/services" },
     ],
   },
 ];
 
 const legalLinks = [
-  "Privacy Policy",
-  "Terms of Service",
-  "Legal Disclaimer",
-  "Sitemap",
-  "Cookie Settings",
+  { label: "Privacy Policy", href: "/privacy" },
+  { label: "Terms of Service", href: "/terms" },
+  { label: "Legal Disclaimer", href: "/terms#disclaimer" },
+  { label: "Sitemap", href: "/sitemap.xml" },
 ];
 
-function SocialIcon({ type }: { type: "facebook" | "behance" | "instagram" | "linkedin" | "x" }) {
+const socials = {
+  facebook: { url: "https://facebook.com/centangleglobal", label: "Facebook" },
+  behance: { url: "https://www.behance.net/centangle", label: "Behance" },
+  instagram: { url: "https://instagram.com/centangleglobal", label: "Instagram" },
+  linkedin: { url: "https://www.linkedin.com/company/centangleglobal", label: "LinkedIn" },
+  x: { url: "https://x.com/centangleglobal", label: "X" },
+} as const;
+
+function SocialIcon({ type }: { type: keyof typeof socials }) {
+  const { url, label } = socials[type];
   return (
     <a
-      href="#"
-      aria-label={type}
+      href={url}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={`${label} (opens in a new tab)`}
       className="flex items-center justify-center rounded-full transition-colors hover:border-white/40"
       style={{
         width: "52px",
@@ -81,15 +103,11 @@ export default function Footer() {
   useEffect(() => {
     const ctx = gsap.context(() => {
       gsap.from(".footer-inner > *", {
-        y: 40,
+        y: 32,
         opacity: 0,
-        stagger: 0.1,
-        duration: 0.8,
-        ease: "power3.out",
+        stagger: 0.08,
         scrollTrigger: {
           trigger: footerRef.current,
-          start: "top 85%",
-          toggleActions: "play none none reverse",
         },
       });
     }, footerRef);
@@ -100,7 +118,9 @@ export default function Footer() {
   return (
     <footer ref={footerRef} style={{ background: "#050507" }}>
       <div className="footer-inner pt-20 pb-8 px-6 md:px-[79px]">
-        <div className="flex flex-col lg:flex-row gap-14 lg:gap-[250px]">
+        {/* The email block plus three link columns need ~1100px before they can
+            sit side by side, so the split happens at xl and the gap is fluid. */}
+        <div className="flex flex-col xl:flex-row gap-14 xl:gap-[clamp(80px,12vw,250px)]">
           {/* Left: email + socials */}
           <div>
             <a
@@ -111,12 +131,12 @@ export default function Footer() {
                 lineHeight: 1,
                 fontFamily: "'Google Sans Flex', 'Google Sans', sans-serif",
                 fontWeight: 600,
-                fontSize: "clamp(24px, 2.4vw, 34px)",
+                fontSize: "clamp(18px, 5vw, 34px)",
               }}
             >
               contact@centangleglobal.com
             </a>
-            <div className="flex gap-4" style={{ marginTop: "34px" }}>
+            <div className="flex flex-wrap gap-3 sm:gap-4" style={{ marginTop: "34px" }}>
               <SocialIcon type="facebook" />
               <SocialIcon type="behance" />
               <SocialIcon type="instagram" />
@@ -126,18 +146,18 @@ export default function Footer() {
           </div>
 
           {/* Right: link columns */}
-          <div className="grid grid-cols-1 sm:grid-cols-[auto_auto_auto] gap-y-10 gap-x-[90px]">
+          <div className="grid grid-cols-1 sm:grid-cols-[auto_auto_auto] gap-y-10 gap-x-10 lg:gap-x-[90px]">
             {columns.map((col) => (
               <div key={col.heading}>
                 <div className="text-white text-[15px] font-medium mb-5">{col.heading}</div>
                 <ul className="space-y-3.5">
-                  {col.links.map((link, i) => (
-                    <li key={`${link}-${i}`}>
+                  {col.links.map((link) => (
+                    <li key={`${col.heading}-${link.label}`}>
                       <a
-                        href="#"
-                        className="text-[#737373] hover:text-white transition-colors text-[14px] whitespace-nowrap"
+                        href={link.href}
+                        className="text-[#737373] hover:text-white transition-colors text-[14px]"
                       >
-                        {link}
+                        {link.label}
                       </a>
                     </li>
                   ))}
@@ -154,18 +174,18 @@ export default function Footer() {
               Centangle Global is US-registered, with delivery teams in Pakistan.
             </span>
             <span className="text-[#737373] text-[13px]">
-              © 2026 Centangle Interactive. All rights reserved.
+              © 2026 Centangle Global LLC. All rights reserved.
             </span>
           </div>
 
           <div className="flex flex-wrap items-center justify-start md:justify-end gap-x-2 gap-y-1">
             {legalLinks.map((link, i) => (
-              <span key={link} className="flex items-center gap-2">
+              <span key={link.label} className="flex items-center gap-2">
                 <a
-                  href="#"
+                  href={link.href}
                   className="text-[#737373] hover:text-white transition-colors text-[13px]"
                 >
-                  {link}
+                  {link.label}
                 </a>
                 {i < legalLinks.length - 1 && (
                   <span className="text-[#3a3a3e] text-[13px]">·</span>

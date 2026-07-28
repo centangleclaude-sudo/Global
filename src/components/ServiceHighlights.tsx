@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import Image from "next/image";
-import { gsap, ScrollTrigger } from "@/lib/gsap";
+import { gsap } from "@/lib/gsap";
 
 interface Highlight {
   title: string;
@@ -34,15 +34,11 @@ export default function ServiceHighlights() {
   useEffect(() => {
     const ctx = gsap.context(() => {
       gsap.from(".highlight-card", {
-        y: 60,
+        y: 32,
         opacity: 0,
-        stagger: 0.12,
-        duration: 0.9,
-        ease: "power3.out",
+        stagger: 0.08,
         scrollTrigger: {
           trigger: sectionRef.current,
-          start: "top 80%",
-          toggleActions: "play none none reverse",
         },
       });
     }, sectionRef);
@@ -53,7 +49,7 @@ export default function ServiceHighlights() {
   return (
     <section
       ref={sectionRef}
-      className="px-6 md:px-12 max-w-6xl mx-auto flex flex-col gap-[30px] pb-[180px]"
+      className="px-6 md:px-12 max-w-6xl mx-auto flex flex-col gap-[30px] pb-[100px] md:pb-[180px]"
     >
       {highlights.map((h) => (
         <div
@@ -64,7 +60,7 @@ export default function ServiceHighlights() {
             border: "1px solid rgba(255,255,255,0.06)",
             background:
               "radial-gradient(140% 160% at 85% 10%, rgba(37, 62, 128, 0.35) 0%, rgba(10, 14, 26, 0.9) 55%, #05060a 100%)",
-            padding: "44px 48px",
+            padding: "clamp(28px, 6vw, 44px) clamp(24px, 6vw, 48px)",
           }}
         >
           <div className="max-w-[640px]">
@@ -73,7 +69,7 @@ export default function ServiceHighlights() {
               style={{
                 fontFamily: "'Google Sans Flex', 'Google Sans', sans-serif",
                 fontWeight: 600,
-                fontSize: "26px",
+                fontSize: "clamp(21px, 4.5vw, 26px)",
               }}
             >
               {h.title}
@@ -92,8 +88,8 @@ export default function ServiceHighlights() {
             className="object-contain flex-shrink-0 self-center"
             style={{
               width: "220.368px",
-              height: "196.473px",
               maxWidth: "100%",
+              height: "auto",
             }}
           />
         </div>

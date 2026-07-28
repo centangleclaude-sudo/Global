@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import Image from "next/image";
-import { gsap, ScrollTrigger } from "@/lib/gsap";
+import { gsap } from "@/lib/gsap";
 
 const partnerLogos = [
   { src: "/BritishCouncil.png", alt: "British Council" },
@@ -24,7 +24,7 @@ const scatteredStars: {
   fill?: string;
   stroke?: string;
 }[] = [
-  { x: 50, y: 22, size: 9, fill: "#d9d9d9" },
+  { x: 32, y: 22, size: 9, fill: "#d9d9d9" },
   { x: 140, y: 44, size: 13, stroke: "#737373" },
   { x: 241, y: 16, size: 8, stroke: "#e0e0e0" },
   { x: 303, y: 66, size: 7, fill: "#2F7CFF" },
@@ -41,27 +41,19 @@ export default function ProofSection() {
     const ctx = gsap.context(() => {
       gsap.from(".proof-heading .word", {
         opacity: 0.15,
-        y: 20,
+        y: 12,
         stagger: 0.03,
-        duration: 0.8,
-        ease: "power2.out",
         scrollTrigger: {
           trigger: ".proof-heading",
-          start: "top 75%",
-          toggleActions: "play none none reverse",
         },
       });
 
       gsap.from(".proof-card", {
-        y: 60,
+        y: 32,
         opacity: 0,
-        stagger: 0.12,
-        duration: 0.9,
-        ease: "power3.out",
+        stagger: 0.08,
         scrollTrigger: {
           trigger: ".proof-grid",
-          start: "top 80%",
-          toggleActions: "play none none reverse",
         },
       });
     }, sectionRef);
@@ -75,7 +67,7 @@ export default function ProofSection() {
   const whiteWordCount = 3;
 
   return (
-    <section ref={sectionRef} className="pt-[200px] pb-[200px] px-6 md:px-12">
+    <section ref={sectionRef} className="pt-[110px] pb-[110px] md:pt-[200px] md:pb-[200px] px-6 md:px-12">
       {/* Heading */}
       <h2
         className="proof-heading text-center max-w-[760px] mx-auto"
@@ -98,7 +90,7 @@ export default function ProofSection() {
       </h2>
 
       {/* Stats grid */}
-      <div className="proof-grid flex flex-col md:flex-row items-start gap-[30px] max-w-6xl mx-auto mt-[130px]">
+      <div className="proof-grid flex flex-col md:flex-row items-start gap-[30px] max-w-6xl mx-auto mt-[70px] md:mt-[130px]">
         {/* Left column */}
         <div className="flex w-full md:w-[384.5px] flex-shrink-0 flex-col gap-[30px]">
         {/* 13+ Years */}
@@ -107,9 +99,9 @@ export default function ProofSection() {
           style={{
             width: "100%",
             maxWidth: "384.5px",
-            height: "267px",
+            minHeight: "267px",
             display: "flex",
-            padding: "40px",
+            padding: "clamp(24px, 5vw, 40px)",
             flexDirection: "column",
             alignItems: "flex-start",
             alignSelf: "stretch",
@@ -147,13 +139,13 @@ export default function ProofSection() {
             style={{
               color: "#737373",
               fontFamily: "'Google Sans Flex', 'Google Sans', sans-serif",
-              fontSize: "30.72px",
+              fontSize: "clamp(22px, 4.5vw, 30.72px)",
               fontStyle: "normal",
               fontWeight: 400,
               lineHeight: "120%",
             }}
           >
-            <span style={{ color: "#ffffff", fontSize: "32px", fontWeight: 600 }}>
+            <span style={{ color: "#ffffff", fontSize: "clamp(23px, 4.7vw, 32px)", fontWeight: 600 }}>
               13+ Years
             </span>{" "}
             of Delivering Innovative Software Solutions
@@ -166,9 +158,9 @@ export default function ProofSection() {
           style={{
             width: "100%",
             maxWidth: "384.5px",
-            height: "415px",
+            minHeight: "415px",
             display: "flex",
-            padding: "40px",
+            padding: "clamp(24px, 5vw, 40px)",
             flexDirection: "column",
             alignItems: "flex-start",
             alignSelf: "stretch",
@@ -178,11 +170,9 @@ export default function ProofSection() {
         >
           {/* Scattered stars artwork — top center */}
           <svg
-            width="300"
-            height="216"
             viewBox="0 0 320 230"
             fill="none"
-            style={{ alignSelf: "center" }}
+            style={{ alignSelf: "center", width: "min(300px, 100%)", height: "auto" }}
           >
             {scatteredStars.map((s, i) => (
               <path
@@ -204,7 +194,7 @@ export default function ProofSection() {
           <p
             style={{
               fontFamily: "'Inter', sans-serif",
-              fontSize: "30.72px",
+              fontSize: "clamp(22px, 4.5vw, 30.72px)",
               fontStyle: "normal",
               lineHeight: "120%",
             }}
@@ -224,8 +214,8 @@ export default function ProofSection() {
             display: "flex",
             width: "100%",
             maxWidth: "703px",
-            height: "415px",
-            padding: "40px",
+            minHeight: "415px",
+            padding: "clamp(24px, 5vw, 40px)",
             flexDirection: "column",
             alignItems: "flex-start",
             justifyContent: "center",
@@ -236,7 +226,7 @@ export default function ProofSection() {
           <p
             style={{
               fontFamily: "'Google Sans Flex', 'Google Sans', sans-serif",
-              fontSize: "30.72px",
+              fontSize: "clamp(22px, 4.5vw, 30.72px)",
               fontStyle: "normal",
               lineHeight: "120%",
               maxWidth: "480px",
@@ -251,8 +241,8 @@ export default function ProofSection() {
 
           {/* Partner logos — 2 rows of 3, 90px below the text */}
           <div
-            className="grid grid-cols-3 gap-x-12 gap-y-10 items-center justify-items-center w-full"
-            style={{ marginTop: "90px" }}
+            className="grid grid-cols-2 sm:grid-cols-3 gap-x-8 sm:gap-x-12 gap-y-10 items-center justify-items-center w-full"
+            style={{ marginTop: "clamp(40px, 9vw, 90px)" }}
           >
             {partnerLogos.map((logo) => (
               <Image
@@ -274,8 +264,8 @@ export default function ProofSection() {
             display: "flex",
             width: "100%",
             maxWidth: "703px",
-            height: "268px",
-            padding: "40px",
+            minHeight: "268px",
+            padding: "clamp(24px, 5vw, 40px)",
             flexDirection: "column",
             alignItems: "flex-start",
             gap: "21px",
@@ -297,7 +287,7 @@ export default function ProofSection() {
             className="relative z-10"
             style={{
               fontFamily: "'Google Sans Flex', 'Google Sans', sans-serif",
-              fontSize: "30.72px",
+              fontSize: "clamp(22px, 4.5vw, 30.72px)",
               fontStyle: "normal",
               lineHeight: "120%",
             }}

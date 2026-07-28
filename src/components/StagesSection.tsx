@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { gsap, ScrollTrigger } from "@/lib/gsap";
+import { gsap } from "@/lib/gsap";
 
 export default function StagesSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -9,22 +9,22 @@ export default function StagesSection() {
   const subtitleRef = useRef<HTMLParagraphElement>(null);
 
   useEffect(() => {
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: sectionRef.current,
-        start: "top 70%",
-        toggleActions: "play none none reverse",
-      },
-    });
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: sectionRef.current,
+        },
+      });
 
-    tl.from(headingRef.current, { y: 60, opacity: 0, duration: 1, ease: "power3.out" })
-      .from(subtitleRef.current, { y: 40, opacity: 0, duration: 0.8, ease: "power3.out" }, "-=0.5");
+      tl.from(headingRef.current, { y: 32, opacity: 0 })
+        .from(subtitleRef.current, { y: 32, opacity: 0 }, "-=0.5");
+    }, sectionRef);
 
-    return () => ScrollTrigger.getAll().forEach((t) => t.kill());
+    return () => ctx.revert();
   }, []);
 
   return (
-    <section ref={sectionRef} className="pt-[200px] pb-0 px-6 text-center">
+    <section ref={sectionRef} className="pt-[110px] md:pt-[200px] pb-0 px-6 text-center">
       <h2
         ref={headingRef}
         className="max-w-3xl mx-auto"

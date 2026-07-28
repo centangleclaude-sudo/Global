@@ -8,10 +8,10 @@ export default function ServicesHero() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
-      tl.from(".services-hero-title", { y: 60, opacity: 0, duration: 1 }).from(
+      const tl = gsap.timeline();
+      tl.from(".services-hero-title", { y: 32, opacity: 0 }).from(
         ".services-hero-sub",
-        { y: 30, opacity: 0, duration: 0.8 },
+        { y: 32, opacity: 0 },
         "-=0.5"
       );
     }, sectionRef);
@@ -22,7 +22,7 @@ export default function ServicesHero() {
   return (
     <section
       ref={sectionRef}
-      className="relative flex flex-col items-center text-center px-6 pt-[170px] pb-[120px]"
+      className="relative flex flex-col items-center text-center px-6 pt-[130px] md:pt-[170px] pb-[80px] md:pb-[120px]"
     >
       {/* Hero video + gradient scrim */}
       <div

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { gsap, ScrollTrigger } from "@/lib/gsap";
+import { gsap } from "@/lib/gsap";
 
 export default function MissionSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -9,35 +9,30 @@ export default function MissionSection() {
   const btnRef = useRef<HTMLAnchorElement>(null);
 
   useEffect(() => {
-    const words = textRef.current?.querySelectorAll(".word");
-    if (!words) return;
+    const ctx = gsap.context(() => {
+      const words = textRef.current?.querySelectorAll(".word");
+      if (!words) return;
 
-    gsap.from(words, {
-      opacity: 0.15,
-      y: 20,
-      stagger: 0.03,
-      duration: 0.8,
-      ease: "power2.out",
-      scrollTrigger: {
-        trigger: sectionRef.current,
-        start: "top 70%",
-        end: "bottom 60%",
-        toggleActions: "play none none reverse",
-      },
-    });
+      gsap.from(words, {
+        opacity: 0.15,
+        y: 12,
+        stagger: 0.03,
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          end: "bottom 60%",
+        },
+      });
 
-    gsap.from(btnRef.current, {
-      opacity: 0,
-      y: 30,
-      duration: 0.8,
-      ease: "power2.out",
-      scrollTrigger: {
-        trigger: btnRef.current,
-        start: "top 85%",
-      },
-    });
+      gsap.from(btnRef.current, {
+        opacity: 0,
+        y: 32,
+        scrollTrigger: {
+          trigger: btnRef.current,
+        },
+      });
+    }, sectionRef);
 
-    return () => ScrollTrigger.getAll().forEach((t) => t.kill());
+    return () => ctx.revert();
   }, []);
 
   // Four forced lines; text turns #737373 starting at "understand"
@@ -58,7 +53,7 @@ export default function MissionSection() {
   return (
     <section
       ref={sectionRef}
-      className="pt-[200px] pb-0 px-6 md:px-12 max-w-[1000px] mx-auto"
+      className="pt-[110px] md:pt-[200px] pb-0 px-6 md:px-12 max-w-[1000px] mx-auto"
     >
       <p
         ref={textRef}
@@ -86,7 +81,7 @@ export default function MissionSection() {
 
       <a
         ref={btnRef}
-        href="#"
+        href="/contact"
         className="mt-10 inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white text-sm px-6 py-3.5 rounded-full transition-colors font-medium"
       >
         Book a Meeting

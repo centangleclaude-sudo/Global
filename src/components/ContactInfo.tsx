@@ -1,8 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import Image from "next/image";
-import { gsap, ScrollTrigger } from "@/lib/gsap";
+import { gsap } from "@/lib/gsap";
 
 function InfoRow({
   icon,
@@ -46,25 +45,17 @@ export default function ContactInfo() {
   useEffect(() => {
     const ctx = gsap.context(() => {
       gsap.from(".contact-info-left", {
-        x: -50,
+        x: -32,
         opacity: 0,
-        duration: 1,
-        ease: "power3.out",
         scrollTrigger: {
           trigger: sectionRef.current,
-          start: "top 70%",
-          toggleActions: "play none none reverse",
         },
       });
       gsap.from(".contact-info-image", {
-        x: 50,
+        x: 32,
         opacity: 0,
-        duration: 1,
-        ease: "power3.out",
         scrollTrigger: {
           trigger: sectionRef.current,
-          start: "top 70%",
-          toggleActions: "play none none reverse",
         },
       });
     }, sectionRef);
@@ -90,9 +81,9 @@ export default function ContactInfo() {
             </h2>
 
             <p className="text-[#737373] text-[16px] leading-[1.6] mb-10">
-              30 N GOULD ST STE R, 
+              30 N Gould St, Ste R,
               <br />
-              SHERIDAN, WY 82801
+              Sheridan, WY 82801, United States
             </p>
 
             <div className="flex flex-col gap-6">

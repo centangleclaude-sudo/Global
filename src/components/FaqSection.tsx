@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { gsap, ScrollTrigger } from "@/lib/gsap";
+import { gsap } from "@/lib/gsap";
 
 const faqs = [
   {
@@ -76,7 +76,7 @@ function FaqItem({
     <div className="faq-item border-b border-white/[0.08]">
       <button
         onClick={onToggle}
-        className="w-full flex items-center justify-between gap-6 py-6 text-left cursor-pointer group"
+        className="w-full flex items-center justify-between gap-4 sm:gap-6 py-6 text-left cursor-pointer group"
       >
         <span
           className="text-white group-hover:text-blue-400 transition-colors"
@@ -100,7 +100,7 @@ function FaqItem({
         </svg>
       </button>
       <div ref={answerRef} className="overflow-hidden" style={{ height: 0, opacity: 0 }}>
-        <p className="text-gray-400 text-[14px] leading-[1.75] pb-6 pr-10 max-w-2xl">{answer}</p>
+        <p className="text-gray-400 text-[14px] leading-[1.75] pb-6 pr-0 sm:pr-10 max-w-2xl">{answer}</p>
       </div>
     </div>
   );
@@ -116,27 +116,19 @@ export default function FaqSection() {
   useEffect(() => {
     const ctx = gsap.context(() => {
       gsap.from(".faq-title", {
-        y: 50,
+        y: 32,
         opacity: 0,
-        duration: 0.9,
-        ease: "power3.out",
         scrollTrigger: {
           trigger: ".faq-title",
-          start: "top 82%",
-          toggleActions: "play none none reverse",
         },
       });
 
       gsap.from(".faq-item", {
-        y: 40,
+        y: 32,
         opacity: 0,
-        stagger: 0.1,
-        duration: 0.8,
-        ease: "power3.out",
+        stagger: 0.08,
         scrollTrigger: {
           trigger: ".faq-list",
-          start: "top 82%",
-          toggleActions: "play none none reverse",
         },
       });
     }, sectionRef);
@@ -145,13 +137,13 @@ export default function FaqSection() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="py-20 md:py-28 px-6 md:px-12 max-w-4xl mx-auto">
+    <section id="faq" ref={sectionRef} className="py-20 md:py-28 px-6 md:px-12 max-w-4xl mx-auto">
       <h2
-        className="faq-title text-center text-white mb-14 whitespace-nowrap"
+        className="faq-title text-center text-white mb-14"
         style={{
           fontFamily: "'Google Sans Flex', 'Google Sans', sans-serif",
           fontWeight: 600,
-          fontSize: "clamp(38px, 5.3vw, 75px)",
+          fontSize: "clamp(30px, 5.3vw, 75px)",
           lineHeight: 1.2,
         }}
       >

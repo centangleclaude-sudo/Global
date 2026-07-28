@@ -5,7 +5,7 @@ import ProcessSection from "@/components/ProcessSection";
 import Footer from "@/components/Footer";
 
 export const metadata = {
-  title: "Contact - Centangle Interactive",
+  title: "Contact - Centangle Global",
 };
 
 export default function ContactPage() {

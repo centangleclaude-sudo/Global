@@ -6,7 +6,7 @@ import CtaSection from "@/components/CtaSection";
 import Footer from "@/components/Footer";
 
 export const metadata = {
-  title: "Projects - Centangle Interactive",
+  title: "Projects - Centangle Global",
 };
 
 export default function ProjectsPage() {

@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import Image from "next/image";
-import { gsap, ScrollTrigger } from "@/lib/gsap";
+import { gsap } from "@/lib/gsap";
 
 interface CaseStudy {
   title: string;
@@ -35,7 +35,7 @@ const caseStudies: CaseStudy[] = [
       "A learning platform built for the British Council's DICE program supporting women entrepreneurs through interactive modules, live discussion forums, and structured course management.",
     boldPhrases: ["British Council's DICE program"],
     extraParagraph:
-      "The program has since concluded and the platform is no longer active. The engagement delivered a fully functional ed-tech product within a two-day design sprint.",
+      "The engagement delivered a fully functional ed-tech product within a ten-day design sprint.",
     image: "/dice.png",
   },
   {
@@ -64,14 +64,10 @@ function CaseCard({ study, index }: { study: CaseStudy; index: number }) {
 
       if (textEl) {
         gsap.from(textEl, {
-          y: 60,
+          y: 32,
           opacity: 0,
-          duration: 1,
-          ease: "power3.out",
           scrollTrigger: {
             trigger: cardRef.current,
-            start: "top 80%",
-            toggleActions: "play none none reverse",
           },
         });
       }
@@ -80,12 +76,8 @@ function CaseCard({ study, index }: { study: CaseStudy; index: number }) {
         gsap.from(imageEl, {
           scale: 0.96,
           opacity: 0,
-          duration: 1.2,
-          ease: "power3.out",
           scrollTrigger: {
             trigger: cardRef.current,
-            start: "top 75%",
-            toggleActions: "play none none reverse",
           },
         });
       }
@@ -128,7 +120,7 @@ function CaseCard({ study, index }: { study: CaseStudy; index: number }) {
           style={{
             fontFamily: "'Google Sans Flex', 'Google Sans', sans-serif",
             fontWeight: 500,
-            fontSize: "28px",
+            fontSize: "clamp(22px, 5.5vw, 28px)",
             whiteSpace: "pre-line",
           }}
         >
@@ -175,7 +167,7 @@ function CaseCard({ study, index }: { study: CaseStudy; index: number }) {
       <div className="case-image">
         <div
           className="relative rounded-2xl overflow-hidden border border-white/[0.06] ml-auto"
-          style={{ width: "752.06px", height: "574.21px", maxWidth: "100%" }}
+          style={{ width: "752.06px", maxWidth: "100%", aspectRatio: "752.06 / 574.21" }}
         >
           <Image
             src={study.image}
@@ -192,7 +184,7 @@ function CaseCard({ study, index }: { study: CaseStudy; index: number }) {
 
 export default function CaseStudies() {
   return (
-    <section className="pt-[130px] px-6 md:px-12 lg:px-20 max-w-7xl mx-auto">
+    <section className="pt-[70px] md:pt-[130px] px-6 md:px-12 lg:px-20 max-w-7xl mx-auto">
       {caseStudies.map((study, i) => (
         <CaseCard key={study.title} study={study} index={i} />
       ))}

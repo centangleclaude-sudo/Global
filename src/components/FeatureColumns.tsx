@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import Image from "next/image";
-import { gsap, ScrollTrigger } from "@/lib/gsap";
+import { gsap } from "@/lib/gsap";
 
 const features = [
   {
@@ -44,27 +44,19 @@ export default function FeatureColumns() {
     const ctx = gsap.context(() => {
       gsap.from(".fc-heading .word", {
         opacity: 0.1,
-        y: 20,
+        y: 12,
         stagger: 0.03,
-        duration: 0.8,
-        ease: "power2.out",
         scrollTrigger: {
           trigger: ".fc-heading",
-          start: "top 75%",
-          toggleActions: "play none none reverse",
         },
       });
 
       gsap.from(".fc-item", {
-        y: 50,
+        y: 32,
         opacity: 0,
-        stagger: 0.1,
-        duration: 0.8,
-        ease: "power3.out",
+        stagger: 0.08,
         scrollTrigger: {
           trigger: ".fc-grid",
-          start: "top 80%",
-          toggleActions: "play none none reverse",
         },
       });
     }, sectionRef);
@@ -80,10 +72,10 @@ export default function FeatureColumns() {
   const darkWordCount = 3;
 
   return (
-    <section ref={sectionRef} className="pt-[200px] pb-0 px-6 md:px-12 max-w-7xl mx-auto">
+    <section ref={sectionRef} className="pt-[110px] md:pt-[200px] pb-0 px-6 md:px-12 max-w-7xl mx-auto">
       {/* Heading */}
       <h2
-        className="fc-heading text-center max-w-[1000px] mx-auto mb-[130px]"
+        className="fc-heading text-center max-w-[1000px] mx-auto mb-[70px] md:mb-[130px]"
         style={{
           fontFamily: "'Google Sans Flex', 'Google Sans', sans-serif",
           fontWeight: 600,
@@ -110,7 +102,7 @@ export default function FeatureColumns() {
             className="fc-item"
             style={{
               display: "flex",
-              padding: "40px 39px",
+              padding: "clamp(28px, 6vw, 40px) clamp(24px, 5.5vw, 39px)",
               flexDirection: "column",
               justifyContent: "center",
               alignItems: "flex-start",
@@ -131,7 +123,7 @@ export default function FeatureColumns() {
               <h3
                 style={{
                   fontFamily: "'Google Sans Flex', 'Google Sans', sans-serif",
-                  fontSize: "26px",
+                  fontSize: "clamp(21px, 4.5vw, 26px)",
                   fontStyle: "normal",
                   fontWeight: 600,
                   color: "#030305",

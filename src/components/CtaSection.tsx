@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import Image from "next/image";
-import { gsap, ScrollTrigger } from "@/lib/gsap";
+import { gsap } from "@/lib/gsap";
 
 export default function CtaSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -10,27 +10,19 @@ export default function CtaSection() {
   useEffect(() => {
     const ctx = gsap.context(() => {
       gsap.from(".cta-heading", {
-        y: 60,
+        y: 32,
         opacity: 0,
-        duration: 1,
-        ease: "power3.out",
         scrollTrigger: {
           trigger: sectionRef.current,
-          start: "top 75%",
-          toggleActions: "play none none reverse",
         },
       });
 
       gsap.from(".cta-button", {
-        y: 30,
+        y: 32,
         opacity: 0,
-        duration: 0.8,
         delay: 0.2,
-        ease: "power3.out",
         scrollTrigger: {
           trigger: sectionRef.current,
-          start: "top 75%",
-          toggleActions: "play none none reverse",
         },
       });
     }, sectionRef);
@@ -48,7 +40,7 @@ export default function CtaSection() {
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
-        padding: "120px 24px 130px",
+        padding: "clamp(72px, 14vw, 120px) 24px clamp(80px, 15vw, 130px)",
       }}
     >
       <h2
@@ -56,7 +48,7 @@ export default function CtaSection() {
         style={{
           fontFamily: "'Google Sans Flex', 'Google Sans', sans-serif",
           fontWeight: 600,
-          fontSize: "clamp(56px, 8.2vw, 118px)",
+          fontSize: "clamp(32px, 8.2vw, 118px)",
           lineHeight: "112.8%",
         }}
       >

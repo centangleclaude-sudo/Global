@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { gsap, ScrollTrigger } from "@/lib/gsap";
+import { gsap } from "@/lib/gsap";
 
 const steps = [
   {
@@ -17,27 +17,19 @@ export default function ProcessSection() {
   useEffect(() => {
     const ctx = gsap.context(() => {
       gsap.from(".process-heading", {
-        y: 50,
+        y: 32,
         opacity: 0,
-        duration: 0.9,
-        ease: "power3.out",
         scrollTrigger: {
           trigger: ".process-heading",
-          start: "top 82%",
-          toggleActions: "play none none reverse",
         },
       });
 
       gsap.from(".process-card", {
-        y: 60,
+        y: 32,
         opacity: 0,
-        stagger: 0.12,
-        duration: 0.9,
-        ease: "power3.out",
+        stagger: 0.08,
         scrollTrigger: {
           trigger: ".process-cards",
-          start: "top 85%",
-          toggleActions: "play none none reverse",
         },
       });
     }, sectionRef);
@@ -75,7 +67,7 @@ export default function ProcessSection() {
                 border: "1px solid rgba(255,255,255,0.06)",
                 background:
                   "radial-gradient(120% 120% at 50% 0%, rgba(37, 62, 128, 0.45) 0%, rgba(10, 14, 26, 0.9) 55%, #05060a 100%)",
-                padding: "44px 40px",
+                padding: "clamp(28px, 6vw, 44px) clamp(24px, 5.5vw, 40px)",
               }}
             >
               <div
@@ -93,7 +85,7 @@ export default function ProcessSection() {
                 style={{
                   fontFamily: "'Google Sans Flex', 'Google Sans', sans-serif",
                   fontWeight: 600,
-                  fontSize: "30px",
+                  fontSize: "clamp(24px, 5vw, 30px)",
                 }}
               >
                 {step.title}

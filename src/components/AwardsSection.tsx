@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import Image from "next/image";
-import { gsap, ScrollTrigger } from "@/lib/gsap";
+import { gsap } from "@/lib/gsap";
 
 const awards = [
   { title: "Excellence Award", subtitle: "Tecbehemoths Global awards", year: "2026", image: "/b1.png" },
@@ -15,28 +15,24 @@ const testimonials = [
     name: "Zain Rahman",
     role: "Project Manager SEED Adam Smith International Pakistan",
     rating: "5.0",
-    avatar: "/darkp.png",
     text: "While working with Centangle Interactive, we found them technically sound, easy to reach, and client-focused…",
   },
   {
     name: "Talha Chishti",
     role: "Head of Society · British High Commission",
     rating: "5.0",
-    avatar: "/darkp.png",
-    text: "I am delighted to share my experience with Centangle Interactive Pvt. Ltd. The team'sI am delighted to share my experience with Centangle Interactive Pvt. Ltd. The team's professionalism and unwavering dedication…",
+    text: "I am delighted to share my experience with Centangle Interactive Pvt. Ltd. The team's professionalism and unwavering dedication…",
   },
   {
     name: "Sajid Maqsood",
     role: "IT Officer · The World Bank",
     rating: "5.0",
-    avatar: "/darkp.png",
     text: "Centangle has been exceptional! Their responsive and professional approach exceeded our expectations…",
   },
   {
     name: "Fayyaz Khan",
     role: "Program Officer Administration SGAFP",
     rating: "5.0",
-    avatar: "/darkp.png",
     text: "SGAFP found Centangle Interactive to be thoroughly professional, customer-oriented…",
   },
 ];
@@ -64,41 +60,29 @@ export default function AwardsSection() {
     const ctx = gsap.context(() => {
       gsap.utils.toArray<HTMLElement>(".awards-heading").forEach((el) => {
         gsap.from(el, {
-          y: 50,
+          y: 32,
           opacity: 0,
-          duration: 0.9,
-          ease: "power3.out",
           scrollTrigger: {
             trigger: el,
-            start: "top 82%",
-            toggleActions: "play none none reverse",
           },
         });
       });
 
       gsap.from(".award-row", {
-        y: 40,
+        y: 32,
         opacity: 0,
-        stagger: 0.12,
-        duration: 0.8,
-        ease: "power3.out",
+        stagger: 0.08,
         scrollTrigger: {
           trigger: ".awards-list",
-          start: "top 82%",
-          toggleActions: "play none none reverse",
         },
       });
 
       gsap.from(".award-highlight", {
-        y: 50,
+        y: 32,
         opacity: 0,
-        stagger: 0.1,
-        duration: 0.8,
-        ease: "power3.out",
+        stagger: 0.08,
         scrollTrigger: {
           trigger: ".awards-highlights",
-          start: "top 82%",
-          toggleActions: "play none none reverse",
         },
       });
     }, sectionRef);
@@ -107,49 +91,42 @@ export default function AwardsSection() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="pt-[200px] pb-28 px-6 md:px-12 max-w-6xl mx-auto">
+    <section ref={sectionRef} className="pt-[110px] md:pt-[200px] pb-20 md:pb-28 px-6 md:px-12 max-w-6xl mx-auto">
       {/* First block: heading + award rows */}
       <div className="awards-heading">
         <AwardsHeading />
       </div>
 
-      <div className="awards-list flex flex-col items-center mt-[130px]" style={{ gap: "30px" }}>
+      <div className="awards-list flex flex-col items-center mt-[70px] md:mt-[130px]" style={{ gap: "30px" }}>
         {awards.map((award, i) => (
           <div
             key={i}
-            className="award-row"
+            className="award-row w-full max-w-[1120.451px] flex flex-col lg:flex-row items-center justify-center rounded-[15px] px-6 py-8 lg:py-3 lg:h-[225.41px]"
             style={{
-              display: "flex",
-              width: "100%",
-              maxWidth: "1120.451px",
-              height: "225.41px",
-              padding: "12px 24px",
-              justifyContent: "center",
-              alignItems: "center",
-              gap: "121px",
-              borderRadius: "15px",
+              gap: "clamp(24px, 6vw, 121px)",
               border: "0.7px solid #DFDFE1",
               background: "#ECECEE",
             }}
           >
-            {/* Text frame — 107px between the three texts; fixed column widths keep rows aligned */}
-            <div className="flex items-center" style={{ gap: "107px" }}>
+            {/* Text frame — columns are fluid so the three rows stay aligned at every width */}
+            <div
+              className="flex flex-col lg:flex-row items-center text-center lg:text-left"
+              style={{ gap: "clamp(10px, 5vw, 107px)" }}
+            >
               <span
+                className="lg:flex-shrink-0 lg:w-[clamp(180px,20vw,252px)]"
                 style={{
-                  width: "252px",
-                  flexShrink: 0,
                   color: "#030305",
                   fontFamily: "'Google Sans Flex', 'Google Sans', sans-serif",
                   fontWeight: 600,
-                  fontSize: "26px",
+                  fontSize: "clamp(20px, 2vw, 26px)",
                 }}
               >
                 {award.title}
               </span>
               <span
+                className="lg:flex-shrink-0 lg:w-[clamp(150px,17vw,212px)]"
                 style={{
-                  width: "212px",
-                  flexShrink: 0,
                   color: "#030305",
                   fontFamily: "'Google Sans Flex', 'Google Sans', sans-serif",
                   fontWeight: 400,
@@ -163,7 +140,7 @@ export default function AwardsSection() {
                   color: "#030305",
                   fontFamily: "'Google Sans Flex', 'Google Sans', sans-serif",
                   fontWeight: 400,
-                  fontSize: "26px",
+                  fontSize: "clamp(20px, 2vw, 26px)",
                 }}
               >
                 {award.year}
@@ -172,9 +149,8 @@ export default function AwardsSection() {
 
             {/* Award certificate image */}
             <div
+              className="w-[144px] h-[170px] lg:w-[170px] lg:h-[201px]"
               style={{
-                width: "170px",
-                height: "201px",
                 flexShrink: 0,
                 borderRadius: "7px",
                 overflow: "hidden",
@@ -193,7 +169,7 @@ export default function AwardsSection() {
       </div>
 
       {/* Second block: heading + three highlight columns */}
-      <div className="awards-heading mt-[200px]">
+      <div className="awards-heading mt-[110px] md:mt-[200px]">
         <p className="text-center text-[#9a9aa0] text-sm mb-4">Testimonial</p>
         <h2
           className="text-center text-[#111114] max-w-[980px] mx-auto"
@@ -208,7 +184,7 @@ export default function AwardsSection() {
         </h2>
       </div>
 
-      <div className="awards-highlights mt-[130px] overflow-hidden">
+      <div className="awards-highlights mt-[70px] md:mt-[130px] overflow-hidden">
         <div className="testimonial-track flex" style={{ width: "max-content" }}>
           {[...testimonials, ...testimonials].map((t, i) => (
             <div
@@ -216,42 +192,37 @@ export default function AwardsSection() {
               className="award-highlight flex-shrink-0"
               style={{
                 display: "flex",
-                width: "409px",
-                height: "329px",
+                width: "min(409px, 82vw)",
+                minHeight: "329px",
                 marginRight: "30px",
-                padding: "40px 39px",
+                padding: "clamp(24px, 5vw, 40px) clamp(22px, 5vw, 39px)",
                 flexDirection: "column",
-                justifyContent: "center",
+                // Top-aligned, not centred: centring lets each card find its own
+                // middle, so names drift out of line whenever a quote is shorter.
+                justifyContent: "flex-start",
                 alignItems: "flex-start",
-                gap: "109px",
+                gap: "clamp(32px, 9vw, 109px)",
                 borderRadius: "30.72px",
                 border: "0.7px solid #DFDFE1",
               }}
             >
-              {/* Avatar + name */}
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full overflow-hidden flex-shrink-0">
-                  <Image
-                    src={t.avatar}
-                    alt={t.name}
-                    width={80}
-                    height={80}
-                    className="w-full h-full object-cover"
-                  />
+              {/* Name + role */}
+              <div>
+                <div
+                  className="text-[#111114]"
+                  style={{
+                    fontFamily: "'Google Sans Flex', 'Google Sans', sans-serif",
+                    fontWeight: 600,
+                    fontSize: "16px",
+                    lineHeight: 1.3,
+                  }}
+                >
+                  {t.name}
                 </div>
-                <div>
-                  <div
-                    className="text-[#111114]"
-                    style={{
-                      fontFamily: "'Google Sans Flex', 'Google Sans', sans-serif",
-                      fontWeight: 600,
-                      fontSize: "16px",
-                      lineHeight: 1.3,
-                    }}
-                  >
-                    {t.name}
-                  </div>
-                  <div className="text-[#9a9aa0] text-[13px]">{t.role}</div>
+                {/* Reserves two lines so a one-line role still leaves the
+                    rating below it at the same height across every card. */}
+                <div className="text-[#9a9aa0] text-[13px]" style={{ minHeight: "3.1em" }}>
+                  {t.role}
                 </div>
               </div>
 
@@ -263,7 +234,7 @@ export default function AwardsSection() {
                     style={{
                       fontFamily: "'Google Sans Flex', 'Google Sans', sans-serif",
                       fontWeight: 500,
-                      fontSize: "48px",
+                      fontSize: "clamp(34px, 9vw, 48px)",
                       lineHeight: 1,
                     }}
                   >

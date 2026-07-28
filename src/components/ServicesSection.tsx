@@ -2,20 +2,33 @@
 
 import { useEffect, useRef } from "react";
 import Image from "next/image";
-import { gsap, ScrollTrigger } from "@/lib/gsap";
+import { gsap } from "@/lib/gsap";
 
 /* ─── Shared card styles (per design spec) ─── */
 
-const cardStyle: React.CSSProperties = {
+/* Card padding is a custom property so the full-bleed compositions inside can
+   cancel it out with negative margins at any breakpoint. */
+const cardStyle = {
+  "--card-pad-x": "clamp(20px, 4vw, 43px)",
+  "--card-pad-y": "clamp(24px, 3.5vw, 40px)",
   display: "flex",
-  padding: "40px 43px",
+  padding: "var(--card-pad-y) var(--card-pad-x)",
   flexDirection: "column",
   justifyContent: "center",
   alignItems: "center",
-  gap: "109px",
+  gap: "clamp(40px, 9vw, 109px)",
   borderRadius: "30.72px",
   border: "0.7px solid #DFDFE1",
   background: "#ECECEE",
+} as React.CSSProperties;
+
+/* The decorative compositions are laid out in percentages against a fixed
+   aspect ratio, so their type and chrome scale with container width (cqw)
+   rather than sitting at desktop pixel sizes on a phone. */
+const bleedStyle: React.CSSProperties = {
+  width: "calc(100% + 2 * var(--card-pad-x))",
+  margin: "0 calc(-1 * var(--card-pad-x)) calc(-1 * var(--card-pad-y))",
+  containerType: "inline-size",
 };
 
 function CardHeading({ children }: { children: React.ReactNode }) {
@@ -24,10 +37,10 @@ function CardHeading({ children }: { children: React.ReactNode }) {
       style={{
         textAlign: "center",
         fontFamily: "'Google Sans Flex', 'Google Sans', sans-serif",
-        fontSize: "42px",
+        fontSize: "clamp(28px, 3.4vw, 42px)",
         fontStyle: "normal",
         fontWeight: 600,
-        lineHeight: "56.84px",
+        lineHeight: 1.35,
         background: "linear-gradient(180deg, #141212 0%, #121010 100%)",
         backgroundClip: "text",
         WebkitBackgroundClip: "text",
@@ -149,27 +162,19 @@ export default function ServicesSection() {
   useEffect(() => {
     const ctx = gsap.context(() => {
       gsap.from(".services-title", {
-        y: 60,
+        y: 32,
         opacity: 0,
-        duration: 1,
-        ease: "power3.out",
         scrollTrigger: {
           trigger: ".services-title",
-          start: "top 80%",
-          toggleActions: "play none none reverse",
         },
       });
 
       gsap.from(".service-card", {
-        y: 70,
+        y: 32,
         opacity: 0,
-        stagger: 0.12,
-        duration: 0.9,
-        ease: "power3.out",
+        stagger: 0.08,
         scrollTrigger: {
           trigger: ".services-grid",
-          start: "top 80%",
-          toggleActions: "play none none reverse",
         },
       });
     }, sectionRef);
@@ -178,7 +183,7 @@ export default function ServicesSection() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="pt-[200px] pb-0 px-6 md:px-12 max-w-7xl mx-auto">
+    <section ref={sectionRef} className="pt-[110px] md:pt-[200px] pb-0 px-6 md:px-12 max-w-7xl mx-auto">
       {/* Heading */}
       <div className="services-title text-center mb-16">
         <h2
@@ -213,33 +218,38 @@ export default function ServicesSection() {
           {/* Composition: person + floating UI cards — bleeds to the card edges */}
           <div
             className="relative"
-            style={{
-              width: "calc(100% + 86px)",
-              margin: "0 -43px -40px",
-              aspectRatio: "976 / 652",
-            }}
+            style={{ ...bleedStyle, aspectRatio: "976 / 652" }}
           >
             {/* Growth card — behind the person */}
             <div
               className="absolute"
               style={{
-                right: "calc(18% + 10px)",
-                top: "calc(8% - 30px)",
-                borderRadius: "14px",
+                right: "calc(18% + 1.7cqw)",
+                top: "calc(8% - 5.2cqw)",
+                borderRadius: "2.41cqw",
                 background: "linear-gradient(180deg, #2F7CFF 0%, #226BF0 100%)",
                 boxShadow: "0 16px 36px rgba(43,117,246,0.30)",
-                padding: "14px 16px 16px",
+                padding: "2.41cqw 2.75cqw 2.75cqw",
                 zIndex: 1,
               }}
             >
-              <div className="text-white text-[11px] font-medium mb-1.5">Growth</div>
-              <div className="flex items-center gap-2">
-                <span className="text-white font-bold" style={{ fontSize: "24px", lineHeight: 1 }}>
+              <div
+                className="text-white font-medium"
+                style={{ fontSize: "1.89cqw", marginBottom: "1.03cqw" }}
+              >
+                Growth
+              </div>
+              <div className="flex items-center" style={{ gap: "1.37cqw" }}>
+                <span className="text-white font-bold" style={{ fontSize: "4.12cqw", lineHeight: 1 }}>
                   3233
                 </span>
                 <span
-                  className="text-white text-[10px] font-semibold px-2 py-0.5 rounded-full"
-                  style={{ background: "rgba(255,255,255,0.22)" }}
+                  className="text-white font-semibold rounded-full"
+                  style={{
+                    background: "rgba(255,255,255,0.22)",
+                    fontSize: "1.72cqw",
+                    padding: "0.34cqw 1.37cqw",
+                  }}
                 >
                   +83.9%
                 </span>
@@ -252,13 +262,13 @@ export default function ServicesSection() {
               style={{
                 right: "14%",
                 top: "0%",
-                width: "52px",
-                height: "52px",
+                width: "8.93cqw",
+                height: "8.93cqw",
                 boxShadow: "0 10px 24px rgba(0,0,0,0.10)",
                 zIndex: 1,
               }}
             >
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="#FF5722">
+              <svg width="38%" height="38%" viewBox="0 0 24 24" fill="#FF5722">
                 <path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5S10.5 3.17 10.5 4v.68C7.64 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z" />
                 <circle cx="17" cy="6" r="3" fill="#22c55e" />
               </svg>
@@ -268,23 +278,39 @@ export default function ServicesSection() {
             <div
               className="absolute bg-white"
               style={{
-                right: "43px",
-                top: "calc(32% + 20px)",
+                right: "var(--card-pad-x)",
+                top: "calc(32% + 3.4cqw)",
                 width: "40%",
-                borderRadius: "16px",
+                borderRadius: "2.75cqw",
                 boxShadow: "0 18px 44px rgba(0,0,0,0.10)",
-                padding: "16px",
+                padding: "2.75cqw",
                 zIndex: 3,
               }}
             >
-              <div className="flex items-center justify-between mb-1.5">
-                <span className="text-[#111114] font-bold text-[14px]">Statistics</span>
-                <span className="text-[9px] text-[#444] border border-black/10 rounded-md px-1.5 py-0.5">
+              <div
+                className="flex items-center justify-between"
+                style={{ marginBottom: "1.03cqw" }}
+              >
+                <span className="text-[#111114] font-bold" style={{ fontSize: "2.41cqw" }}>
+                  Statistics
+                </span>
+                <span
+                  className="text-[#444] border border-black/10"
+                  style={{ fontSize: "1.55cqw", borderRadius: "1cqw", padding: "0.34cqw 1.03cqw" }}
+                >
                   Week 1 ▾
                 </span>
               </div>
-              <div className="text-[9px] text-[#9a9aa0] mb-2">Jun 06 - Jun 13</div>
-              <div className="flex items-end justify-between gap-1.5 h-[64px] mb-1">
+              <div
+                className="text-[#9a9aa0]"
+                style={{ fontSize: "1.55cqw", marginBottom: "1.37cqw" }}
+              >
+                Jun 06 - Jun 13
+              </div>
+              <div
+                className="flex items-end justify-between"
+                style={{ gap: "1.03cqw", height: "11cqw", marginBottom: "0.69cqw" }}
+              >
                 {[
                   { track: 52, bar: 26 },
                   { track: 60, bar: 34 },
@@ -294,25 +320,36 @@ export default function ServicesSection() {
                   { track: 58, bar: 30 },
                   { track: 62, bar: 40 },
                 ].map((b, i) => (
-                  <div key={i} className="flex flex-col items-center gap-1 flex-1">
+                  <div
+                    key={i}
+                    className="flex flex-col items-center flex-1"
+                    style={{ gap: "0.69cqw" }}
+                  >
                     <div
-                      className="relative w-[7px] rounded-full bg-[#e9edf5] flex items-end"
-                      style={{ height: `${b.track}px` }}
+                      className="relative rounded-full bg-[#e9edf5] flex items-end"
+                      style={{ width: "1.2cqw", height: `${(b.track / 582) * 100}cqw` }}
                     >
                       <div
                         className="w-full rounded-full bg-[#2F7CFF]"
-                        style={{ height: `${b.bar}px` }}
+                        style={{ height: `${(b.bar / 582) * 100}cqw` }}
                       />
                     </div>
-                    <span className="text-[7px] text-[#9a9aa0]">
+                    <span className="text-[#9a9aa0]" style={{ fontSize: "1.2cqw" }}>
                       {["M", "T", "W", "T", "F", "S", "S"][i]}
                     </span>
                   </div>
                 ))}
               </div>
-              <div className="flex items-center justify-between border-t border-black/[0.06] pt-1.5">
-                <span className="text-[10px] font-semibold text-[#111114]">New followers</span>
-                <span className="text-[10px] font-bold text-[#111114]">98.5k</span>
+              <div
+                className="flex items-center justify-between border-t border-black/[0.06]"
+                style={{ paddingTop: "1.03cqw" }}
+              >
+                <span className="font-semibold text-[#111114]" style={{ fontSize: "1.72cqw" }}>
+                  New followers
+                </span>
+                <span className="font-bold text-[#111114]" style={{ fontSize: "1.72cqw" }}>
+                  98.5k
+                </span>
               </div>
             </div>
 
@@ -330,63 +367,80 @@ export default function ServicesSection() {
             <div
               className="absolute bg-white"
               style={{
-                left: "43px",
+                left: "var(--card-pad-x)",
                 top: "10%",
                 width: "37%",
-                borderRadius: "18px",
+                borderRadius: "3.09cqw",
                 boxShadow: "0 18px 44px rgba(0,0,0,0.10)",
-                padding: "18px",
+                padding: "3.09cqw",
                 zIndex: 3,
               }}
             >
               <div
-                className="text-[#111114] mb-3"
-                style={{ fontSize: "12.47px", fontWeight: 600 }}
+                className="text-[#111114]"
+                style={{ fontSize: "2.14cqw", fontWeight: 600, marginBottom: "2.06cqw" }}
               >
                 Insights Overview
               </div>
-              <div className="flex items-center gap-2.5 mb-3">
-                <div className="flex items-center justify-center w-9 h-9 rounded-full bg-[#e8f1ff] flex-shrink-0">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="#2F7CFF">
+              <div
+                className="flex items-center"
+                style={{ gap: "1.72cqw", marginBottom: "2.06cqw" }}
+              >
+                <div
+                  className="flex items-center justify-center rounded-full bg-[#e8f1ff] flex-shrink-0"
+                  style={{ width: "6.19cqw", height: "6.19cqw" }}
+                >
+                  <svg width="45%" height="45%" viewBox="0 0 24 24" fill="#2F7CFF">
                     <path d="M23 4.9c-.8.4-1.7.6-2.6.8.9-.6 1.6-1.5 2-2.5-.9.5-1.9.9-2.9 1.1C18.6 3.3 17.4 2.8 16 2.8c-2.7 0-4.9 2.2-4.9 4.9 0 .4 0 .8.1 1.1C7.2 8.6 3.6 6.7 1.2 3.8c-.4.7-.7 1.5-.7 2.4 0 1.7.9 3.2 2.2 4.1-.8 0-1.6-.2-2.2-.6v.1c0 2.4 1.7 4.4 3.9 4.8-.4.1-.8.2-1.3.2-.3 0-.6 0-.9-.1.6 2 2.4 3.4 4.6 3.4-1.7 1.3-3.8 2.1-6.1 2.1-.4 0-.8 0-1.2-.1 2.2 1.4 4.8 2.2 7.5 2.2 9.1 0 14-7.5 14-14v-.6c1-.7 1.8-1.6 2.5-2.6z" />
                   </svg>
                 </div>
                 <div>
-                  <div className="text-[#111114] font-bold text-[12px] leading-tight">
+                  <div
+                    className="text-[#111114] font-bold leading-tight"
+                    style={{ fontSize: "2.06cqw" }}
+                  >
                     Centangle Global
                   </div>
-                  <div className="text-[#9a9aa0] text-[10px]">@CentangleGlobal</div>
+                  <div className="text-[#9a9aa0]" style={{ fontSize: "1.72cqw" }}>
+                    @CentangleGlobal
+                  </div>
                 </div>
               </div>
-              <div className="grid grid-cols-3 gap-2 mb-3">
-                <div>
-                  <div className="text-[9px] text-[#737373] leading-[1.3]">
-                    Reach
-                    <br />
-                    &nbsp;
+              <div
+                className="grid grid-cols-3"
+                style={{ gap: "1.37cqw", marginBottom: "2.06cqw" }}
+              >
+                {[
+                  { label: ["Reach", " "], value: "1.7M" },
+                  { label: ["Engagem", "ent"], value: "38,777" },
+                  { label: ["Net", "followers"], value: "3233" },
+                ].map((stat) => (
+                  <div key={stat.value}>
+                    <div
+                      className="text-[#737373] leading-[1.3]"
+                      style={{ fontSize: "1.55cqw" }}
+                    >
+                      {stat.label[0]}
+                      <br />
+                      {stat.label[1]}
+                    </div>
+                    <div className="font-bold text-[#111114]" style={{ fontSize: "2.23cqw" }}>
+                      {stat.value}
+                    </div>
                   </div>
-                  <div className="text-[13px] font-bold text-[#111114]">1.7M</div>
-                </div>
-                <div>
-                  <div className="text-[9px] text-[#737373] leading-[1.3]">
-                    Engagem
-                    <br />
-                    ent
-                  </div>
-                  <div className="text-[13px] font-bold text-[#111114]">38,777</div>
-                </div>
-                <div>
-                  <div className="text-[9px] text-[#737373] leading-[1.3]">
-                    Net
-                    <br />
-                    followers
-                  </div>
-                  <div className="text-[13px] font-bold text-[#111114]">3233</div>
-                </div>
+                ))}
               </div>
-              <div className="flex items-center justify-between border-t border-black/[0.06] pt-2.5">
-                <span className="text-[11px] font-bold text-[#111114]">Best Performance</span>
-                <span className="text-[10px] font-semibold text-[#2F7CFF] bg-[#e8f1ff] px-2 py-0.5 rounded-full">
+              <div
+                className="flex items-center justify-between border-t border-black/[0.06]"
+                style={{ paddingTop: "1.72cqw" }}
+              >
+                <span className="font-bold text-[#111114]" style={{ fontSize: "1.89cqw" }}>
+                  Best Performance
+                </span>
+                <span
+                  className="font-semibold text-[#2F7CFF] bg-[#e8f1ff] rounded-full"
+                  style={{ fontSize: "1.72cqw", padding: "0.34cqw 1.37cqw" }}
+                >
                   +83.9%
                 </span>
               </div>
@@ -405,7 +459,10 @@ export default function ServicesSection() {
           </div>
 
           {/* Composition: concentric rings + CTA + avatars */}
-          <div className="relative w-full" style={{ aspectRatio: "900 / 503" }}>
+          <div
+            className="relative w-full"
+            style={{ aspectRatio: "900 / 503", containerType: "inline-size" }}
+          >
             {/* Concentric rounded rings */}
             {rings.map((ring, i) => (
               <div
@@ -422,11 +479,12 @@ export default function ServicesSection() {
 
             {/* Center CTA button */}
             <div
-              className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center gap-2.5 z-10"
+              className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center z-10"
               style={{
                 background: "#2F7CFF",
                 borderRadius: "999px",
-                padding: "16px 32px",
+                padding: "3.23cqw 6.45cqw",
+                gap: "2.02cqw",
                 boxShadow: "0 16px 40px rgba(47,124,255,0.35)",
               }}
             >
@@ -436,8 +494,12 @@ export default function ServicesSection() {
                 width={22}
                 height={22}
                 className="object-contain"
+                style={{ width: "4.44cqw", height: "auto", maxWidth: "none" }}
               />
-              <span className="text-white font-semibold whitespace-nowrap" style={{ fontSize: "19px" }}>
+              <span
+                className="text-white font-semibold whitespace-nowrap"
+                style={{ fontSize: "3.83cqw" }}
+              >
                 Lets get started
               </span>
             </div>
@@ -484,11 +546,7 @@ export default function ServicesSection() {
           {/* Composition: GLOBAL text + robot handshake — bleeds to the card edges */}
           <div
             className="relative overflow-hidden"
-            style={{
-              width: "calc(100% + 86px)",
-              margin: "0 -43px -40px",
-              aspectRatio: "1261 / 830",
-            }}
+            style={{ ...bleedStyle, aspectRatio: "1261 / 830" }}
           >
             <span
               className="absolute left-1/2 -translate-x-1/2 select-none whitespace-nowrap"
@@ -497,7 +555,7 @@ export default function ServicesSection() {
                 color: "#2F6BFF",
                 fontFamily: "'Google Sans Flex', 'Google Sans', sans-serif",
                 fontWeight: 800,
-                fontSize: "clamp(90px, 12.5vw, 175px)",
+                fontSize: "30.07cqw",
                 letterSpacing: "-0.01em",
                 lineHeight: 1,
               }}
@@ -528,15 +586,18 @@ export default function ServicesSection() {
           </div>
 
           {/* Composition: scattered pills */}
-          <div className="relative w-full" style={{ aspectRatio: "946 / 531" }}>
+          <div
+            className="relative w-full overflow-hidden"
+            style={{ aspectRatio: "946 / 531", containerType: "inline-size" }}
+          >
             {/* small gradient element */}
             <div
               className="absolute"
               style={{
                 left: "1.5%",
                 top: "72%",
-                width: "45.59px",
-                height: "34.19px",
+                width: "9.19cqw",
+                height: "6.89cqw",
                 transform: "rotate(19.6deg)",
                 borderRadius: "999px",
                 background: "linear-gradient(135deg, #8A5CFF 0%, #5C7CFF 100%)",
@@ -554,8 +615,8 @@ export default function ServicesSection() {
                   color: pill.color,
                   border: pill.border,
                   borderRadius: "999px",
-                  padding: "12px 26px",
-                  fontSize: "19px",
+                  padding: "2.42cqw 5.24cqw",
+                  fontSize: "3.83cqw",
                 }}
               >
                 {pill.label}

@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import Image from "next/image";
-import { gsap, ScrollTrigger } from "@/lib/gsap";
+import { gsap } from "@/lib/gsap";
 
 interface Project {
   title: string;
@@ -58,7 +58,7 @@ const projects: Project[] = [
 
 function ProjectCard({ project }: { project: Project }) {
   return (
-    <a href="#" className="project-card group block">
+    <a href="/coming-soon" className="project-card group block">
       {/* Image */}
       <div
         className="relative rounded-2xl overflow-hidden border border-white/[0.06] bg-[#16161c]"
@@ -101,7 +101,7 @@ function ProjectCard({ project }: { project: Project }) {
         style={{
           fontFamily: "'Google Sans Flex', 'Google Sans', sans-serif",
           fontWeight: 600,
-          fontSize: "42px",
+          fontSize: "clamp(26px, 5.5vw, 42px)",
           lineHeight: 1.3,
           whiteSpace: "pre-line",
         }}
@@ -137,14 +137,10 @@ export default function ProjectsGrid() {
     const ctx = gsap.context(() => {
       gsap.utils.toArray<HTMLElement>(".project-card").forEach((card) => {
         gsap.from(card, {
-          y: 60,
+          y: 32,
           opacity: 0,
-          duration: 0.9,
-          ease: "power3.out",
           scrollTrigger: {
             trigger: card,
-            start: "top 85%",
-            toggleActions: "play none none reverse",
           },
         });
       });

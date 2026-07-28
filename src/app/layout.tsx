@@ -8,7 +8,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Centangle Interactive - Engineering Partners",
+  title: "Centangle Global - Engineering Partners",
   description: "Engineering partners for businesses that build the future",
 };
 

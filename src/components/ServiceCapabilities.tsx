@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import Image from "next/image";
-import { gsap, ScrollTrigger } from "@/lib/gsap";
+import { gsap } from "@/lib/gsap";
 
 interface Capability {
   eyebrow?: string;
@@ -115,7 +115,7 @@ function CapabilityBlock({ cap }: { cap: Capability }) {
       </div>
 
       {/* Content row */}
-      <div className="cap-row grid grid-cols-1 lg:grid-cols-[55%_1fr] gap-12 items-center mt-16">
+      <div className="cap-row grid grid-cols-1 lg:grid-cols-[55%_1fr] gap-12 items-center mt-10 md:mt-16">
         {/* Image */}
         <div>
           <Image
@@ -126,8 +126,9 @@ function CapabilityBlock({ cap }: { cap: Capability }) {
             className="object-contain"
             style={{
               width: cap.imageWidth,
-              height: cap.imageHeight,
               maxWidth: "100%",
+              height: "auto",
+              aspectRatio: `${parseFloat(cap.imageWidth)} / ${parseFloat(cap.imageHeight)}`,
             }}
           />
         </div>
@@ -183,26 +184,18 @@ export default function ServiceCapabilities() {
     const ctx = gsap.context(() => {
       gsap.utils.toArray<HTMLElement>(".capability-block").forEach((block) => {
         gsap.from(block.querySelector(".cap-heading"), {
-          y: 50,
+          y: 32,
           opacity: 0,
-          duration: 0.9,
-          ease: "power3.out",
           scrollTrigger: {
             trigger: block,
-            start: "top 78%",
-            toggleActions: "play none none reverse",
           },
         });
         gsap.from(block.querySelector(".cap-row"), {
-          y: 60,
+          y: 32,
           opacity: 0,
-          duration: 0.9,
           delay: 0.15,
-          ease: "power3.out",
           scrollTrigger: {
             trigger: block,
-            start: "top 78%",
-            toggleActions: "play none none reverse",
           },
         });
       });
@@ -214,7 +207,7 @@ export default function ServiceCapabilities() {
   return (
     <section
       ref={sectionRef}
-      className="px-6 md:px-12 max-w-6xl mx-auto flex flex-col gap-[180px] pb-[180px]"
+      className="px-6 md:px-12 max-w-6xl mx-auto flex flex-col gap-[100px] pb-[100px] md:gap-[180px] md:pb-[180px]"
     >
       {capabilities.map((cap) => (
         <CapabilityBlock key={cap.heading} cap={cap} />
