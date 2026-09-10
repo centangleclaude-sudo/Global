@@ -1,0 +1,35 @@
+{
+  "generated": "2026-09-10",
+  "assets": [
+    {
+      "file": "assets/work/eshopp.jpg",
+      "source": "Eshopp Mockup.png",
+      "origin": "Client project mockup supplied by the user, 10 Sep 2026",
+      "original_px": "2528x1696",
+      "shipped_px": "1800x1207",
+      "kb": 230
+    },
+    {
+      "file": "assets/work/seed.jpg",
+      "source": "Seed Mockup.png",
+      "origin": "Client project mockup supplied by the user, 10 Sep 2026",
+      "original_px": "2528x1696",
+      "shipped_px": "1800x1207",
+      "kb": 214
+    },
+    {
+      "file": "assets/work/convoa.jpg",
+      "source": "Convoa Mockup.png",
+      "origin": "Client project mockup supplied by the user, 10 Sep 2026",
+      "original_px": "2528x1696",
+      "shipped_px": "1800x1207",
+      "kb": 119
+    },
+    {
+      "file": "assets/brand/mark.png",
+      "origin": "Centangle Global logo mark, extracted from the user's own Centangle One-Pager.html bundle",
+      "shipped_px": "180x180",
+      "kb": 45
+    }
+  ]
+}

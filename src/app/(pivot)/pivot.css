@@ -1,0 +1,340 @@
+@import "tailwindcss";
+
+/* ============================================================================
+   CENTANGLE GLOBAL — ONE-PAGER
+   One spacing scale, one type ramp, tokenised colour.
+   Bright brand colours are FILLS and DISPLAY; darker siblings carry small text.
+   ========================================================================= */
+
+@theme {
+  --color-cream: #f5f2ec;
+  --color-tint: #ece7de;
+  --color-ink: #0b0b0c;
+  --color-white: #ffffff;
+
+  /* Brand as fills / display (>=40px clears 3:1 on cream) */
+  --color-blue: #2873f7;
+  --color-orange: #f25c2a;
+  /* Brand as text under 24px on light grounds */
+  --color-blue-ink: #1a50b8;   /* 6.52:1 on cream */
+  --color-orange-ink: #b8380f; /* 5.21:1 on cream */
+  /* Brand on the dark ground */
+  --color-orange-lit: #f25c2a; /* 5.94:1 on ink */
+  --color-blue-lit: #5b8cff;   /* 6.22:1 on ink */
+  /* Panel that can carry white text */
+  --color-blue-panel: #1d5cd6; /* white = 5.91:1 */
+  --color-blue-panel-hover: #1a54c4;
+
+  --color-ink-2: #55524b;
+  --color-ink-3: #635f57;
+  --color-on-ink: #f5f2ec;
+  --color-on-ink-2: #b5b0a6;
+
+  --color-rule: rgb(11 11 12 / 0.14);
+  --color-rule-strong: rgb(11 11 12 / 0.3);
+  --color-rule-ink: rgb(245 242 236 / 0.16);
+  --color-rule-ink-strong: rgb(245 242 236 / 0.32);
+
+  --font-display: var(--font-bricolage), "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-sans: var(--font-instrument), "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+:root {
+  --s1: 8px; --s2: 16px; --s3: 24px; --s4: 32px;
+  --s5: 48px; --s6: 64px; --s7: 96px;
+  --section-pad: clamp(64px, 6.4vw, 104px);
+  --wrap: 1240px;
+  --gutter: clamp(20px, 4vw, 56px);
+  --radius: 16px;
+  --radius-lg: 22px;
+}
+
+@layer base {
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body {
+    background: var(--color-cream);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 17px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  img, svg { display: block; max-width: 100%; }
+  button, input, textarea { font: inherit; color: inherit; }
+  h1, h2, h3 { text-wrap: balance; }
+  p { text-wrap: pretty; }
+  [id] { scroll-margin-top: 6rem; }
+
+  /* Browser surfaces carry the design too */
+  ::selection { background: var(--color-blue); color: var(--color-white); }
+  .on-ink ::selection { background: var(--color-orange); color: var(--color-ink); }
+  :focus-visible { outline: 2.5px solid var(--color-blue); outline-offset: 3px; border-radius: 4px; }
+  .on-ink :focus-visible, .on-blue :focus-visible { outline-color: var(--color-white); }
+  html { scrollbar-color: var(--color-rule-strong) var(--color-cream); }
+  ::-webkit-scrollbar { width: 12px; height: 12px; }
+  ::-webkit-scrollbar-track { background: var(--color-cream); }
+  ::-webkit-scrollbar-thumb { background: var(--color-rule-strong); border: 3px solid var(--color-cream); border-radius: 99px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--color-ink-3); }
+}
+
+/* ---------- Type ramp ---------- */
+@utility d-xl { font-family: var(--font-display); font-weight: 700; font-size: clamp(42px, 5.9vw, 82px); line-height: 0.94; letter-spacing: -0.045em; }
+@utility d-l  { font-family: var(--font-display); font-weight: 700; font-size: clamp(32px, 5.1vw, 64px); line-height: 0.98; letter-spacing: -0.036em; }
+@utility d-m  { font-family: var(--font-display); font-weight: 700; font-size: clamp(23px, 2.3vw, 31px); line-height: 1.14; letter-spacing: -0.028em; }
+@utility t-lead  { font-size: clamp(18px, 1.5vw, 20px); line-height: 1.55; color: var(--color-ink-2); max-width: 34ch; }
+@utility t-body  { font-size: 17px; line-height: 1.65; color: var(--color-ink-2); max-width: 68ch; }
+@utility t-small { font-size: 15px; line-height: 1.6; color: var(--color-ink-2); max-width: 64ch; }
+@utility label {
+  font-family: var(--font-mono); font-weight: 500; font-size: 12px; line-height: 1.35;
+  letter-spacing: 0.09em; text-transform: uppercase; color: var(--color-ink-3);
+}
+@utility tnum { font-variant-numeric: tabular-nums; }
+
+/* THE ACCENT — roman 700 / italic 500 + colour. Three times, no more.
+   Blue on light grounds, orange on dark. */
+@utility accent { font-style: italic; font-weight: 500; color: var(--color-blue); }
+.on-ink .accent { color: var(--color-orange-lit); }
+
+/* ---------- Layout ---------- */
+@utility wrap { width: 100%; max-width: var(--wrap); margin-inline: auto; padding-inline: var(--gutter); }
+@utility section-pad { padding-block: var(--section-pad); }
+.on-ink { background: var(--color-ink); color: var(--color-on-ink); }
+.on-ink .t-lead, .on-ink .t-body, .on-ink .t-small, .on-ink .label { color: var(--color-on-ink-2); }
+
+/* The section kicker, borrowed from the dark comp: a mono index beside the
+   heading, not an eyebrow chip floating above it. */
+@utility kicker {
+  font-family: var(--font-mono); font-size: 11.5px; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--color-blue-ink);
+}
+.on-ink .kicker { color: var(--color-blue-lit); }
+
+/* ---------- Tag ---------- */
+@utility tag {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 9px 18px 9px 15px; border: 1px solid var(--color-rule-strong); border-radius: 99px;
+  font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--color-ink-2); background: rgb(255 255 255 / 0.4);
+}
+
+/* ---------- Controls ---------- */
+@utility btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  min-height: 52px; padding-inline: 26px; border: 0; border-radius: 99px;
+  font-family: var(--font-sans); font-weight: 600; font-size: 16px; line-height: 1;
+  text-decoration: none; white-space: nowrap; cursor: pointer;
+  transition: background-color 0.22s var(--ease-out-expo), color 0.22s var(--ease-out-expo), box-shadow 0.28s var(--ease-out-expo);
+  & svg { transition: transform 0.3s var(--ease-out-expo); }
+  &:hover svg { transform: translateX(4px); }
+  &:disabled { opacity: 0.6; cursor: default; }
+}
+@utility btn-primary {
+  background: var(--color-blue-panel); color: var(--color-white);
+  box-shadow: 0 1px 2px rgb(11 11 12 / 0.14), 0 10px 24px -12px rgb(11 11 12 / 0.5);
+  &:hover { background: var(--color-blue-panel-hover); box-shadow: 0 2px 5px rgb(11 11 12 / 0.18), 0 18px 36px -14px rgb(11 11 12 / 0.55); }
+}
+@utility btn-ghost {
+  background: transparent; color: var(--color-ink); box-shadow: inset 0 0 0 1.5px var(--color-rule-strong);
+  &:hover { box-shadow: inset 0 0 0 1.5px var(--color-ink); background: rgb(11 11 12 / 0.03); }
+}
+@utility btn-ink {
+  background: var(--color-ink); color: var(--color-on-ink);
+  &:hover { background: #26262a; }
+}
+@utility btn-sm { min-height: 44px; padding-inline: 20px; font-size: 15px; }
+
+/* GSAP writes --mx/--my; CSS owns the transform so it degrades to nothing. */
+@utility magnetic { transform: translate(var(--mx, 0px), var(--my, 0px)); }
+
+/* ---------- Placeholders (all listed in report.md) ---------- */
+@utility ph {
+  font-style: normal; color: currentColor; opacity: 0.74;
+  border-bottom: 1.5px dotted currentColor; padding-bottom: 1px;
+}
+
+/* ---------- Aurora ---------- */
+.aurora { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; }
+.aurora i {
+  position: absolute; display: block; border-radius: 50%;
+  filter: blur(58px); opacity: 0.5; will-change: transform;
+  transform: translate3d(var(--ax, 0px), var(--ay, 0px), 0);
+}
+.aurora .a1 { width: 46%; padding-bottom: 46%; left: 6%; top: 4%; background: radial-gradient(circle at 50% 50%, rgb(40 115 247 / 0.6), transparent 68%); }
+.aurora .a2 { width: 40%; padding-bottom: 40%; right: 5%; top: 24%; background: radial-gradient(circle at 50% 50%, rgb(242 92 42 / 0.5), transparent 68%); }
+.aurora .a3 { width: 34%; padding-bottom: 34%; left: 32%; bottom: 0; background: radial-gradient(circle at 50% 50%, rgb(29 92 214 / 0.34), transparent 70%); }
+@media (prefers-reduced-motion: reduce) { .aurora i { transform: none !important; } }
+
+/* ---------- Hero light field ---------- */
+.field {
+  position: relative; aspect-ratio: 1 / 0.66; border-radius: var(--radius-lg); overflow: hidden;
+  background: linear-gradient(168deg, #fbfaf7, #efebe3);
+  box-shadow: inset 0 0 0 1px var(--color-rule), 0 24px 60px -34px rgb(11 11 12 / 0.4);
+}
+@media (min-width: 1024px) { .field { aspect-ratio: 1 / 0.92; } }
+.field .aurora i { filter: blur(46px); opacity: 0.72; }
+.field .a1 { width: 62%; padding-bottom: 62%; left: -6%; top: -6%; }
+.field .a2 { width: 54%; padding-bottom: 54%; right: -8%; top: 18%; }
+.field .a3 { width: 46%; padding-bottom: 46%; left: 26%; bottom: -8%; }
+.field-dots {
+  position: absolute; inset: 0; z-index: 1;
+  background-image: radial-gradient(rgb(11 11 12 / 0.26) 1px, transparent 1px);
+  background-size: 26px 26px;
+  -webkit-mask-image: radial-gradient(240px circle at var(--px, 50%) var(--py, 50%), #000 0%, rgb(0 0 0 / 0.35) 45%, transparent 72%);
+  mask-image: radial-gradient(240px circle at var(--px, 50%) var(--py, 50%), #000 0%, rgb(0 0 0 / 0.35) 45%, transparent 72%);
+}
+.field-glow {
+  position: absolute; inset: 0;
+  background: radial-gradient(320px circle at var(--px, 50%) var(--py, 50%), rgb(255 255 255 / 0.65), transparent 68%);
+  mix-blend-mode: overlay;
+}
+.field-ring {
+  position: absolute; z-index: 2; width: 118px; height: 118px; left: 0; top: 0; margin: -59px 0 0 -59px;
+  border-radius: 50%; border: 1.5px solid var(--color-blue); opacity: 0.5;
+  transform: translate3d(var(--rx, 50%), var(--ry, 50%), 0); will-change: transform;
+}
+.field-cap { position: absolute; z-index: 2; inset: auto 0 0 0; padding: var(--s3); display: flex; align-items: baseline; justify-content: space-between; gap: var(--s2); }
+@media (prefers-reduced-motion: reduce) {
+  .field-dots { -webkit-mask-image: none; mask-image: none; opacity: 0.45; }
+  .field-ring { display: none; }
+}
+
+/* ---------- Marquee ---------- */
+.marquee { background: var(--color-ink); color: var(--color-on-ink); overflow: hidden; padding-block: 18px; }
+.marquee-track { display: flex; width: max-content; will-change: transform; }
+.marquee-item {
+  display: inline-flex; align-items: center; gap: var(--s5); padding-right: var(--s5);
+  font-family: var(--font-display); font-weight: 600; font-size: 17px; letter-spacing: -0.015em; white-space: nowrap;
+}
+.marquee-item::after { content: ""; width: 7px; height: 7px; flex: 0 0 auto; background: var(--color-orange); transform: rotate(45deg); }
+.marquee-item:nth-child(even)::after { background: var(--color-blue-lit); }
+
+/* ---------- Compact process, after the dark comp ----------
+   Outlined numerals so the index recedes; tight rows; heading pinned left. */
+.steps { border-top: 1px solid var(--color-rule); }
+.step {
+  display: grid; grid-template-columns: 58px minmax(0, 1fr); gap: var(--s3);
+  padding-block: 18px; border-bottom: 1px solid var(--color-rule);
+}
+@media (min-width: 640px) { .step { grid-template-columns: 74px minmax(0, 1fr); gap: var(--s4); padding-block: 20px; } }
+.step-n {
+  font-family: var(--font-display); font-weight: 700; font-size: 30px; line-height: 1;
+  letter-spacing: -0.04em; font-variant-numeric: tabular-nums;
+  color: transparent;
+  -webkit-text-stroke: 1.4px var(--color-blue-ink);
+  transition: color 0.3s var(--ease-out-expo), -webkit-text-stroke-color 0.3s var(--ease-out-expo);
+}
+.step:hover .step-n { color: var(--color-blue-ink); }
+.step h3 { font-family: var(--font-display); font-weight: 600; font-size: 19px; line-height: 1.3; letter-spacing: -0.02em; }
+.step p { margin-top: 4px; font-size: 16px; line-height: 1.55; color: var(--color-ink-2); max-width: 60ch; }
+
+.note {
+  margin-top: var(--s5); padding: var(--s3) var(--s4); border-radius: var(--radius);
+  background: rgb(255 255 255 / 0.62); border: 1px solid var(--color-rule); max-width: 46ch;
+  -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+}
+
+/* ---------- Packages ---------- */
+.pk-tab {
+  display: inline-flex; align-items: center; min-height: 46px; padding-inline: 18px; border-radius: 99px;
+  font-weight: 600; font-size: 15.5px; color: var(--color-ink-2); cursor: pointer;
+  box-shadow: inset 0 0 0 1.5px var(--color-rule-strong); background: transparent;
+  transition: color 0.22s var(--ease-out-expo), background-color 0.22s var(--ease-out-expo), box-shadow 0.22s var(--ease-out-expo);
+  &:hover { color: var(--color-ink); box-shadow: inset 0 0 0 1.5px var(--color-ink); }
+}
+.pk-tab[aria-selected="true"] { background: var(--color-ink); color: var(--color-cream); box-shadow: inset 0 0 0 1.5px var(--color-ink); }
+.pk-col > .label { display: block; padding-bottom: 12px; border-bottom: 1.5px solid var(--color-ink); }
+.pk-col.out > .label { color: var(--color-orange-ink); border-bottom-color: var(--color-orange); }
+.pk-col li {
+  position: relative; padding-left: 26px; padding-block: 9px; font-size: 16px; line-height: 1.55;
+  color: var(--color-ink-2); border-bottom: 1px solid var(--color-rule);
+}
+.pk-col li:last-child { border-bottom: 0; }
+.pk-col li::before { position: absolute; left: 0; top: 0.58em; font-family: var(--font-mono); font-size: 13px; line-height: 1; }
+.pk-col.in li::before { content: "+"; color: var(--color-blue-ink); }
+.pk-col.out li::before { content: "–"; color: var(--color-orange-ink); }
+
+/* ---------- Work ---------- */
+.case { transition: transform 0.4s var(--ease-out-expo), box-shadow 0.4s var(--ease-out-expo); }
+.case:hover { transform: translateY(-5px); box-shadow: inset 0 0 0 1px var(--color-rule-ink-strong), 0 26px 50px -26px rgb(0 0 0 / 0.9); }
+.case-shot img { transition: transform 0.7s var(--ease-out-expo); }
+.case:hover .case-shot img { transform: scale(1.045); }
+.case:hover .case-open svg { transform: translateX(4px); }
+.case-open svg { transition: transform 0.3s var(--ease-out-expo); }
+
+/* ---------- Handover ---------- */
+.handover-list { counter-reset: h; }
+.handover-list li {
+  counter-increment: h; position: relative; padding: var(--s3) 0 var(--s3) 52px;
+  border-bottom: 1px solid var(--color-rule-ink); font-size: 16.5px; line-height: 1.55;
+}
+.handover-list li::before {
+  content: counter(h, decimal-leading-zero); position: absolute; left: 0; top: calc(var(--s3) + 5px);
+  font-family: var(--font-mono); font-size: 12px; color: var(--color-blue-lit); font-variant-numeric: tabular-nums;
+}
+.handover-list li:last-child { border-bottom: 0; }
+
+/* ---------- FAQ ---------- */
+.faq details { border-bottom: 1px solid var(--color-rule); }
+.faq summary {
+  display: flex; align-items: flex-start; justify-content: space-between; gap: var(--s4);
+  padding-block: 22px; cursor: pointer; list-style: none;
+  font-family: var(--font-display); font-weight: 600; font-size: clamp(18px, 1.5vw, 21px);
+  letter-spacing: -0.02em; line-height: 1.35; transition: color 0.2s var(--ease-out-expo);
+}
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary:hover { color: var(--color-blue-ink); }
+.faq-icon {
+  position: relative; flex: 0 0 auto; width: 26px; height: 26px; margin-top: 2px; border-radius: 99px;
+  border: 1.5px solid var(--color-rule-strong);
+  transition: transform 0.35s var(--ease-out-expo), border-color 0.22s, background-color 0.22s;
+}
+.faq-icon::before, .faq-icon::after { content: ""; position: absolute; inset: 50% auto auto 50%; translate: -50% -50%; background: var(--color-ink); }
+.faq-icon::before { width: 11px; height: 1.5px; }
+.faq-icon::after { width: 1.5px; height: 11px; transition: opacity 0.25s var(--ease-out-expo); }
+details[open] .faq-icon { transform: rotate(180deg); border-color: var(--color-blue-panel); background: var(--color-blue-panel); }
+details[open] .faq-icon::before { background: var(--color-white); }
+details[open] .faq-icon::after { opacity: 0; }
+
+/* ---------- Form ---------- */
+.field-row input, .field-row textarea {
+  display: block; width: 100%; min-height: 52px; padding: 14px 16px;
+  background: var(--color-white); border: 1.5px solid var(--color-rule-strong); border-radius: 12px;
+  font-size: 16.5px; line-height: 1.5;
+  transition: border-color 0.18s var(--ease-out-expo), box-shadow 0.18s var(--ease-out-expo);
+}
+.field-row textarea { min-height: 120px; resize: vertical; }
+.field-row input::placeholder, .field-row textarea::placeholder { color: var(--color-ink-3); opacity: 1; }
+.field-row input:hover, .field-row textarea:hover { border-color: var(--color-ink-3); }
+.field-row input:focus, .field-row textarea:focus { outline: none; border-color: var(--color-blue-panel); box-shadow: 0 0 0 4px rgb(29 92 214 / 0.2); }
+
+/* ---------- Footer ---------- */
+.ftr-mark {
+  font-family: var(--font-display); font-weight: 700; letter-spacing: -0.05em; line-height: 0.78;
+  font-size: clamp(76px, 17.5vw, 268px); color: rgb(245 242 236 / 0.06);
+  user-select: none; white-space: nowrap; text-align: center; margin-bottom: -0.09em;
+}
+
+/* ---------- Reveal ----------------------------------------------------
+   Two mechanisms, each owning its own attribute:
+     [data-hero]  — the load timeline, driven by GSAP (inline styles win).
+     [data-rv] / [data-line] — scroll reveals, driven by a CSS class toggle so
+                    that a ScrollTrigger.refresh() can never revert them.
+   Both only apply under html.js, which an inline script sets before paint and
+   a failsafe removes if the motion script never runs. */
+@media (prefers-reduced-motion: no-preference) {
+  html.js [data-hero] { opacity: 0; }
+
+  html.js [data-rv] { opacity: 0; transform: translateY(22px); }
+  html.js [data-rv].in {
+    opacity: 1; transform: none;
+    transition: opacity 0.75s var(--ease-out-expo), transform 0.75s var(--ease-out-expo);
+  }
+
+  html.js [data-lines] [data-line] { transform: translateY(108%); }
+  html.js [data-lines].in [data-line] { transform: none; transition: transform 0.85s var(--ease-out-expo); }
+}
