@@ -4,11 +4,6 @@ import { useEffect } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-/** gsap.quickTo types its setter for numbers; CSS variables take unit strings. */
-type VarSetter = (value: string | number) => void;
-const quickVar = (target: Element, prop: string, vars: gsap.TweenVars): VarSetter =>
-  gsap.quickTo(target, prop, vars) as unknown as VarSetter;
-
 /**
  * The page's motion, in one place.
  *
@@ -104,10 +99,13 @@ export function Motion() {
         revealOnce(el, [el], "top 88%", 0);
       });
 
-      /* ---------- Magnetic controls. ------------------------------------- */
+      /* ---------- Magnetic controls ------------------------------------
+         Animate x/y directly rather than through a CSS variable: GSAP already
+         writes an inline transform on these elements (the intro timeline
+         animates y), and an inline transform always beats a class rule. */
       gsap.utils.toArray<HTMLElement>(".magnetic").forEach((el) => {
-        const qx = quickVar(el, "--mx", { duration: 0.45, ease: "power3" });
-        const qy = quickVar(el, "--my", { duration: 0.45, ease: "power3" });
+        const qx = gsap.quickTo(el, "x", { duration: 0.45, ease: "power3" });
+        const qy = gsap.quickTo(el, "y", { duration: 0.45, ease: "power3" });
         const reset = () => {
           qx(0);
           qy(0);
@@ -121,39 +119,12 @@ export function Motion() {
         el.addEventListener("blur", reset);
       });
 
-      /* ---------- Hero light field tracks the pointer. ------------------- */
-      const field = document.getElementById("field");
-      const ring = field?.querySelector<HTMLElement>(".field-ring");
-      if (field && ring) {
-        const px = quickVar(field, "--px", { duration: 0.6, ease: "power3" });
-        const py = quickVar(field, "--py", { duration: 0.6, ease: "power3" });
-        const rx = quickVar(ring, "--rx", { duration: 0.8, ease: "power3" });
-        const ry = quickVar(ring, "--ry", { duration: 0.8, ease: "power3" });
-        const centre = () => {
-          px("50%");
-          py("50%");
-          rx(field.clientWidth / 2 + "px");
-          ry(field.clientHeight / 2 + "px");
-        };
-        centre();
-        field.addEventListener("pointermove", (e) => {
-          const r = field.getBoundingClientRect();
-          const x = e.clientX - r.left;
-          const y = e.clientY - r.top;
-          px((x / r.width) * 100 + "%");
-          py((y / r.height) * 100 + "%");
-          rx(x + "px");
-          ry(y + "px");
-        });
-        field.addEventListener("pointerleave", centre);
-      }
-
       /* ---------- Aurora drifts with the pointer, parallaxes on scroll. -- */
       gsap.utils.toArray<HTMLElement>("[data-aurora]").forEach((au) => {
         const blobs = gsap.utils.toArray<HTMLElement>(au.children);
         const setters = blobs.map((b, i) => ({
-          x: quickVar(b, "--ax", { duration: 1.4, ease: "power2" }),
-          y: quickVar(b, "--ay", { duration: 1.4, ease: "power2" }),
+          x: gsap.quickTo(b, "x", { duration: 1.4, ease: "power2" }),
+          y: gsap.quickTo(b, "y", { duration: 1.4, ease: "power2" }),
           k: (i + 1) * 14,
         }));
         const host = au.parentElement;
@@ -163,8 +134,8 @@ export function Motion() {
             const nx = (e.clientX - r.left) / r.width - 0.5;
             const ny = (e.clientY - r.top) / r.height - 0.5;
             setters.forEach((s) => {
-              s.x(nx * s.k + "px");
-              s.y(ny * s.k + "px");
+              s.x(nx * s.k);
+              s.y(ny * s.k);
             });
           });
           gsap.to(blobs, {

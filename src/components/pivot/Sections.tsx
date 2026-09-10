@@ -52,43 +52,30 @@ const Aurora = () => (
 export function Hero() {
   return (
     <section id="hero" className="wrap relative overflow-hidden pb-[clamp(56px,6vw,96px)] pt-[clamp(40px,5vw,72px)]">
-      <div className="relative z-10 grid items-center gap-[clamp(36px,4.5vw,56px)] min-[1024px]:grid-cols-[minmax(0,1.06fr)_minmax(0,0.94fr)] min-[1024px]:gap-[clamp(40px,4vw,64px)]">
-        <div>
-          <p className="tag" data-hero="tag">
-            {site.tagline}
-          </p>
-          <h1 className="d-xl mt-8 max-w-[13ch]">
-            <span className="block overflow-hidden pb-[0.06em]">
-              <span data-line className="block">
-                {hero.headline[0]}
-                <span className="accent">{hero.headline[1]}</span>
-              </span>
+      <Aurora />
+      <div className="relative z-10">
+        <p className="tag" data-hero="tag">
+          {site.tagline}
+        </p>
+        <h1 className="d-xl mt-8 max-w-[15ch]">
+          <span className="block overflow-hidden pb-[0.06em]">
+            <span data-line className="block">
+              {hero.headline[0]}
+              <span className="accent">{hero.headline[1]}</span>
             </span>
-          </h1>
-          <p className="mt-8 max-w-[52ch] text-[clamp(17px,1.4vw,19px)] leading-[1.6] text-ink-2" data-hero="sub">
-            {hero.sub}
-          </p>
-          <div className="mt-12 flex flex-wrap gap-4">
-            <a href={hero.primary.href} className="btn btn-primary magnetic" data-hero="cta">
-              {hero.primary.label}
-              <Arrow />
-            </a>
-            <a href={hero.secondary.href} className="btn btn-ghost magnetic" data-hero="cta">
-              {hero.secondary.label}
-            </a>
-          </div>
-        </div>
-
-        {/* Cursor-reactive light field. Decorative: it carries no information. */}
-        <div className="field" id="field" aria-hidden="true" data-hero="field">
-          <Aurora />
-          <span className="field-dots" />
-          <span className="field-glow" />
-          <span className="field-ring" />
-          <span className="field-cap">
-            <span className="label">{hero.fieldCaption}</span>
-            <span className="label tnum">01 / 05</span>
           </span>
+        </h1>
+        <p className="mt-8 max-w-[54ch] text-[clamp(17px,1.45vw,20px)] leading-[1.6] text-ink-2" data-hero="sub">
+          {hero.sub}
+        </p>
+        <div className="mt-12 flex flex-wrap gap-4">
+          <a href={hero.primary.href} className="btn btn-primary magnetic" data-hero="cta">
+            {hero.primary.label}
+            <Arrow />
+          </a>
+          <a href={hero.secondary.href} className="btn btn-ghost magnetic" data-hero="cta">
+            {hero.secondary.label}
+          </a>
         </div>
       </div>
     </section>
