@@ -15,7 +15,7 @@ export type Lp = {
   slug: string;
   metaTitle: string;
   metaDescription: string;
-  hero: { h1: string; price: string; sub: string; cta: string; reassure: string };
+  hero: { tag: string; h1: string; price: string; sub: string; cta: string; reassure: string };
   strip: string[];
   problem: { heading: string; body: string[] };
   covers: { heading: string; items: string[]; meta: string };
@@ -57,6 +57,7 @@ export const landingPages: Lp[] = [
     metaDescription:
       "Speed work on a fixed £950 price. We measure your store on five pages, fix what is slowing it down, and measure the same five pages again. You get both files.",
     hero: {
+      tag: "Shopify speed",
       h1: "Your Shopify store is slow. We’ll show you the numbers before and after.",
       price: "£950",
       sub: "We measure your store on five pages, fix what’s actually slowing it down, and measure the same five pages again. You get both files.",
@@ -143,6 +144,7 @@ export const landingPages: Lp[] = [
     metaDescription:
       "Shopify migration on a fixed £1,250 price. Up to 300 products, your order and customer history, and every old URL redirected to the right new page.",
     hero: {
+      tag: "Shopify migration",
       h1: "Move your store to Shopify without losing your Google rankings.",
       price: "£1,250",
       sub: "Up to 300 products, your order and customer history, and every old URL redirected to the right new page.",
@@ -230,6 +232,7 @@ export const landingPages: Lp[] = [
     metaDescription:
       "A Shopify redesign on a fixed £1,250 price, built on your existing catalogue. Same products, same account, design approved before any code.",
     hero: {
+      tag: "Store redesign",
       h1: "Same products. Same Shopify account. A store people trust.",
       price: "£1,250",
       sub: "A redesign built on your existing catalogue, so nothing breaks and nothing gets re-entered. You approve the design before anything is built.",
@@ -315,6 +318,7 @@ export const landingPages: Lp[] = [
     metaDescription:
       "A Shopify store built around what you sell, with payments, shipping and tax set up and explained once in plain words. Fixed price, published scope.",
     hero: {
+      tag: "Your first shop",
       h1: "You already have a business. We’ll build the shop that sells it.",
       price: "£[ ]",
       sub: "A Shopify store built around what you sell, with payments, shipping and tax set up and explained once in plain words. You’ve never done this before. We have, since 2013.",

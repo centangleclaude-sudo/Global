@@ -45,18 +45,25 @@ export function Motion() {
       const intro = gsap.timeline({ defaults: { ease: "expo.out" } });
 
       /* fromTo, never from: the stylesheet has already set opacity to 0, so a
-         .from() tween would animate 0 -> 0 and the element would never appear. */
-      intro
-        .fromTo("#hero [data-hero='tag']", { y: 14, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7 })
-        .from(heroLines, { yPercent: 108, duration: 0.95, stagger: 0.07 }, "-=0.45")
-        .fromTo("#hero [data-hero='sub']", { y: 16, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8 }, "-=0.6")
-        .fromTo("#hero [data-hero='cta']", { y: 16, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7, stagger: 0.06 }, "-=0.62")
-        .fromTo(
-          "#hero [data-hero='field']",
-          { y: 26, opacity: 0, scale: 0.985 },
-          { y: 0, opacity: 1, scale: 1, duration: 1.1 },
-          "-=0.95",
-        );
+         .from() tween would animate 0 -> 0 and the element would never appear.
+         Selectors that match nothing on a given page are skipped, so the
+         homepage and the landing pages can share one timeline. */
+      const beat = (sel: string, from: gsap.TweenVars, to: gsap.TweenVars, at?: string) => {
+        if (!document.querySelector(sel)) return;
+        intro.fromTo(sel, from, to, at);
+      };
+
+      beat("#hero [data-hero='tag']", { y: 14, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7 });
+      if (heroLines.length) intro.from(heroLines, { yPercent: 108, duration: 0.95, stagger: 0.07 }, "-=0.45");
+      beat("#hero [data-hero='price']", { y: 18, opacity: 0, scale: 0.97 }, { y: 0, opacity: 1, scale: 1, duration: 0.8 }, "-=0.6");
+      beat("#hero [data-hero='sub']", { y: 16, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8 }, "-=0.6");
+      beat("#hero [data-hero='cta']", { y: 16, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7, stagger: 0.06 }, "-=0.62");
+      beat(
+        "#hero [data-hero='field']",
+        { y: 26, opacity: 0, scale: 0.985 },
+        { y: 0, opacity: 1, scale: 1, duration: 1.1 },
+        "-=0.95",
+      );
 
       /* ---------- Reveal-on-scroll -------------------------------------
          A class toggle, not a tween. GSAP's ScrollTrigger.refresh() — which

@@ -7,10 +7,17 @@ import { site } from "@/content/site";
 /**
  * One template, four campaigns.
  *
- * Deliberately different from the homepage: no navigation, one CTA repeated,
- * and a footer that carries only privacy and cookies. Bought traffic arrives
- * with an intent already formed — anything that offers a way out of the page
- * is working against the ad that paid for the click.
+ * Centre-aligned throughout, after the approved comps — but headings and short
+ * leads only. List rows, FAQ answers and form fields stay left-aligned inside
+ * their centred containers, because centred multi-line body text is markedly
+ * slower to scan and those lists are the part a buyer actually reads.
+ *
+ * Otherwise this is the homepage's design language unchanged: same palette,
+ * type ramp, hollow numerals, tick/dash lists, motion and controls.
+ *
+ * No navigation, one CTA repeated, a footer of legal links only. Someone
+ * arriving from an ad has already formed an intent; a nav is a way out of the
+ * page the click paid for.
  */
 
 const Arrow = ({ size = 17 }: { size?: number }) => (
@@ -31,6 +38,17 @@ const Dash = () => (
   </svg>
 );
 
+/** A centred section heading, wiped up on approach like the homepage's. */
+const Heading = ({ children, className = "d-l" }: { children: string; className?: string }) => (
+  <h2 className={`${className} mx-auto max-w-[20ch] text-center`} data-lines>
+    <span className="block overflow-hidden pb-[0.06em]">
+      <span data-line className="block">
+        {children}
+      </span>
+    </span>
+  </h2>
+);
+
 export function LandingPage({ lp }: { lp: Lp }) {
   return (
     <>
@@ -43,8 +61,8 @@ export function LandingPage({ lp }: { lp: Lp }) {
         Skip to the form
       </a>
 
-      {/* Wordmark only. No nav: there is nowhere else to go from here. */}
-      <header className="wrap flex min-h-[76px] items-center">
+      {/* Wordmark only, centred. No nav: there is nowhere else to go. */}
+      <header className="wrap flex min-h-[76px] items-center justify-center">
         <span className="flex items-center gap-3 font-display text-[18px] font-bold tracking-[-0.03em]">
           <Image src="/brand/mark.png" alt="" width={34} height={34} className="rounded-full" priority />
           {site.name}
@@ -55,53 +73,56 @@ export function LandingPage({ lp }: { lp: Lp }) {
         {/* ---------------- Hero ---------------- */}
         {/* id="hero": Motion scopes the load timeline to #hero, and the
             stylesheet hides [data-hero] until it runs. */}
-        <section id="hero" className="wrap relative overflow-hidden pb-[clamp(40px,4.5vw,64px)] pt-[clamp(28px,3.5vw,56px)]">
+        <section id="hero" className="wrap relative overflow-hidden pb-[clamp(48px,5vw,80px)] pt-[clamp(24px,3vw,48px)] text-center">
           <div className="aurora" aria-hidden="true" data-aurora>
             <i className="a1" />
             <i className="a2" />
             <i className="a3" />
           </div>
-          <div className="relative z-10 grid items-end gap-10 min-[900px]:grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)] min-[900px]:gap-16">
-            <div>
-              {/* No data-lines here: inside #hero the intro timeline owns this
-                  line. Adding data-lines would let CSS hide it at 108% and the
-                  timeline would then animate 108 -> 108 and never reveal it. */}
-              <h1 className="d-xl max-w-[17ch]">
-                <span className="block overflow-hidden pb-[0.06em]">
-                  <span data-line className="block">
-                    {lp.hero.h1}
-                  </span>
-                </span>
-              </h1>
-              <p className="mt-8 max-w-[54ch] text-[clamp(17px,1.4vw,19px)] leading-[1.6] text-ink-2" data-hero="sub">
-                {lp.hero.sub}
-              </p>
-            </div>
 
-            {/* The price is the offer, so it gets its own weight rather than
-                being folded into the headline. */}
-            <div data-hero="field" className="min-[900px]:pb-2">
-              <p className="label">Fixed price</p>
-              <p className="mt-3 font-display text-[clamp(56px,7vw,96px)] font-bold leading-[0.9] tracking-[-0.05em] text-blue-panel">
-                <Copy text={lp.hero.price} />
-              </p>
-              <div className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-3">
-                <a href="#start" className="btn btn-primary magnetic" data-hero="cta">
-                  {lp.hero.cta}
-                  <Arrow />
-                </a>
-              </div>
-              <p className="t-small mt-4 max-w-[36ch]">{lp.hero.reassure}</p>
+          <div className="relative z-10">
+            <p className="tag" data-hero="tag">
+              {lp.hero.tag}
+            </p>
+
+            {/* No data-lines inside #hero: the intro timeline owns this line,
+                and CSS hiding it would leave the tween animating 108 -> 108. */}
+            <h1 className="d-xl mx-auto mt-8 max-w-[20ch]">
+              <span className="block overflow-hidden pb-[0.06em]">
+                <span data-line className="block">
+                  {lp.hero.h1}
+                </span>
+              </span>
+            </h1>
+
+            {/* The price is the offer, so it carries its own weight rather than
+                running on at the end of the sentence. */}
+            <p
+              className="mt-8 font-display text-[clamp(52px,6.4vw,88px)] font-bold leading-[0.9] tracking-[-0.05em] text-blue-panel"
+              data-hero="price"
+            >
+              <Copy text={lp.hero.price} />
+            </p>
+
+            <p className="mx-auto mt-8 max-w-[56ch] text-[clamp(17px,1.4vw,19px)] leading-[1.6] text-ink-2" data-hero="sub">
+              {lp.hero.sub}
+            </p>
+
+            <div className="mt-10 flex justify-center">
+              <a href="#start" className="btn btn-primary magnetic" data-hero="cta">
+                {lp.hero.cta}
+                <Arrow />
+              </a>
             </div>
+            <p className="label mt-5 !normal-case !tracking-[0.02em]">{lp.hero.reassure}</p>
           </div>
         </section>
 
         {/* ---------------- Trust strip ---------------- */}
         <div className="on-ink bg-ink">
-          <ul className="wrap grid list-none gap-x-8 gap-y-4 py-6 sm:grid-cols-2 min-[980px]:grid-cols-4">
+          <ul className="wrap grid list-none gap-x-8 gap-y-5 py-7 text-center min-[640px]:grid-cols-2 min-[980px]:grid-cols-4 min-[980px]:divide-x min-[980px]:divide-rule-ink">
             {lp.strip.map((s) => (
-              <li key={s} className="flex items-start gap-2.5 font-mono text-[11.5px] uppercase leading-[1.45] tracking-[0.1em] text-on-ink-2">
-                <span aria-hidden className="mt-[5px] size-[6px] flex-none rotate-45 bg-orange-lit" />
+              <li key={s} className="font-mono text-[11.5px] uppercase leading-[1.5] tracking-[0.1em] text-on-ink-2">
                 {s}
               </li>
             ))}
@@ -109,37 +130,24 @@ export function LandingPage({ lp }: { lp: Lp }) {
         </div>
 
         {/* ---------------- The problem ---------------- */}
-        <section className="wrap section-pad">
-          <div className="grid gap-8 min-[900px]:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] min-[900px]:gap-20">
-            <h2 className="d-l max-w-[16ch]" data-lines>
-              <span className="block overflow-hidden pb-[0.06em]">
-                <span data-line className="block">
-                  {lp.problem.heading}
-                </span>
-              </span>
-            </h2>
-            <div data-rv-group>
-              {lp.problem.body.map((b) => (
-                <p key={b} className="t-body mb-5 last:mb-0" data-rv>
-                  {b}
-                </p>
-              ))}
-            </div>
+        <section className="wrap section-pad text-center">
+          <Heading>{lp.problem.heading}</Heading>
+          <div className="mx-auto mt-8 max-w-[62ch]" data-rv-group>
+            {lp.problem.body.map((b) => (
+              <p key={b} className="mb-5 text-[17px] leading-[1.65] text-ink-2 last:mb-0" data-rv>
+                {b}
+              </p>
+            ))}
           </div>
         </section>
 
         {/* ---------------- Covers / doesn't, at the same size ---------------- */}
         <section className="section-pad bg-tint">
-          <div className="wrap grid gap-12 min-[900px]:grid-cols-2 min-[900px]:gap-[clamp(40px,4.5vw,80px)]">
+          <div className="wrap grid gap-14 min-[900px]:grid-cols-2 min-[900px]:gap-[clamp(40px,4.5vw,80px)]">
             <div>
-              <h2 className="d-m" data-lines>
-                <span className="block overflow-hidden pb-[0.06em]">
-                  <span data-line className="block">
-                    {lp.covers.heading}
-                  </span>
-                </span>
-              </h2>
-              <ul className="mt-8 list-none p-0" data-rv-group>
+              <Heading className="d-m">{lp.covers.heading}</Heading>
+              {/* Rows stay left-aligned: this is the part people read closely. */}
+              <ul className="mx-auto mt-8 max-w-[46ch] list-none p-0 text-left" data-rv-group>
                 {lp.covers.items.map((i) => (
                   <li key={i} className="flex gap-3 border-b border-rule py-3.5 text-[16px] leading-[1.55] last:border-0" data-rv>
                     <span className="mt-[3px] flex-none text-blue-ink">
@@ -149,25 +157,21 @@ export function LandingPage({ lp }: { lp: Lp }) {
                   </li>
                 ))}
               </ul>
-              <p className="label mt-6 !normal-case !tracking-[0.02em] !text-[12.5px] !leading-[1.6]">
+              <p className="label mx-auto mt-6 max-w-[48ch] text-center !normal-case !tracking-[0.02em] !text-[12.5px] !leading-[1.6]">
                 <Copy text={lp.covers.meta} />
               </p>
-              <a href="#start" className="btn btn-primary magnetic mt-8">
-                {lp.hero.cta}
-                <Arrow />
-              </a>
+              <div className="mt-8 flex justify-center">
+                <a href="#start" className="btn btn-primary magnetic">
+                  {lp.hero.cta}
+                  <Arrow />
+                </a>
+              </div>
             </div>
 
             <div>
-              <h2 className="d-m" data-lines>
-                <span className="block overflow-hidden pb-[0.06em]">
-                  <span data-line className="block">
-                    {lp.excludes.heading}
-                  </span>
-                </span>
-              </h2>
-              <p className="t-small mt-4 max-w-[44ch]">{lp.excludes.lead}</p>
-              <ul className="mt-6 list-none p-0" data-rv-group>
+              <Heading className="d-m">{lp.excludes.heading}</Heading>
+              <p className="t-small mx-auto mt-4 max-w-[46ch] text-center">{lp.excludes.lead}</p>
+              <ul className="mx-auto mt-6 max-w-[46ch] list-none p-0 text-left" data-rv-group>
                 {lp.excludes.items.map((i) => (
                   <li key={i} className="flex gap-3 border-b border-rule py-3.5 text-[16px] leading-[1.55] text-ink-2 last:border-0" data-rv>
                     <span className="mt-[3px] flex-none text-orange-ink">
@@ -177,13 +181,15 @@ export function LandingPage({ lp }: { lp: Lp }) {
                   </li>
                 ))}
               </ul>
-              {lp.excludes.note && <p className="t-small mt-6 max-w-[46ch]">{lp.excludes.note}</p>}
+              {lp.excludes.note && (
+                <p className="t-small mx-auto mt-6 max-w-[48ch] text-center">{lp.excludes.note}</p>
+              )}
             </div>
           </div>
 
           {lp.promise && (
-            <div className="wrap mt-16">
-              <div className="note !max-w-[62ch]">
+            <div className="wrap mt-16 text-center">
+              <div className="note mx-auto !max-w-[66ch]">
                 <h3 className="font-display text-[19px] font-semibold tracking-[-0.02em]">{lp.promise.heading}</h3>
                 <p className="mt-3 text-[16px] leading-[1.6] text-ink-2">{lp.promise.body}</p>
               </div>
@@ -192,47 +198,31 @@ export function LandingPage({ lp }: { lp: Lp }) {
         </section>
 
         {/* ---------------- How it runs ---------------- */}
-        <section className="wrap section-pad">
-          <h2 className="d-l" data-lines>
-            <span className="block overflow-hidden pb-[0.06em]">
-              <span data-line className="block">
-                How it runs
-              </span>
-            </span>
-          </h2>
-          <ol className="steps mt-12 list-none p-0" data-rv-group>
+        <section className="wrap section-pad text-center">
+          <Heading>How it runs</Heading>
+          {/* Four across on a centred page, rather than the homepage's rows. */}
+          <ol className="mt-14 grid list-none gap-10 p-0 min-[640px]:grid-cols-2 min-[980px]:grid-cols-4 min-[980px]:gap-8" data-rv-group>
             {lp.steps.map((s, i) => (
-              <li className="step" key={s.title} data-rv>
-                <span className="step-n">{String(i + 1).padStart(2, "0")}</span>
-                <div>
-                  <h3>{s.title}</h3>
-                  <p>{s.body}</p>
-                </div>
+              <li key={s.title} data-rv>
+                <span className="step-n block !text-[34px]">{String(i + 1).padStart(2, "0")}</span>
+                <h3 className="mt-4 font-display text-[19px] font-semibold leading-[1.3] tracking-[-0.02em]">{s.title}</h3>
+                <p className="mx-auto mt-2.5 max-w-[34ch] text-[16px] leading-[1.55] text-ink-2">{s.body}</p>
               </li>
             ))}
           </ol>
-          {lp.stepsNote && <p className="t-body mt-10 max-w-[60ch]">{lp.stepsNote}</p>}
+          {lp.stepsNote && <p className="mx-auto mt-12 max-w-[62ch] text-[17px] leading-[1.65] text-ink-2">{lp.stepsNote}</p>}
         </section>
 
         {/* ---------------- Proof ---------------- */}
-        <section className="on-ink section-pad">
-          <div className="wrap grid items-center gap-12 min-[900px]:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] min-[900px]:gap-16">
-            <div>
-              <h2 className="d-l max-w-[14ch]" data-lines>
-                <span className="block overflow-hidden pb-[0.06em]">
-                  <span data-line className="block">
-                    A store we built. Open it.
-                  </span>
-                </span>
-              </h2>
-              <p className="t-body mt-6">{shared.proofBody}</p>
-              <p className="t-small mt-8 max-w-[52ch]">{shared.about}</p>
-            </div>
+        <section className="on-ink section-pad text-center">
+          <div className="wrap">
+            <Heading>A store we built. Open it.</Heading>
+            <p className="mx-auto mt-6 max-w-[58ch] text-[17px] leading-[1.65] text-on-ink-2">{shared.proofBody}</p>
             <a
               href="#work"
               data-ph-link
               data-rv
-              className="case flex flex-col overflow-hidden rounded-2xl bg-[#141416] no-underline shadow-[inset_0_0_0_1px_var(--color-rule-ink)]"
+              className="case mx-auto mt-12 flex max-w-[560px] flex-col overflow-hidden rounded-2xl bg-[#141416] no-underline shadow-[inset_0_0_0_1px_var(--color-rule-ink)]"
             >
               <div className="case-shot relative aspect-3/2 overflow-hidden border-b border-rule-ink bg-[#0E0E10]">
                 <Image
@@ -244,58 +234,51 @@ export function LandingPage({ lp }: { lp: Lp }) {
                   className="size-full scale-[1.08] object-cover"
                 />
               </div>
-              <div className="flex items-baseline justify-between gap-4 p-6">
+              <div className="flex items-center justify-center gap-4 p-6">
                 <h3 className="font-display text-2xl font-bold leading-[1.15] tracking-[-0.03em]">eshopp</h3>
                 <span className="font-mono text-[11px] uppercase tracking-[0.09em] text-orange-lit">Shopify · Canada</span>
               </div>
             </a>
+            <p className="mx-auto mt-12 max-w-[60ch] text-[15px] leading-[1.6] text-on-ink-2">{shared.about}</p>
           </div>
         </section>
 
         {/* ---------------- FAQ ---------------- */}
         <section className="wrap section-pad">
-          <h2 className="d-l" data-lines>
-            <span className="block overflow-hidden pb-[0.06em]">
-              <span data-line className="block">
-                Before you ask
-              </span>
-            </span>
-          </h2>
-          <div className="faq mt-12 border-t border-rule">
+          <Heading>Before you ask</Heading>
+          {/* Answers left-aligned: nobody reads a centred paragraph twice. */}
+          <div className="faq mx-auto mt-12 max-w-[820px] border-t border-rule text-left">
             {lp.faq.map((f, i) => (
               <details key={f.q} open={i === 0} name="lp-faq">
                 <summary>
                   {f.q}
                   <span className="faq-icon" aria-hidden="true" />
                 </summary>
-                <p className="max-w-[66ch] pb-7 pr-[clamp(0px,6vw,64px)] text-[16.5px] leading-[1.65] text-ink-2">{f.a}</p>
+                <p className="max-w-[66ch] pb-7 pr-6 text-[16.5px] leading-[1.65] text-ink-2">{f.a}</p>
               </details>
             ))}
           </div>
         </section>
 
         {/* ---------------- Close ---------------- */}
-        <section id="start" className="on-blue section-pad bg-blue-panel text-white">
-          <div className="wrap grid items-start gap-[clamp(36px,4vw,64px)] min-[940px]:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] min-[940px]:gap-[clamp(48px,5vw,88px)]">
-            <div>
-              <h2 className="d-l max-w-[14ch]" data-lines>
-                <span className="block overflow-hidden pb-[0.06em]">
-                  <span data-line className="block">
-                    {lp.close.heading}
-                  </span>
+        <section id="start" className="on-blue section-pad bg-blue-panel text-center text-white">
+          <div className="wrap">
+            <h2 className="d-l mx-auto max-w-[16ch]" data-lines>
+              <span className="block overflow-hidden pb-[0.06em]">
+                <span data-line className="block">
+                  {lp.close.heading}
                 </span>
-              </h2>
-              <p className="t-lead mt-6 !max-w-[42ch] !text-[rgb(255_255_255/0.9)]">{lp.close.body}</p>
-              <p className="mt-10 border-t border-[rgb(255_255_255/0.3)] pt-6 font-mono text-[12.5px] leading-[1.8] text-[rgb(255_255_255/0.9)]">
-                {lp.close.fine}
-              </p>
-            </div>
+              </span>
+            </h2>
+            <p className="mx-auto mt-6 max-w-[56ch] text-[clamp(18px,1.5vw,20px)] leading-[1.55] text-[rgb(255_255_255/0.9)]">
+              {lp.close.body}
+            </p>
 
             <form
               action="#"
               method="post"
               noValidate
-              className="rounded-[22px] bg-cream p-[clamp(24px,2.8vw,40px)] text-ink shadow-[0_30px_70px_-30px_rgb(11_11_12/0.5)]"
+              className="mx-auto mt-12 max-w-[560px] rounded-[22px] bg-cream p-[clamp(24px,2.8vw,40px)] text-left text-ink shadow-[0_30px_70px_-30px_rgb(11_11_12/0.5)]"
               data-rv
             >
               {lp.close.fields.map((f) => (
@@ -309,17 +292,21 @@ export function LandingPage({ lp }: { lp: Lp }) {
                 <Arrow />
               </button>
             </form>
+
+            <p className="mx-auto mt-8 max-w-[64ch] font-mono text-[12.5px] leading-[1.8] text-[rgb(255_255_255/0.9)]">
+              {lp.close.fine}
+            </p>
           </div>
         </section>
       </main>
 
-      {/* Privacy and cookies only, per the campaign spec. */}
-      <footer className="on-ink bg-ink py-10 text-on-ink-2">
-        <div className="wrap flex flex-wrap items-center justify-between gap-x-10 gap-y-4">
-          <p className="t-small !text-on-ink-2">
+      {/* Legal links only, per the campaign spec. */}
+      <footer className="on-ink bg-ink py-10 text-center text-on-ink-2">
+        <div className="wrap flex flex-col items-center gap-4">
+          <p className="t-small !max-w-none !text-on-ink-2">
             {site.name}. US-registered, with delivery teams in Pakistan. Building websites since 2013.
           </p>
-          <nav aria-label="Legal" className="flex flex-wrap gap-8">
+          <nav aria-label="Legal" className="flex flex-wrap justify-center gap-8">
             <a href="/privacy" className="inline-flex min-h-11 items-center text-sm no-underline transition-colors hover:text-on-ink hover:underline">
               Privacy
             </a>
