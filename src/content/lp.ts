@@ -18,6 +18,8 @@ export type Lp = {
   hero: { tag: string; h1: string; price: string; sub: string; cta: string; reassure: string };
   strip: string[];
   problem: { heading: string; body: string[] };
+  /* Speed only: the five things usually wrong, as a numbered grid. */
+  symptoms?: { heading: string; items: string[]; note: string };
   covers: { heading: string; items: string[]; meta: string };
   excludes: { heading: string; lead: string; items: string[]; note?: string };
   steps: { title: string; body: string }[];
@@ -75,6 +77,17 @@ export const landingPages: Lp[] = [
       body: [
         "There’s no alert when someone leaves. They tap, wait, and go somewhere else, and it shows up as traffic that never converted rather than as a problem you can see.",
       ],
+    },
+    symptoms: {
+      heading: "What’s usually wrong",
+      items: [
+        "Images uploaded at full camera resolution and shrunk in the browser",
+        "Apps you stopped using that still load their scripts on every page",
+        "Fonts blocking the first paint",
+        "Sliders and video on the homepage doing more work than they’re worth",
+        "Theme code left behind by whoever built it before",
+      ],
+      note: "Most stores have four of these. Some have all five.",
     },
     covers: {
       heading: "What £950 covers",

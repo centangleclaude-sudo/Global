@@ -26,18 +26,6 @@ const Arrow = ({ size = 17 }: { size?: number }) => (
   </svg>
 );
 
-const Tick = () => (
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-    <path d="M4 12.5 9.5 18 20 6.5" />
-  </svg>
-);
-
-const Dash = () => (
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" aria-hidden="true">
-    <path d="M6 12h12" />
-  </svg>
-);
-
 /** A centred section heading, wiped up on approach like the homepage's. */
 const Heading = ({ children, className = "d-l" }: { children: string; className?: string }) => (
   <h2 className={`${className} mx-auto max-w-[20ch] text-center`} data-lines>
@@ -73,7 +61,7 @@ export function LandingPage({ lp }: { lp: Lp }) {
         {/* ---------------- Hero ---------------- */}
         {/* id="hero": Motion scopes the load timeline to #hero, and the
             stylesheet hides [data-hero] until it runs. */}
-        <section id="hero" className="wrap relative overflow-hidden pb-[clamp(48px,5vw,80px)] pt-[clamp(24px,3vw,48px)] text-center">
+        <section id="hero" className="wrap relative overflow-hidden pb-[clamp(40px,4vw,64px)] pt-[clamp(24px,3vw,48px)] text-center">
           <div className="aurora" aria-hidden="true" data-aurora>
             <i className="a1" />
             <i className="a2" />
@@ -85,44 +73,40 @@ export function LandingPage({ lp }: { lp: Lp }) {
               {lp.hero.tag}
             </p>
 
-            {/* No data-lines inside #hero: the intro timeline owns this line,
-                and CSS hiding it would leave the tween animating 108 -> 108. */}
-            <h1 className="d-xl mx-auto mt-8 max-w-[20ch]">
-              <span className="block overflow-hidden pb-[0.06em]">
+            {/* Price runs inline at the end of the sentence, as the comp has it.
+                No data-lines inside #hero: the intro timeline owns this line. */}
+            <h1 className="d-xl mx-auto mt-8 max-w-[19ch]">
+              <span className="block overflow-hidden pb-[0.08em]">
                 <span data-line className="block">
-                  {lp.hero.h1}
+                  {lp.hero.h1}{" "}
+                  <span className="text-blue-panel">
+                    <Copy text={lp.hero.price} />
+                  </span>
                 </span>
               </span>
             </h1>
 
-            {/* The price is the offer, so it carries its own weight rather than
-                running on at the end of the sentence. */}
-            <p
-              className="mt-8 font-display text-[clamp(52px,6.4vw,88px)] font-bold leading-[0.9] tracking-[-0.05em] text-blue-panel"
-              data-hero="price"
-            >
-              <Copy text={lp.hero.price} />
-            </p>
-
-            <p className="mx-auto mt-8 max-w-[56ch] text-[clamp(17px,1.4vw,19px)] leading-[1.6] text-ink-2" data-hero="sub">
+            <p className="mx-auto mt-7 max-w-[58ch] text-[clamp(17px,1.4vw,19px)] leading-[1.6] text-ink-2" data-hero="sub">
               {lp.hero.sub}
             </p>
 
-            <div className="mt-10 flex justify-center">
+            <div className="mt-9 flex justify-center">
               <a href="#start" className="btn btn-primary magnetic" data-hero="cta">
                 {lp.hero.cta}
                 <Arrow />
               </a>
             </div>
-            <p className="label mt-5 !normal-case !tracking-[0.02em]">{lp.hero.reassure}</p>
+            <p className="label mt-4 !normal-case !tracking-[0.02em]">{lp.hero.reassure}</p>
           </div>
         </section>
 
-        {/* ---------------- Trust strip ---------------- */}
-        <div className="on-ink bg-ink">
-          <ul className="wrap grid list-none gap-x-8 gap-y-5 py-7 text-center min-[640px]:grid-cols-2 min-[980px]:grid-cols-4 min-[980px]:divide-x min-[980px]:divide-rule-ink">
+        {/* ---------------- Trust strip ----------------
+            On the cream ground, ruled top and bottom with dividers between,
+            as the comp has it. */}
+        <div className="wrap pb-[clamp(48px,5vw,72px)]">
+          <ul className="mx-auto grid max-w-[1000px] list-none border-y border-rule text-center min-[640px]:grid-cols-2 min-[980px]:grid-cols-4 min-[980px]:divide-x min-[980px]:divide-rule">
             {lp.strip.map((s) => (
-              <li key={s} className="font-mono text-[11.5px] uppercase leading-[1.5] tracking-[0.1em] text-on-ink-2">
+              <li key={s} className="px-5 py-5 font-mono text-[11.5px] uppercase leading-[1.55] tracking-[0.1em] text-ink-3">
                 {s}
               </li>
             ))}
@@ -130,71 +114,102 @@ export function LandingPage({ lp }: { lp: Lp }) {
         </div>
 
         {/* ---------------- The problem ---------------- */}
-        <section className="wrap section-pad text-center">
-          <Heading>{lp.problem.heading}</Heading>
-          <div className="mx-auto mt-8 max-w-[62ch]" data-rv-group>
-            {lp.problem.body.map((b) => (
-              <p key={b} className="mb-5 text-[17px] leading-[1.65] text-ink-2 last:mb-0" data-rv>
-                {b}
-              </p>
-            ))}
+        <section className="section-pad bg-tint text-center">
+          <div className="wrap">
+            <Heading>{lp.problem.heading}</Heading>
+            <div className="mx-auto mt-7 max-w-[62ch]" data-rv-group>
+              {lp.problem.body.map((b) => (
+                <p key={b} className="mb-5 text-[17px] leading-[1.65] text-ink-2 last:mb-0" data-rv>
+                  {b}
+                </p>
+              ))}
+            </div>
           </div>
         </section>
 
-        {/* ---------------- Covers / doesn't, at the same size ---------------- */}
-        <section className="section-pad bg-tint">
-          <div className="wrap grid gap-14 min-[900px]:grid-cols-2 min-[900px]:gap-[clamp(40px,4.5vw,80px)]">
-            <div>
-              <Heading className="d-m">{lp.covers.heading}</Heading>
-              {/* Rows stay left-aligned: this is the part people read closely. */}
-              <ul className="mx-auto mt-8 max-w-[46ch] list-none p-0 text-left" data-rv-group>
-                {lp.covers.items.map((i) => (
-                  <li key={i} className="flex gap-3 border-b border-rule py-3.5 text-[16px] leading-[1.55] last:border-0" data-rv>
-                    <span className="mt-[3px] flex-none text-blue-ink">
-                      <Tick />
+        {/* ---------------- What's usually wrong (Speed only) ---------------- */}
+        {lp.symptoms && (
+          <section className="section-pad text-center">
+            <div className="wrap">
+              <Heading>{lp.symptoms.heading}</Heading>
+              <div
+                className="mx-auto mt-10 grid max-w-[1000px] overflow-hidden rounded-[18px] border border-rule text-left min-[680px]:grid-cols-2 min-[980px]:grid-cols-3"
+                data-rv-group
+              >
+                {lp.symptoms.items.map((it, i) => (
+                  <div key={it} className="border-b border-r border-rule p-6" data-rv>
+                    <span className="font-mono text-[11px] tracking-[0.08em] text-orange-ink">
+                      {String(i + 1).padStart(2, "0")}
                     </span>
-                    <Copy text={i} />
-                  </li>
+                    <p className="mt-2.5 text-[16px] leading-[1.5]">{it}</p>
+                  </div>
                 ))}
-              </ul>
-              <p className="label mx-auto mt-6 max-w-[48ch] text-center !normal-case !tracking-[0.02em] !text-[12.5px] !leading-[1.6]">
-                <Copy text={lp.covers.meta} />
-              </p>
-              <div className="mt-8 flex justify-center">
-                <a href="#start" className="btn btn-primary magnetic">
-                  {lp.hero.cta}
-                  <Arrow />
-                </a>
+                {/* Keeps the last row square rather than leaving a ragged edge. */}
+                <div aria-hidden className="hidden border-b border-rule bg-[rgb(11_11_12/0.03)] min-[680px]:block min-[980px]:col-span-1" />
               </div>
+              <p className="t-small mx-auto mt-6 text-center">{lp.symptoms.note}</p>
             </div>
+          </section>
+        )}
 
-            <div>
-              <Heading className="d-m">{lp.excludes.heading}</Heading>
-              <p className="t-small mx-auto mt-4 max-w-[46ch] text-center">{lp.excludes.lead}</p>
-              <ul className="mx-auto mt-6 max-w-[46ch] list-none p-0 text-left" data-rv-group>
-                {lp.excludes.items.map((i) => (
-                  <li key={i} className="flex gap-3 border-b border-rule py-3.5 text-[16px] leading-[1.55] text-ink-2 last:border-0" data-rv>
-                    <span className="mt-[3px] flex-none text-orange-ink">
-                      <Dash />
-                    </span>
+        {/* ---------------- What it covers ---------------- */}
+        <section className="section-pad bg-tint text-center">
+          <div className="wrap">
+            <Heading>{lp.covers.heading}</Heading>
+            <ul
+              className="mx-auto mt-10 grid max-w-[1000px] list-none overflow-hidden rounded-[18px] border border-rule text-left min-[680px]:grid-cols-2 min-[980px]:grid-cols-3"
+              data-rv-group
+            >
+              {lp.covers.items.map((i) => (
+                <li key={i} className="flex gap-3 border-b border-r border-rule p-6 text-[16px] leading-[1.5]" data-rv>
+                  <span aria-hidden className="mt-[7px] size-[7px] flex-none rounded-full bg-blue-panel" />
+                  <span>
                     <Copy text={i} />
-                  </li>
-                ))}
-              </ul>
-              {lp.excludes.note && (
-                <p className="t-small mx-auto mt-6 max-w-[48ch] text-center">{lp.excludes.note}</p>
-              )}
+                  </span>
+                </li>
+              ))}
+            </ul>
+            <p className="label mx-auto mt-7 max-w-[60ch] !normal-case !tracking-[0.02em] !text-[12.5px] !leading-[1.7]">
+              <Copy text={lp.covers.meta} />
+            </p>
+            <div className="mt-8 flex justify-center">
+              <a href="#start" className="btn btn-ghost magnetic">
+                {lp.hero.cta}
+                <Arrow />
+              </a>
             </div>
           </div>
+        </section>
 
-          {lp.promise && (
-            <div className="wrap mt-16 text-center">
-              <div className="note mx-auto !max-w-[66ch]">
-                <h3 className="font-display text-[19px] font-semibold tracking-[-0.02em]">{lp.promise.heading}</h3>
-                <p className="mt-3 text-[16px] leading-[1.6] text-ink-2">{lp.promise.body}</p>
+        {/* ---------------- And what it doesn't ----------------
+            On the dark ground, exclusions as chips: the comp gives them the
+            same visual weight as the inclusions rather than burying them. */}
+        <section className="on-ink section-pad bg-ink text-center">
+          <div className="wrap">
+            <Heading>{lp.excludes.heading}</Heading>
+            <p className="mx-auto mt-5 max-w-[54ch] text-[16.5px] leading-[1.6] text-on-ink-2">{lp.excludes.lead}</p>
+            <ul className="mx-auto mt-10 flex max-w-[900px] list-none flex-wrap justify-center gap-3 p-0" data-rv-group>
+              {lp.excludes.items.map((i) => (
+                <li
+                  key={i}
+                  data-rv
+                  className="rounded-full border border-rule-ink-strong px-5 py-3 text-[15.5px] leading-[1.4] text-on-ink"
+                >
+                  <Copy text={i} />
+                </li>
+              ))}
+            </ul>
+            {lp.excludes.note && (
+              <p className="mx-auto mt-9 max-w-[58ch] text-[16px] leading-[1.6] text-on-ink-2">{lp.excludes.note}</p>
+            )}
+
+            {lp.promise && (
+              <div className="mx-auto mt-14 max-w-[66ch] border-t border-rule-ink pt-10">
+                <h3 className="font-display text-[19px] font-semibold tracking-[-0.02em] text-on-ink">{lp.promise.heading}</h3>
+                <p className="mt-4 text-[16px] leading-[1.65] text-on-ink-2">{lp.promise.body}</p>
               </div>
-            </div>
-          )}
+            )}
+          </div>
         </section>
 
         {/* ---------------- How it runs ---------------- */}

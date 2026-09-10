@@ -121,6 +121,11 @@
   font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.14em;
   text-transform: uppercase; color: var(--color-ink-2); background: rgb(255 255 255 / 0.4);
 }
+/* The blue dot, lost when this moved from plain CSS to a Tailwind utility. */
+.tag::before {
+  content: ""; width: 8px; height: 8px; flex: 0 0 auto;
+  border-radius: 99px; background: var(--color-blue);
+}
 
 /* ---------- Controls ---------- */
 @utility btn {
