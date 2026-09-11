@@ -15,15 +15,18 @@ export const site = {
   whatsapp: { label: "+1 (307) 269-6427", href: "https://wa.me/13072696427" },
   calendly: "https://calendly.com/centangle/book-a-call-centangle-global",
   legalName: "Centangle Global LLC",
+  /* Supplied by the user 2026-09-11. Note this is NOT the registered
+     address in /privacy and /terms, which reads Sheridan, WY. */
+  address: ["23075 Sullivans Cove Sq,", "Brambleton, VA 20148,", "United States"],
 };
 
 /* From the live centangleglobal.com footer. */
 export const socials = [
-  { label: "LinkedIn", href: "https://www.linkedin.com/company/centangleglobal" },
-  { label: "Instagram", href: "https://instagram.com/centangleglobal" },
   { label: "Facebook", href: "https://facebook.com/centangleglobal" },
-  { label: "X", href: "https://x.com/centangleglobal" },
   { label: "Behance", href: "https://www.behance.net/centangle" },
+  { label: "Instagram", href: "https://instagram.com/centangleglobal" },
+  { label: "LinkedIn", href: "https://www.linkedin.com/company/centangleglobal" },
+  { label: "X", href: "https://x.com/centangleglobal" },
 ] as const;
 
 export const nav = [

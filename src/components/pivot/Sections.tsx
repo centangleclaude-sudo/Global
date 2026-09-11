@@ -387,32 +387,33 @@ export function Start() {
 }
 
 /* =============================== FOOTER =============================== */
-export function Footer() {
+/**
+ * `standalone` is for pages that are not the homepage: the in-page jump to
+ * the contact form has to become a link back to it.
+ */
+export function Footer({ standalone = false }: { standalone?: boolean }) {
+  const startHref = standalone ? "/#start" : "#start";
   return (
     <footer className="on-ink relative overflow-hidden bg-ink pt-24 text-on-ink-2">
       <div className="wrap">
         <div className="relative z-10 grid gap-16 min-[860px]:grid-cols-[1.4fr_1fr_1fr]">
           <div>
-            <a href="#top" className="inline-flex min-h-11 items-center gap-3 font-display text-[18px] font-bold tracking-[-0.03em] text-on-ink no-underline">
+            <a href={standalone ? "/" : "#top"} className="inline-flex min-h-11 items-center gap-3 font-display text-[18px] font-bold tracking-[-0.03em] text-on-ink no-underline">
               <Image src="/brand/mark.png" alt="" width={34} height={34} className="rounded-full" />
               {site.name}
             </a>
             <p className="mt-6 max-w-[34ch] text-[16px] leading-[1.6] text-on-ink-2">{site.blurb}</p>
-          </div>
-
-          <div>
-            <p className="mb-6 font-mono text-[11.5px] uppercase tracking-[0.12em] text-on-ink-2 opacity-70">Follow</p>
-            <ul className="flex list-none flex-col p-0 text-[16px]">
+            <ul className="mt-8 flex list-none flex-wrap gap-3 p-0">
               {socials.map((sn) => (
                 <li key={sn.label}>
                   <a
                     href={sn.href}
                     target="_blank"
-                    rel="noopener"
-                    className="inline-flex min-h-11 items-center gap-3 text-on-ink-2 no-underline transition-colors duration-200 hover:text-on-ink"
+                    rel="noopener noreferrer"
+                    aria-label={sn.label}
+                    className="social-dot no-underline"
                   >
                     <SocialIcon name={sn.label} />
-                    {sn.label}
                   </a>
                 </li>
               ))}
@@ -420,10 +421,21 @@ export function Footer() {
           </div>
 
           <div>
+            <p className="mb-6 font-mono text-[11.5px] uppercase tracking-[0.12em] text-on-ink-2 opacity-70">Where we are</p>
+            <address className="not-italic text-[16px] leading-[1.6] text-on-ink-2">
+              {site.address.map((line) => (
+                <span key={line} className="block">
+                  {line}
+                </span>
+              ))}
+            </address>
+          </div>
+
+          <div>
             <p className="mb-6 font-mono text-[11.5px] uppercase tracking-[0.12em] text-on-ink-2 opacity-70">Get in touch</p>
             <ul className="flex list-none flex-col p-0 text-[16px] text-on-ink-2">
               <li>
-                <a href="#start" className="inline-flex min-h-11 items-center no-underline transition-colors duration-200 hover:text-on-ink">
+                <a href={startHref} className="inline-flex min-h-11 items-center no-underline transition-colors duration-200 hover:text-on-ink">
                   Start a project
                 </a>
               </li>

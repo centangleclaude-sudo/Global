@@ -17,11 +17,20 @@ not extract it into a subfolder called `out`.
 | `/lp/shopify-migration/` | Ad landing page — Migration, £1,250 |
 | `/lp/store-redesign/` | Ad landing page — Redesign, £1,250 |
 | `/lp/first-store/` | Ad landing page — first shop, price TBC |
-| `/services/` `/projects/` `/contact/` `/privacy/` `/terms/` `/coming-soon/` | Existing pages, unchanged |
+| `/privacy/` | Privacy Policy, rebuilt in the pivot design |
+| `/terms/` | Terms of Service, rebuilt in the pivot design |
 
-`/` is the only homepage. The previous one lived at `/home-legacy/` and has
-been moved out to `../archive/homepages/global-legacy-home/`, along with the
-eight components only it used.
+**That is the whole site — seven pages.** The old Centangle site is gone from
+this build, not hidden: `/home-legacy/`, `/services/`, `/projects/`,
+`/contact/` and `/coming-soon/` no longer exist and will 404. Everything that
+served them — the `(legacy)` route group, fifteen components, `globals.css`,
+`src/lib/` and 42 MB of imagery — is in `../archive/legacy-site/`.
+
+**If those URLs are indexed**, add 301 redirects to `/` on the server before
+this goes live, or you lose whatever ranking they carry.
+
+Privacy and Terms keep their wording exactly as it was. Only the shell around
+them changed.
 
 The four `/lp/` pages are `noindex, follow` — they're paid destinations and
 should not compete with the homepage in search. They are not linked from the
@@ -62,8 +71,16 @@ cd out && zip -r ../centangle-website-pivot.zip .
    production domain, which is still a `TODO` in that file.
 6. **The form does not submit.** `action="#"` on the homepage and all four
    landing pages. Point it at a handler before you spend on ads.
-7. **Payload.** The export is ~46 MB, of which ~30 MB is legacy imagery — a
-   19.8 MB `Hero video.mp4` still used by `/services/`, and a 9 MB `Cta bg.png`
-   used by `/services/`, `/projects/` and `/contact/`. The new pages ship about
-   2.4 MB in total. If you retire the legacy pages, delete those two files and
-   the upload drops to a few MB.
+7. ~~Payload~~ — done. Removing the legacy pages took the export from **46 MB
+   to 3.2 MB**. `public/` now holds only the brand mark, the three work
+   screenshots and `.htaccess`.
+8. **Two different addresses.** The footer says 23075 Sullivans Cove Sq,
+   Brambleton, VA 20148. `/privacy/` and `/terms/` say the registered address
+   is 30 N Gould St, Ste R, Sheridan, WY 82801, and `/terms/` puts the
+   governing law in Wyoming. A registered agent address and an office address
+   can legitimately differ — but confirm which is which before launch, because
+   the terms are enforceable and the footer is not.
+9. **The privacy policy describes a site that no longer exists.** It names
+   Web3Forms as the form processor and describes a newsletter signup. This
+   build has neither: the forms do not submit at all, and there is no
+   newsletter. Whichever way item 6 is resolved, this section needs to match.

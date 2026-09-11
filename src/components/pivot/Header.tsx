@@ -4,7 +4,12 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { nav, site } from "@/content/site";
 
-export function Header() {
+/**
+ * `minimal` drops the section nav and points the wordmark home. The legal
+ * pages have no sections to jump to, so a nav of dead in-page anchors would
+ * be worse than none.
+ */
+export function Header({ minimal = false }: { minimal?: boolean }) {
   const [open, setOpen] = useState(false);
   const [stuck, setStuck] = useState(false);
 
@@ -38,11 +43,12 @@ export function Header() {
         style={{ background: "rgb(245 242 236 / 0.85)" }}
       >
         <div className="wrap flex min-h-[72px] items-center justify-between gap-8">
-          <a href="#top" className="inline-flex min-h-11 items-center gap-3 rounded-lg px-1 font-display text-[18px] font-bold tracking-[-0.03em] no-underline">
+          <a href={minimal ? "/" : "#top"} className="inline-flex min-h-11 items-center gap-3 rounded-lg px-1 font-display text-[18px] font-bold tracking-[-0.03em] no-underline">
             <Image src="/brand/mark.png" alt="" width={34} height={34} className="rounded-full" priority />
             {site.name}
           </a>
 
+          {!minimal && (
           <nav aria-label="Primary" className="hidden items-center gap-2 min-[980px]:flex">
             {nav.map((i) => (
               <a
@@ -54,11 +60,18 @@ export function Header() {
               </a>
             ))}
           </nav>
+          )}
 
-          <a href="#start" className="btn btn-ink btn-sm magnetic hidden min-[980px]:inline-flex">
+          <a
+            href={minimal ? "/#start" : "#start"}
+            /* Without a burger beside it, the minimal CTA is the only
+               control in the bar — so it has to show at every width. */
+            className={`btn btn-ink btn-sm magnetic ${minimal ? "inline-flex" : "hidden min-[980px]:inline-flex"}`}
+          >
             Start a project
           </a>
 
+          {!minimal && (
           <button
             type="button"
             aria-expanded={open}
@@ -78,9 +91,11 @@ export function Header() {
               />
             </span>
           </button>
+          )}
         </div>
       </header>
 
+      {!minimal && (
       <div
         id="menu"
         hidden={!open}
@@ -100,6 +115,7 @@ export function Header() {
           Start a project
         </a>
       </div>
+      )}
     </>
   );
 }

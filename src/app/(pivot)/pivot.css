@@ -153,9 +153,28 @@
 }
 @utility btn-sm { min-height: 44px; padding-inline: 20px; font-size: 15px; }
 
-/* GSAP writes --mx/--my; CSS owns the transform so it degrades to nothing. */
 /* A marker for the motion script. GSAP owns the transform on these. */
 @utility magnetic { will-change: transform; }
+
+/* ---------- Social buttons ----------
+   Icon-only, so each one carries an aria-label. 44px is the minimum comfortable
+   touch target; the ring uses the footer rule colour so the row reads as part
+   of the same system rather than as five floating chips. */
+.social-dot {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 44px; height: 44px; flex: 0 0 auto;
+  border-radius: 999px;
+  border: 1px solid var(--color-rule-ink);
+  color: var(--color-on-ink-2);
+  transition: color 0.25s var(--ease-out-expo), border-color 0.25s var(--ease-out-expo),
+    background-color 0.25s var(--ease-out-expo), transform 0.25s var(--ease-out-expo);
+}
+.social-dot:hover {
+  color: var(--color-ink);
+  background: var(--color-on-ink);
+  border-color: var(--color-on-ink);
+}
+.social-dot:focus-visible { color: var(--color-on-ink); border-color: var(--color-on-ink); }
 
 /* ---------- Placeholders (all listed in report.md) ---------- */
 @utility ph {
