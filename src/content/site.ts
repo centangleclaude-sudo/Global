@@ -118,7 +118,7 @@ export const work = {
       body: "Mobile and repair retail in Canada. Product catalogue, variants, and a storefront built to survive comparison with the larger sellers in the same category.",
       image: "/work/eshopp.jpg",
       alt: "The eshopp storefront open on a laptop at a phone-repair bench.",
-      href: "#work",
+      href: "https://eshopp.ca/",
     },
     {
       name: "SEED",
@@ -126,7 +126,7 @@ export const work = {
       body: "A website for a UK FCDO-funded programme.",
       image: "/work/seed.jpg",
       alt: "The SEED programme homepage open on a laptop.",
-      href: "#work",
+      href: "https://seed-pk.com/",
     },
     {
       name: "Convoa",
@@ -134,7 +134,7 @@ export const work = {
       body: "An AI voice agent company in the United States. Nine industry landing pages sharing one design system, so their team can add a tenth without a designer.",
       image: "/work/convoa.jpg",
       alt: "The Convoa landing page on a desktop display.",
-      href: "#work",
+      href: "https://convoa.com/",
     },
   ],
 };
@@ -374,8 +374,8 @@ export const start = {
 export const footer = {
   /* Same domain as the live site, so these resolve once this ships there. */
   legal: [
-    { href: "/privacy", label: "Privacy" },
-    { href: "/terms", label: "Terms" },
-    { href: "/terms#disclaimer", label: "Legal disclaimer" },
+    { href: "/privacy/", label: "Privacy" },
+    { href: "/terms/", label: "Terms" },
+    { href: "/terms/#disclaimer", label: "Legal disclaimer" },
   ],
 };

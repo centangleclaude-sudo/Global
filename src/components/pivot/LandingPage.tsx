@@ -234,8 +234,9 @@ export function LandingPage({ lp }: { lp: Lp }) {
             <Heading>A store we built. Open it.</Heading>
             <p className="mx-auto mt-6 max-w-[58ch] text-[17px] leading-[1.65] text-on-ink-2">{shared.proofBody}</p>
             <a
-              href="#work"
-              data-ph-link
+              href={shared.proofHref}
+              target="_blank"
+              rel="noopener noreferrer"
               data-rv
               className="case mx-auto mt-12 flex max-w-[560px] flex-col overflow-hidden rounded-2xl bg-[#141416] no-underline shadow-[inset_0_0_0_1px_var(--color-rule-ink)]"
             >
@@ -322,10 +323,10 @@ export function LandingPage({ lp }: { lp: Lp }) {
             {site.name}. US-registered, with delivery teams in Pakistan. Building websites since 2013.
           </p>
           <nav aria-label="Legal" className="flex flex-wrap justify-center gap-8">
-            <a href="/privacy" className="inline-flex min-h-11 items-center text-sm no-underline transition-colors hover:text-on-ink hover:underline">
+            <a href="/privacy/" className="inline-flex min-h-11 items-center text-sm no-underline transition-colors hover:text-on-ink hover:underline">
               Privacy
             </a>
-            <a href="/terms" className="inline-flex min-h-11 items-center text-sm no-underline transition-colors hover:text-on-ink hover:underline">
+            <a href="/terms/" className="inline-flex min-h-11 items-center text-sm no-underline transition-colors hover:text-on-ink hover:underline">
               Terms
             </a>
           </nav>

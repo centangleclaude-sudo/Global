@@ -50,7 +50,12 @@ const STORE_FIELDS: LpField[] = [
   { name: "name", label: "Name", autoComplete: "name" },
 ];
 
-export const shared = { proofBody: PROOF_BODY, about: ABOUT, excludesLead: EXCLUDES_LEAD };
+export const shared = {
+  proofBody: PROOF_BODY,
+  proofHref: "https://eshopp.ca/",
+  about: ABOUT,
+  excludesLead: EXCLUDES_LEAD,
+};
 
 export const landingPages: Lp[] = [
   {

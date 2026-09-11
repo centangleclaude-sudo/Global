@@ -48,12 +48,14 @@ cd out && zip -r ../centangle-website-pivot.zip .
 
 ## Before this replaces the live homepage
 
-1. **Scope ceilings.** 15 `[n]` blanks remain in the packages section of the
-   homepage, plus four on `/lp/first-store/`. They render with a dotted
-   underline. Delivery sign-off needed — see `../NewPivot/PLACEHOLDERS.md`.
+1. **Scope ceilings.** 14 `[n]` blanks remain in the packages section of the
+   homepage — 3 in each of the first four packages, 2 in "Taking over a build"
+   — plus four on `/lp/first-store/` (price, product ceiling, app ceiling,
+   timeline). They render with a dotted underline. Delivery sign-off needed —
+   see `../NewPivot/PLACEHOLDERS.md`.
 2. **`[VAT line]`** appears on all four landing pages.
-3. **The three work links** on the homepage point at `#work`, and the heading
-   says "Three you can open now". Supply live URLs or change the heading.
+3. ~~The three work links~~ — done. They point at the live sites:
+   eshopp.ca, seed-pk.com, convoa.com. All three open in a new tab.
 4. **Convoa clearance.** Confirm in writing before publishing.
 5. **`src/app/sitemap.ts`** still lists the old routes only. The `/lp/` pages
    are left out deliberately — they are paid destinations — but confirm the

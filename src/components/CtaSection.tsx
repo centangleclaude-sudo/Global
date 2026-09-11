@@ -58,7 +58,7 @@ export default function CtaSection() {
       </h2>
 
       <a
-        href="/contact"
+        href="/contact/"
         className="cta-button mt-12 inline-flex items-center gap-[10px] text-white"
         style={{
           padding: "6px 6px 6px 16px",

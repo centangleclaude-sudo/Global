@@ -58,7 +58,7 @@ const projects: Project[] = [
 
 function ProjectCard({ project }: { project: Project }) {
   return (
-    <a href="/coming-soon" className="project-card group block">
+    <a href="/coming-soon/" className="project-card group block">
       {/* Image */}
       <div
         className="relative rounded-2xl overflow-hidden border border-white/[0.06] bg-[#16161c]"

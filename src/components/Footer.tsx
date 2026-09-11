@@ -8,36 +8,36 @@ const columns = [
     heading: "About",
     links: [
       // TODO: no pages exist for these three yet.
-      { label: "Who We Are", href: "/coming-soon" },
-      { label: "Careers", href: "/coming-soon" },
-      { label: "Our Leadership", href: "/coming-soon" },
+      { label: "Who We Are", href: "/coming-soon/" },
+      { label: "Careers", href: "/coming-soon/" },
+      { label: "Our Leadership", href: "/coming-soon/" },
       { label: "FAQs", href: "/#faq" },
     ],
   },
   {
     heading: "Cases",
     links: [
-      { label: "EZTRAK", href: "/coming-soon" },
-      { label: "RAMS", href: "/coming-soon" },
-      { label: "DYH", href: "/coming-soon" },
-      { label: "DICE", href: "/coming-soon" },
-      { label: "Ignite", href: "/coming-soon" },
+      { label: "EZTRAK", href: "/coming-soon/" },
+      { label: "RAMS", href: "/coming-soon/" },
+      { label: "DYH", href: "/coming-soon/" },
+      { label: "DICE", href: "/coming-soon/" },
+      { label: "Ignite", href: "/coming-soon/" },
     ],
   },
   {
     heading: "Services",
     links: [
-      { label: "Custom Software Development", href: "/services" },
-      { label: "Staff Augmentation", href: "/services" },
-      { label: "AI Development", href: "/services" },
-      { label: "UI/UX Design", href: "/services" },
+      { label: "Custom Software Development", href: "/services/" },
+      { label: "Staff Augmentation", href: "/services/" },
+      { label: "AI Development", href: "/services/" },
+      { label: "UI/UX Design", href: "/services/" },
     ],
   },
 ];
 
 const legalLinks = [
-  { label: "Privacy Policy", href: "/privacy" },
-  { label: "Terms of Service", href: "/terms" },
+  { label: "Privacy Policy", href: "/privacy/" },
+  { label: "Terms of Service", href: "/terms/" },
   { label: "Legal Disclaimer", href: "/terms#disclaimer" },
   { label: "Sitemap", href: "/sitemap.xml" },
 ];

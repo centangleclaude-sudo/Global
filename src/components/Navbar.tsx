@@ -6,10 +6,10 @@ import Logo from "@/components/Logo";
 
 const navLinks = [
   { href: "/", label: "Home" },
-  { href: "/services", label: "Services" },
-  { href: "/projects", label: "Projects" },
-  { href: "/coming-soon", label: "About us" },
-  { href: "/contact", label: "Contact us" },
+  { href: "/services/", label: "Services" },
+  { href: "/projects/", label: "Projects" },
+  { href: "/coming-soon/", label: "About us" },
+  { href: "/contact/", label: "Contact us" },
 ];
 
 export default function Navbar({ variant = "dark" }: { variant?: "dark" | "light" }) {
@@ -158,7 +158,7 @@ export default function Navbar({ variant = "dark" }: { variant?: "dark" | "light
         </div>
 
         <a
-          href="/contact"
+          href="/contact/"
           className="bg-blue-600 hover:bg-blue-700 text-white text-[13px] font-medium px-5 py-2.5 rounded-full flex items-center gap-1.5 transition-colors whitespace-nowrap flex-shrink-0"
         >
           Book a Meeting
@@ -232,7 +232,7 @@ export default function Navbar({ variant = "dark" }: { variant?: "dark" | "light
             ))}
 
             <a
-              href="/contact"
+              href="/contact/"
               onClick={() => setOpen(false)}
               className="mt-2 bg-blue-600 hover:bg-blue-700 text-white text-[14px] font-medium px-5 py-3.5 rounded-full flex items-center justify-center gap-1.5 transition-colors"
             >

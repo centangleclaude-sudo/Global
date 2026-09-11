@@ -159,7 +159,7 @@ function CapabilityBlock({ cap }: { cap: Capability }) {
           </div>
 
           {/* <a
-            href="/contact"
+            href="/contact/"
             className="inline-flex items-center gap-2.5 mt-10 text-white text-[13px] font-medium rounded-full px-6 py-3 transition-colors hover:bg-blue-600"
             style={{
               background: "rgba(47, 124, 255, 0.16)",

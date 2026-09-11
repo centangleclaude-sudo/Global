@@ -189,7 +189,8 @@ export function Work() {
             <a
               key={w.name}
               href={w.href}
-              data-ph-link
+              target="_blank"
+              rel="noopener noreferrer"
               data-rv
               className="case flex flex-col overflow-hidden rounded-2xl bg-[#141416] no-underline shadow-[inset_0_0_0_1px_var(--color-rule-ink)]"
             >
