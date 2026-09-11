@@ -3,7 +3,24 @@
 import { useRef, useState } from "react";
 import { gsap } from "gsap";
 import { Copy, Kicker, Lines } from "./Ph";
-import { packages } from "@/content/site";
+import { packages, site } from "@/content/site";
+
+const Arrow = () => (
+  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <path d="M5 12h13M13 6l6 6-6 6" />
+  </svg>
+);
+
+/**
+ * A booking link per offering.
+ *
+ * The offering rides along as `utm_campaign`, which Calendly records on every
+ * booking with no setup at either end. Prefilling a custom question instead
+ * (`a1=`) would need to know which question is first on the booking page, and
+ * guessing that puts the wrong answer in the wrong field.
+ */
+const bookingHref = (slug: string) =>
+  `${site.calendly}?utm_source=website&utm_medium=offerings&utm_campaign=${slug}`;
 
 /**
  * No prices on this page, so the section is built on what IS true:
@@ -63,7 +80,7 @@ export function Packages() {
           <div
             ref={tabsRef}
             role="tablist"
-            aria-label="Packages"
+            aria-label="Offerings"
             onKeyDown={onKey}
             className="flex flex-wrap gap-2.5 border-b border-rule pb-6"
           >
@@ -117,6 +134,24 @@ export function Packages() {
                   ))}
                 </ul>
               </div>
+            </div>
+
+            {/* Booking sits with the offering, so the thing being booked is
+                unambiguous by the time they land on Calendly. */}
+            <div className="mt-12 flex flex-wrap items-center gap-x-6 gap-y-4 border-t border-rule pt-8">
+              <a
+                href={bookingHref(item.slug)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-primary magnetic"
+              >
+                Schedule a meeting
+                <Arrow />
+              </a>
+              <p className="t-small !mt-0">
+                Twenty minutes about <strong className="font-medium text-ink">{item.topic}</strong>. If it fits, we
+                say so. If nothing does, we say that too.
+              </p>
             </div>
           </div>
         </div>

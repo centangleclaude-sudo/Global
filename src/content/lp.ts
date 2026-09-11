@@ -104,7 +104,7 @@ export const landingPages: Lp[] = [
         "Font loading, lazy-loading and render-blocking fixes",
         "Before and after measurements on the same five pages, as a file",
       ],
-      meta: "Typically 5–10 working days · Half to start, half at launch · Prices in GBP · [VAT line]",
+      meta: "Typically 5–10 working days · Half to start, half at launch · Prices in GBP",
     },
     excludes: {
       heading: "And what it doesn’t",
@@ -194,7 +194,7 @@ export const landingPages: Lp[] = [
         "Recorded handover call",
         "30 days of bug fixes",
       ],
-      meta: "Typically 3–4 weeks · Half to start, half at launch · Prices in GBP · [VAT line]",
+      meta: "Typically 3–4 weeks · Half to start, half at launch · Prices in GBP",
     },
     excludes: {
       heading: "And what it doesn’t",
@@ -280,7 +280,7 @@ export const landingPages: Lp[] = [
         "Two rounds of revisions at the design stage",
         "Recorded handover call · 30 days of bug fixes",
       ],
-      meta: "Typically 4–5 weeks · Half to start, half at launch · Prices in GBP · [VAT line]",
+      meta: "Typically 4–5 weeks · Half to start, half at launch · Prices in GBP",
     },
     excludes: {
       heading: "And what it doesn’t",
@@ -368,7 +368,7 @@ export const landingPages: Lp[] = [
         "A recorded walkthrough of the admin",
         "30 days of bug fixes after launch",
       ],
-      meta: "Typically [n] weeks · Half to start, half at launch · Prices in GBP · [VAT line]",
+      meta: "Typically [n] weeks · Half to start, half at launch · Prices in GBP",
     },
     excludes: {
       heading: "And what it doesn’t",

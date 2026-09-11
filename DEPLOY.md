@@ -66,7 +66,7 @@ cd out && zip -r ../centangle-website-pivot.zip .
    products in 2–3 weeks; `/lp/shopify-migration/` says 300 products in 3–4
    weeks for £1,250, and builds a FAQ answer on the 300. Same service, same
    domain, two numbers.
-2. **`[VAT line]`** appears on all four landing pages.
+2. ~~`[VAT line]`~~ — removed from all four landing pages 11 Sep 2026.
 3. ~~The three work links~~ — done. They point at the live sites:
    eshopp.ca, seed-pk.com, convoa.com. All three open in a new tab.
 4. **Convoa clearance.** Confirm in writing before publishing.
@@ -74,7 +74,9 @@ cd out && zip -r ../centangle-website-pivot.zip .
    are left out deliberately — they are paid destinations — but confirm the
    production domain, which is still a `TODO` in that file.
 6. **The form does not submit.** `action="#"` on the homepage and all four
-   landing pages. Point it at a handler before you spend on ads.
+   landing pages. Point it at a handler before you spend on ads. The five
+   offering CTAs go to Calendly and do work — booking is covered, enquiry
+   is not.
 7. ~~Payload~~ — done. Removing the legacy pages took the export from **46 MB
    to 3.2 MB**. `public/` now holds only the brand mark, the three work
    screenshots and `.htaccess`.

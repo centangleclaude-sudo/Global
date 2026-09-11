@@ -33,7 +33,7 @@ export const nav = [
   { href: "#work", label: "Work" },
   { href: "#build", label: "What we build" },
   { href: "#process", label: "How it works" },
-  { href: "#packages", label: "Packages" },
+  { href: "#packages", label: "Offerings" },
   { href: "#questions", label: "Questions" },
 ];
 
@@ -181,12 +181,14 @@ export const process = {
 };
 
 export const packages = {
-  kicker: "05 / Packages",
+  kicker: "05 / Offerings",
   heading: ["What’s included, and what isn’t, at ", "the same size"],
-  lead: "Five packages. Pick the one that sounds like you and read both columns — they are printed at the same weight on purpose. Every package is a fixed price, quoted in writing after a 20-minute call, and anything extra is priced before it’s done, never after.",
+  lead: "Five offerings. Pick the one that sounds like you and read both columns — they are printed at the same weight on purpose. Every one is a fixed price, quoted in writing after a 20-minute call, and anything extra is priced before it’s done, never after.",
   items: [
     {
       tab: "A website on WordPress",
+      slug: "wordpress-website",
+      topic: "a WordPress website",
       meta: "10 pages · live in 2 weeks",
       desc: "A designed site you can edit yourself, with a contact form that sends to your email and hosting set up in your name, on your card.",
       included: [
@@ -208,6 +210,8 @@ export const packages = {
     },
     {
       tab: "An online shop on WooCommerce",
+      slug: "woocommerce-shop",
+      topic: "a WooCommerce shop",
       meta: "up to 50 products · live in 2 weeks",
       desc: "A WooCommerce shop designed around what you sell, with the plugins chosen with an eye on what they cost you in speed.",
       included: [
@@ -230,6 +234,8 @@ export const packages = {
     },
     {
       tab: "A Shopify store",
+      slug: "shopify-store",
+      topic: "a Shopify store",
       meta: "up to 50 products · live in 2 weeks",
       desc: "A Shopify theme set up around your products, colours and logo — or designed from scratch if that’s what the brief needs.",
       included: [
@@ -252,6 +258,8 @@ export const packages = {
     },
     {
       tab: "Moving a store to Shopify",
+      slug: "shopify-migration",
+      topic: "moving a store to Shopify",
       meta: "up to 100 products · 2 to 3 weeks",
       desc: "Products, customers and order history moved across, with every old web address redirected so old links and search results still work.",
       included: [
@@ -272,6 +280,8 @@ export const packages = {
     },
     {
       tab: "Taking over a build",
+      slug: "taking-over-a-build",
+      topic: "taking over a build",
       meta: "fixed once we’ve seen it · 2 to 3 weeks",
       desc: "A written account of what was built, what was not, and what is worth keeping — then a fixed price to finish it.",
       included: [
