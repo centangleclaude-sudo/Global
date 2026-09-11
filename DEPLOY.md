@@ -17,8 +17,11 @@ not extract it into a subfolder called `out`.
 | `/lp/shopify-migration/` | Ad landing page — Migration, £1,250 |
 | `/lp/store-redesign/` | Ad landing page — Redesign, £1,250 |
 | `/lp/first-store/` | Ad landing page — first shop, price TBC |
-| `/home-legacy/` | The previous homepage, kept for comparison |
 | `/services/` `/projects/` `/contact/` `/privacy/` `/terms/` `/coming-soon/` | Existing pages, unchanged |
+
+`/` is the only homepage. The previous one lived at `/home-legacy/` and has
+been moved out to `../archive/homepages/global-legacy-home/`, along with the
+eight components only it used.
 
 The four `/lp/` pages are `noindex, follow` — they're paid destinations and
 should not compete with the homepage in search. They are not linked from the
@@ -47,17 +50,18 @@ cd out && zip -r ../centangle-website-pivot.zip .
 
 1. **Scope ceilings.** 15 `[n]` blanks remain in the packages section of the
    homepage, plus four on `/lp/first-store/`. They render with a dotted
-   underline. Delivery sign-off needed — see `onepager/report.md`.
+   underline. Delivery sign-off needed — see `../NewPivot/PLACEHOLDERS.md`.
 2. **`[VAT line]`** appears on all four landing pages.
 3. **The three work links** on the homepage point at `#work`, and the heading
    says "Three you can open now". Supply live URLs or change the heading.
 4. **Convoa clearance.** Confirm in writing before publishing.
-5. **`src/app/sitemap.ts`** still lists the old routes only. It does not know
-   about `/home-legacy` or the `/lp/` pages — and the `/lp/` pages should stay
-   out of it deliberately.
+5. **`src/app/sitemap.ts`** still lists the old routes only. The `/lp/` pages
+   are left out deliberately — they are paid destinations — but confirm the
+   production domain, which is still a `TODO` in that file.
 6. **The form does not submit.** `action="#"` on the homepage and all four
    landing pages. Point it at a handler before you spend on ads.
-7. **Payload.** The export is ~46 MB, of which ~30 MB is legacy imagery used
-   only by `/services/` and `/home-legacy/` — a 19.8 MB `Hero video.mp4` and a
-   9 MB `Cta bg.png`. The new pages ship about 2.4 MB in total. If you retire
-   the legacy pages, delete those two files and the upload drops to a few MB.
+7. **Payload.** The export is ~46 MB, of which ~30 MB is legacy imagery — a
+   19.8 MB `Hero video.mp4` still used by `/services/`, and a 9 MB `Cta bg.png`
+   used by `/services/`, `/projects/` and `/contact/`. The new pages ship about
+   2.4 MB in total. If you retire the legacy pages, delete those two files and
+   the upload drops to a few MB.
