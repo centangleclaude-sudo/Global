@@ -57,11 +57,15 @@ cd out && zip -r ../centangle-website-pivot.zip .
 
 ## Before this replaces the live homepage
 
-1. **Scope ceilings.** 14 `[n]` blanks remain in the packages section of the
-   homepage — 3 in each of the first four packages, 2 in "Taking over a build"
-   — plus four on `/lp/first-store/` (price, product ceiling, app ceiling,
-   timeline). They render with a dotted underline. Delivery sign-off needed —
-   see `../NewPivot/PLACEHOLDERS.md`.
+1. ~~Scope ceilings on the homepage~~ — done, confirmed 11 Sep 2026:
+   WordPress 10 pages / 2 weeks · WooCommerce and Shopify up to 50 products /
+   2 weeks · Moving a store up to 100 products / 2–3 weeks · Taking over a
+   build 2–3 weeks. **The homepage has no blanks left.** Four remain on
+   `/lp/first-store/`: price, product ceiling, app ceiling, timeline.
+   **Conflict to resolve:** the homepage says moving a store is up to 100
+   products in 2–3 weeks; `/lp/shopify-migration/` says 300 products in 3–4
+   weeks for £1,250, and builds a FAQ answer on the 300. Same service, same
+   domain, two numbers.
 2. **`[VAT line]`** appears on all four landing pages.
 3. ~~The three work links~~ — done. They point at the live sites:
    eshopp.ca, seed-pk.com, convoa.com. All three open in a new tab.

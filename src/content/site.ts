@@ -187,10 +187,10 @@ export const packages = {
   items: [
     {
       tab: "A website on WordPress",
-      meta: "[n] pages · live in [n] weeks",
+      meta: "10 pages · live in 2 weeks",
       desc: "A designed site you can edit yourself, with a contact form that sends to your email and hosting set up in your name, on your card.",
       included: [
-        "[n] designed pages you can edit yourself",
+        "10 designed pages you can edit yourself",
         "A contact form that sends to your email",
         "Hosting set up in your name, on your card",
         "A short, named list of plugins — each one in the handover, chosen for what it costs you in speed",
@@ -208,11 +208,11 @@ export const packages = {
     },
     {
       tab: "An online shop on WooCommerce",
-      meta: "up to [n] products · live in [n] weeks",
+      meta: "up to 50 products · live in 2 weeks",
       desc: "A WooCommerce shop designed around what you sell, with the plugins chosen with an eye on what they cost you in speed.",
       included: [
         "A shop designed around what you sell",
-        "Up to [n] products loaded from what you send",
+        "Up to 50 products loaded from what you send",
         "Payments, shipping and tax set up",
         "Plugins chosen for what they cost you in speed",
         "Hosting in your name, and a recorded walkthrough",
@@ -230,12 +230,12 @@ export const packages = {
     },
     {
       tab: "A Shopify store",
-      meta: "up to [n] products · live in [n] weeks",
+      meta: "up to 50 products · live in 2 weeks",
       desc: "A Shopify theme set up around your products, colours and logo — or designed from scratch if that’s what the brief needs.",
       included: [
         "A theme set up around your products, colours and logo",
         "Or designed from scratch if the brief needs it",
-        "Up to [n] products loaded",
+        "Up to 50 products loaded",
         "Payments, shipping and tax set up",
         "Every app named, with its monthly cost, before it is installed",
         "Domain connected, a recorded walkthrough, thirty days of fixes",
@@ -252,7 +252,7 @@ export const packages = {
     },
     {
       tab: "Moving a store to Shopify",
-      meta: "up to [n] products · [n] to [n] weeks",
+      meta: "up to 100 products · 2 to 3 weeks",
       desc: "Products, customers and order history moved across, with every old web address redirected so old links and search results still work.",
       included: [
         "Products, customers and order history moved across",
@@ -272,7 +272,7 @@ export const packages = {
     },
     {
       tab: "Taking over a build",
-      meta: "fixed once we’ve seen it · [n] to [n] weeks",
+      meta: "fixed once we’ve seen it · 2 to 3 weeks",
       desc: "A written account of what was built, what was not, and what is worth keeping — then a fixed price to finish it.",
       included: [
         "A written account of what was built, before you commit to finishing it",
