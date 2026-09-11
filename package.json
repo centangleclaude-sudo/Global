@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "build:static": "NEXT_PUBLIC_SITE_URL=https://centangleglobal.com next build",
+    "zip": "npm run build:static && cd out && zip -rq ../centangle-website-pivot.zip . && cd .. && ls -lh centangle-website-pivot.zip"
   },
   "dependencies": {
     "gsap": "^3.15.0",

@@ -46,14 +46,39 @@ homepage by design.
 - **No server runtime.** Plain static files. Nothing to install, no Node
   process, no environment variables.
 
-## Rebuilding
+## Reviewing on Vercel
+
+Every push to `website-pivot` builds a preview. Connect the repo once at
+vercel.com/new — pick `centangleclaude-sudo/Global`, accept the detected
+Next.js settings, deploy. No environment variables needed.
+
+Preview builds are **noindex**: `robots.ts` emits `Disallow: /` whenever
+`VERCEL_ENV=preview`, and the sitemap points at the preview's own URL rather
+than the live domain. The production build gets the real domain and the real
+robots file. Nothing to remember, nothing to switch.
+
+**What Vercel does not test**, because it replaces the server:
+
+- `.htaccess` rewrites
+- Trailing-slash resolution on Apache
+- `ErrorDocument 404`
+- The 301s for `/services/`, `/projects/`, `/contact/`, `/coming-soon/`
+
+So do one upload to a staging subdomain before the domain is pointed at this.
+Iterate on Vercel; verify once on cPanel.
+
+## Building the zip for cPanel
 
 ```bash
 cd Global
-npm install         # first time only
-npm run build       # writes out/
-cd out && zip -r ../centangle-website-pivot.zip .
+npm install    # first time only
+npm run zip    # builds with the live domain, writes centangle-website-pivot.zip
 ```
+
+`npm run zip` sets `NEXT_PUBLIC_SITE_URL=https://centangleglobal.com`, so the
+sitemap and robots file carry the live domain regardless of where it is built.
+The zip is the contents of `out/` at the root — extract it into the web root,
+not into a folder called `out`.
 
 ## Before this replaces the live homepage
 
@@ -70,9 +95,10 @@ cd out && zip -r ../centangle-website-pivot.zip .
 3. ~~The three work links~~ — done. They point at the live sites:
    eshopp.ca, seed-pk.com, convoa.com. All three open in a new tab.
 4. **Convoa clearance.** Confirm in writing before publishing.
-5. **`src/app/sitemap.ts`** still lists the old routes only. The `/lp/` pages
-   are left out deliberately — they are paid destinations — but confirm the
-   production domain, which is still a `TODO` in that file.
+5. ~~sitemap~~ — done. It lists `/`, `/privacy/` and `/terms/`, resolves its
+   own domain per build, and there is now a `robots.txt`. **Confirm the
+   production domain** is `centangleglobal.com`; that is what `npm run zip`
+   bakes in.
 6. **The form does not submit.** `action="#"` on the homepage and all four
    landing pages. Point it at a handler before you spend on ads. The five
    offering CTAs go to Calendly and do work — booking is covered, enquiry

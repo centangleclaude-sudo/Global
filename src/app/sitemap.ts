@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { SITE_URL } from "@/lib/site-url";
 
 /**
  * Emitted as a static /sitemap.xml at build time, so it works under
@@ -10,8 +11,9 @@ import type { MetadataRoute } from "next";
  */
 export const dynamic = "force-static";
 
-// TODO: confirm the production domain before launch.
-const BASE_URL = "https://centangleglobal.com";
+// Resolved per build, so a preview never advertises live URLs. Set
+// NEXT_PUBLIC_SITE_URL for the cPanel build.
+const BASE_URL = SITE_URL;
 
 // The /lp/ pages are deliberately absent: they are bought traffic, marked
 // noindex, and should never compete with the homepage in search.
