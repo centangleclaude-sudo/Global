@@ -23,6 +23,7 @@
 # deployment archives (build output, not source)
 /out.zip
 /deploy.zip
+/centangle-*.zip
 
 # misc
 .DS_Store
